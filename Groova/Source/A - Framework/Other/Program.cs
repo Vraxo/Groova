@@ -65,11 +65,16 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
                 RootNode.Process();
             Raylib.EndDrawing();
 
-            if (Raylib.IsKeyPressed(KeyboardKey.Enter))
-            {
-                Console.Clear();
-                RootNode.PrintChildren();
-            }
+            PrintTree();
+        }
+    }
+
+    private void PrintTree()
+    {
+        if (Raylib.IsKeyPressed(KeyboardKey.Enter))
+        {
+            Console.Clear();
+            RootNode.PrintChildren();
         }
     }
 }
