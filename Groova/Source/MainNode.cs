@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.ComponentModel;
 
 namespace Sonique;
 
@@ -36,6 +37,15 @@ public class MainNode : Node
         {
             Position = new(50, 0),
             HasButtons = false,
+            OnUpdate = (slider) =>
+            {
+                float y = Raylib.GetScreenHeight() - slider.Size.Y * 4;
+                slider.Position = new(slider.Position.X, y);
+
+                float width = Raylib.GetScreenWidth() - 75;
+                float height = slider.Size.Y;
+                slider.Size = new(width, height);
+            }
         }, "AudioSlider");
         
         AddChild(new HorizontalSlider()
@@ -50,11 +60,49 @@ public class MainNode : Node
             Position = new(25, 20),
             Size = new(32, 32),
             Text = "||",
+            OnUpdate = (button) =>
+            {
+                float x = button.Position.X;
+                float y = Raylib.GetScreenHeight() - 40;
+
+                button.Position = new(x, y);
+            }
+        });
+
+        AddChild(new ItemList
+        {
+            OnUpdate = (list) =>
+            {
+                float x = list.Position.X;
+                float y = 50;
+                list.Position = new(x, y);
+
+
+                float width = Raylib.GetScreenWidth();
+                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+                list.Size = new(width, height);
+            }
         });
     }
 
     public override void Ready()
     {
+        //var list = GetChild<ItemList>();
+        //list.ItemSize = new(list.ItemSize.X, list.ItemSize.Y * 3);
+        //
+        //list.AddItem(new Label { Text = "Item 1" });
+        //list.AddItem(new Label { Text = "Item 2" });
+        //list.AddItem(new Label { Text = "Item 3" });
+        //list.AddItem(new Label { Text = "Item 4" });
+        //list.AddItem(new Label { Text = "Item 5" });
+        //list.AddItem(new Label { Text = "Item 6" });
+        //list.AddItem(new Label { Text = "Item 7" });
+        //list.AddItem(new Label { Text = "Item 8" });
+        //list.AddItem(new Label { Text = "Item 9" });
+        //list.AddItem(new Label { Text = "Item 10" });
+        //list.AddItem(new Label { Text = "Item 11" });
+        //list.AddItem(new Label { Text = "Item 12" });
+
         //string audioPath = Program.Args.Length > 0 ?
         //                   Program.Args[0] :
         //                   AudioPath;
@@ -76,9 +124,9 @@ public class MainNode : Node
 
     public override void Update()
     {
-        UpdateAudioSlider();
+        //UpdateAudioSlider();
         UpdateVolumeSlider();
-        UpdateButton();
+        //UpdateButton();
     }
 
     private void OnButtonLeftClicked(object? sender, EventArgs e)

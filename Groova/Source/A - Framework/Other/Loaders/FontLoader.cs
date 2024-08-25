@@ -13,21 +13,22 @@ public class FontLoader
         get
         {
             instance ??= new();
-
-            if (!File.Exists("Assetsw/RobotoMono.ttf"))
-            {
-                //byte[] defaultFont = Resources.RobotoMono;
-                //File.WriteAllBytes("Resources/RobotoMono.ttf", defaultFont);
-            }
-
             return instance;
         }
     }
 
     private FontLoader()
     {
+        LoadDefaultFont();
+    }
+
+    private void LoadDefaultFont()
+    {
         string name = "RobotoMono 32";
-        Font font = Raylib.LoadFontEx("Assets/Fonts/RobotoMono.ttf", 32, null, 0);
+        string path = "Resources/Fonts/RobotoMono.ttf";
+        int size = 32;
+
+        Font font = Raylib.LoadFontEx(path, size, null, 0);
         Fonts.Add(name, font);
 
         Texture2D texture = Fonts[name].Texture;
