@@ -9,14 +9,27 @@ public partial class NewPlaylistDialog : Node2D
         Origin = GetChild<Panel>().Size / 2;
         GetNode<ClickManager>().MinLayer = ClickableLayer.DialogButtons;
         GetChild<Button>().LeftClicked += OnButtonLeftClicked;
+        GetChild<TextBox>().Confirmed += OnTextBoxConfirmed;
     }
 
     public override void Update()
     {
         UpdatePosition();
+        Console.WriteLine(GetNode<ClickManager>().MinLayer);
     }
 
     private void OnButtonLeftClicked(object? sender, EventArgs e)
+    {
+        Close();
+    }
+
+    private void OnTextBoxConfirmed(object? sender, string e)
+    {
+        GetNode<PlaylistsContainer>("PlaylistsContainer").AddPlaylist(e);
+        Close();
+    }
+
+    private void Close()
     {
         GetNode<ClickManager>().MinLayer = 0;
         Destroy();

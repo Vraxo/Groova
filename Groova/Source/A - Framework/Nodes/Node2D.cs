@@ -15,7 +15,7 @@ public class Node2D : Node
 
         set
         {
-            //UpdateOrigin();
+            //UpdateTextOrigin();
             _size = value;
         }
     }

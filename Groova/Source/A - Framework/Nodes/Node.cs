@@ -198,7 +198,7 @@ public class Node
         return null;
     }
 
-    // Add child
+    // AddPlaylist child
 
     public void AddChild(Node node, string name, bool start = true)
     {

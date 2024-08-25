@@ -6,6 +6,24 @@ public partial class MainNode : Node
 {
     public override void Build()
     {
+        AddChild(new ClickManager());
+
+        AddChild(new Button
+        {
+            Position = new(25, 20),
+            Size = new(32, 32),
+            Text = "||",
+            OnUpdate = (button) =>
+            {
+                float x = button.Position.X;
+                float y = Raylib.GetScreenHeight() - 40;
+
+                button.Position = new(x, y);
+            }
+        }, "PlayButton");
+
+        AddChild(new PlaylistsContainer());
+
         AddChild(new Button
         {
             Position = new(20, 25),
@@ -60,19 +78,7 @@ public partial class MainNode : Node
             Percentage = 1,
         }, "VolumeSlider");
         
-        AddChild(new Button
-        {
-            Position = new(25, 20),
-            Size = new(32, 32),
-            Text = "||",
-            OnUpdate = (button) =>
-            {
-                float x = button.Position.X;
-                float y = Raylib.GetScreenHeight() - 40;
 
-                button.Position = new(x, y);
-            }
-        }, "PlayButton");
 
         AddChild(new ItemList
         {

@@ -26,7 +26,7 @@ public partial class MainNode : Node
         //list.AddItem(new Label { Text = "Item 11" });
         //list.AddItem(new Label { Text = "Item 12" });
 
-        //musicPlayer = GetChild<MusicPlayer>();
+        musicPlayer = GetChild<MusicPlayer>();
         //musicPlayer.Audio = Raylib.LoadMusicStream(audioPath);
         //musicPlayer.Play();
         
@@ -68,21 +68,40 @@ public partial class MainNode : Node
 
     private void Setup()
     {
-        string playlistsDirectory = "Resources/Playlists";
+        var playlistsContainer = GetChild<PlaylistsContainer>();
+        playlistsContainer.Load();
 
-        if (Directory.Exists(playlistsDirectory))
+        var list = GetChild<ItemList>();
+
+        foreach (Playlist playlist in playlistsContainer.Playlists)
         {
-            string[] playlistFiles = Directory.GetFiles(playlistsDirectory);
-
-            foreach (string playlistFile in playlistFiles)
+            Button button = new()
             {
-                Console.WriteLine(playlistFile);
-            }
+                Size = new(100, 40),
+                OriginPreset = OriginPreset.TopLeft,
+                TextOriginPreset = OriginPreset.CenterLeft,
+                Text = playlist.Name,
+                Style = new()
+                {
+                    Roundness = 0
+                },
+                OnUpdate = (button) =>
+                {
+                    float width = Raylib.GetScreenWidth();
+                    float height = button.Size.Y;
+                    button.Size = new(width, height);
+                }
+            };
+
+            list.AddChild(button);
+
+            button.LeftClicked += OnPlaylistButtonLeftClicked;
         }
-        else
-        {
-            Directory.CreateDirectory(playlistsDirectory);
-        }
+    }
+
+    private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
+    {
+
     }
 
     private void UpdateVolumeSlider()

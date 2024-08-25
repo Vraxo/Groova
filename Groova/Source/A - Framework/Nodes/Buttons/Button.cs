@@ -6,6 +6,7 @@ public class Button : ClickableRectangle
 {
     public string Text { get; set; } = "";
     public Vector2 TextOrigin { get; set; } = Vector2.Zero;
+    public OriginPreset TextOriginPreset { get; set; } = OriginPreset.Center;
     public ButtonStyle Style { get; set; } = new();
     public bool PressedLeft { get; set; } = false;
     public bool PressedRight { get; set; } = false;
@@ -24,6 +25,7 @@ public class Button : ClickableRectangle
 
     public override void Update()
     {
+        UpdateTextOrigin();
         Draw();
         HandleInput();
         OnUpdate(this);
@@ -34,6 +36,24 @@ public class Button : ClickableRectangle
     {
         HandleLeftClicks();
         HandleRightClicks();
+    }
+
+    private void UpdateTextOrigin()
+    {
+        TextOrigin = TextOriginPreset switch
+        {
+            OriginPreset.Center => Size / 2,
+            OriginPreset.CenterLeft => new(0, Size.Y / 2),
+            OriginPreset.CenterRight => new(Size.X, Size.Y / 2),
+            OriginPreset.TopLeft => new(0, 0),
+            OriginPreset.TopRight => new(Size.X, 0),
+            OriginPreset.TopCenter => new(Size.X / 2, 0),
+            OriginPreset.BottomLeft => new(0, Size.Y),
+            OriginPreset.BottomRight => Size,
+            OriginPreset.BottomCenter => new(Size.X / 2, Size.Y),
+            OriginPreset.None => Origin,
+            _ => Origin,
+        };
     }
 
     // Left click
@@ -304,17 +324,51 @@ public class Button : ClickableRectangle
             Style.Current.TextColor);
     }
 
+    //private Vector2 GetTextPosition()
+    //{
+    //    Vector2 fontDimensions = Raylib.MeasureTextEx(
+    //                                Style.Current.Font,
+    //                                Text,
+    //                                Style.Current.FontSize,
+    //                                1);
+    //
+    //    Vector2 halfFontDimensions = fontDimensions / 2;
+    //    Vector2 center = Size / 2;
+    //
+    //    if (Name == "PlaylistButton")
+    //    {
+    //        Console.WriteLine("origin: " + Origin);
+    //        Console.WriteLine("trigin: " + TextOrigin);
+    //        Console.WriteLine("center: " + center);
+    //    }
+    //
+    //    Vector2 difference = TextOrigin - center;
+    //
+    //    //return GlobalPosition + center - halfFontDimensions - Origin; // best
+    //    return GlobalPosition + center - /*halfFontDimensions*/ - Origin + difference; // second best
+    //}
+
     private Vector2 GetTextPosition()
     {
+        // Measure the dimensions of the text
         Vector2 fontDimensions = Raylib.MeasureTextEx(
-                                    Style.Current.Font,
-                                    Text,
-                                    Style.Current.FontSize,
-                                    1);
+            Style.Current.Font,
+            Text,
+            Style.Current.FontSize,
+            1
+        );
 
-        Vector2 halfFontDimensions = fontDimensions / 2;
+        // Calculate the center of the button
         Vector2 center = Size / 2;
 
-        return GlobalPosition + center - halfFontDimensions - Origin;
+        // Determine the alignment adjustment based on the TextOrigin
+        Vector2 alignmentAdjustment = new Vector2(
+            TextOrigin.X < center.X ? 0 : TextOrigin.X > center.X ? -fontDimensions.X : -fontDimensions.X / 2,
+            TextOrigin.Y < center.Y ? 0 : TextOrigin.Y > center.Y ? -fontDimensions.Y : -fontDimensions.Y / 2
+        );
+
+        // Calculate the text position based on the alignment and origin
+        return GlobalPosition + TextOrigin + alignmentAdjustment - Origin;
     }
+
 }

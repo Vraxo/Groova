@@ -27,8 +27,6 @@ public partial class VerticalSlider : BaseSlider
             return;
         }
 
-        Console.WriteLine(MaxExternalValue);
-
         float x = Grabber.GlobalPosition.X;
         float movementUnit = Size.Y / MathF.Abs(MaxExternalValue);
         float y = Grabber.GlobalPosition.Y + direction * movementUnit;
@@ -41,13 +39,15 @@ public partial class VerticalSlider : BaseSlider
     {
         if (IsMouseOver())
         {
-            if (Raylib.IsMouseButtonPressed(MouseButton.Left))
+            if (Raylib.IsMouseButtonPressed(MouseButton.Left) && OnTopLeft)
             {
                 float x = Grabber.GlobalPosition.X;
                 float y = Raylib.GetMousePosition().Y;
 
                 Grabber.GlobalPosition = new(x, y);
                 Grabber.Pressed = true;
+
+                OnTopLeft = false;
             }
         }
     }

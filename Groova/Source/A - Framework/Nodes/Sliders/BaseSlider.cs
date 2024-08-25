@@ -86,6 +86,8 @@ public abstract class BaseSlider : ClickableRectangle
             decrementButton.Layer = Layer;
             incrementButton.Layer = Layer;
         }
+
+        base.Start();
     }
 
     public override void Update()

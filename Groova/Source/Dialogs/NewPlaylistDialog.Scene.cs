@@ -22,7 +22,7 @@ public partial class NewPlaylistDialog : Node2D
             },
             OnUpdate = (button) =>
             {
-                float x = 400 - 35;
+                float x = 300 - 35;
                 float y = 10;
 
                 button.Position = new(x, y);
@@ -40,10 +40,12 @@ public partial class NewPlaylistDialog : Node2D
         {
             Position = new(0, 10),
             Size = new(250, 25),
+            Layer = ClickableLayer.DialogButtons,
             Style = new()
             {
                 Roundness = 1
-            }
+            },
+            MaxCharacters = 30
         });
     }
 }
