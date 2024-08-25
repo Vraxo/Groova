@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace Sonique;
+namespace Groova;
 
 public class Label : Node2D
 {

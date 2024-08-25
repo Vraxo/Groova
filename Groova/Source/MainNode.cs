@@ -1,89 +1,12 @@
 ﻿using Raylib_cs;
-using System.ComponentModel;
 
-namespace Sonique;
+namespace Groova;
 
-public class MainNode : Node
+public partial class MainNode : Node
 {
     public string AudioPath = "Assets/Audio.mp3";
 
     private MusicPlayer musicPlayer;
-
-    public override void Build()
-    {
-        AddChild(new TextBox
-        {
-            Position = new(0, 25),
-            Style = new()
-            {
-                Roundedness = 1
-            },
-            OnUpdate = (textbox) =>
-            {
-                float x = Raylib.GetScreenWidth() / 2;
-                float y = textbox.Position.Y;
-
-                textbox.Position = new(x, y);
-            }
-        });
-
-        AddChild(new MusicPlayer
-        {
-            AutoPlay = false,
-            Loop = true,
-        });
-        
-        AddChild(new HorizontalSlider()
-        {
-            Position = new(50, 0),
-            HasButtons = false,
-            OnUpdate = (slider) =>
-            {
-                float y = Raylib.GetScreenHeight() - slider.Size.Y * 4;
-                slider.Position = new(slider.Position.X, y);
-
-                float width = Raylib.GetScreenWidth() - 75;
-                float height = slider.Size.Y;
-                slider.Size = new(width, height);
-            }
-        }, "AudioSlider");
-        
-        AddChild(new HorizontalSlider()
-        {
-            Position = new(50, 0),
-            HasButtons = false,
-            Percentage = 1,
-        }, "VolumeSlider");
-        
-        AddChild(new Button
-        {
-            Position = new(25, 20),
-            Size = new(32, 32),
-            Text = "||",
-            OnUpdate = (button) =>
-            {
-                float x = button.Position.X;
-                float y = Raylib.GetScreenHeight() - 40;
-
-                button.Position = new(x, y);
-            }
-        });
-
-        AddChild(new ItemList
-        {
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
-
-
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
-        });
-    }
 
     public override void Ready()
     {
@@ -103,23 +26,14 @@ public class MainNode : Node
         //list.AddItem(new Label { Text = "Item 11" });
         //list.AddItem(new Label { Text = "Item 12" });
 
-        //string audioPath = Program.Args.Length > 0 ?
-        //                   Program.Args[0] :
-        //                   AudioPath;
-        //
-
-        if (Program.Args.Length == 0)
-        {
-            //Environment.Exit(0);
-        }
-        
-        //string audioPath = Program.Args[0];
-        
         //musicPlayer = GetChild<MusicPlayer>();
         //musicPlayer.Audio = Raylib.LoadMusicStream(audioPath);
         //musicPlayer.Play();
         
-        GetChild<Button>().LeftClicked += OnButtonLeftClicked;
+        GetChild<Button>("PlayButton").LeftClicked += OnPlayButtonLeftClicked;
+        GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
+
+        Setup();
     }
 
     public override void Update()
@@ -129,7 +43,7 @@ public class MainNode : Node
         //UpdateButton();
     }
 
-    private void OnButtonLeftClicked(object? sender, EventArgs e)
+    private void OnPlayButtonLeftClicked(object? sender, EventArgs e)
     {
         if (musicPlayer.Playing)
         {
@@ -147,16 +61,28 @@ public class MainNode : Node
                       ">";
     }
 
-    private void UpdateAudioSlider()
+    private void OnAddButtonLeftClicked(object? sender, EventArgs e)
     {
-        var slider = GetChild<HorizontalSlider>("AudioSlider");
+        Program.RootNode.AddChild(new NewPlaylistDialog());
+    }
 
-        float y = Raylib.GetScreenHeight() * 0.2f;
-        slider.Position = new(slider.Position.X, y);
+    private void Setup()
+    {
+        string playlistsDirectory = "Resources/Playlists";
 
-        float width = Raylib.GetScreenWidth() - 75;
-        float height = slider.Size.Y;
-        slider.Size = new(width, height);
+        if (Directory.Exists(playlistsDirectory))
+        {
+            string[] playlistFiles = Directory.GetFiles(playlistsDirectory);
+
+            foreach (string playlistFile in playlistFiles)
+            {
+                Console.WriteLine(playlistFile);
+            }
+        }
+        else
+        {
+            Directory.CreateDirectory(playlistsDirectory);
+        }
     }
 
     private void UpdateVolumeSlider()
@@ -176,15 +102,5 @@ public class MainNode : Node
         float width = screenWidth / 5;
         float height = slider.Size.Y;
         slider.Size = new(width, height);
-    }
-
-    private void UpdateButton()
-    {
-        var button = GetChild<Button>("Button");
-
-        float x = button.Position.X;
-        float y = Raylib.GetScreenHeight() * 0.2f;
-
-        button.Position = new(x, y);
     }
 }

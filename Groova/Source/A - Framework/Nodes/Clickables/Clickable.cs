@@ -1,4 +1,4 @@
-﻿namespace Sonique;
+﻿namespace Groova;
 
 public abstract class Clickable : Node2D
 {

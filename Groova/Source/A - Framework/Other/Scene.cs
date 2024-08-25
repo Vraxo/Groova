@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Sonique;
+namespace Groova;
 
 public class Scene
 {

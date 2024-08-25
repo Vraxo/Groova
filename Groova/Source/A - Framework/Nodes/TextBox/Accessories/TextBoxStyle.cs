@@ -1,10 +1,10 @@
-﻿namespace Sonique;
+﻿namespace Groova;
 
 public class TextBoxStyle
 {
     public TextBoxStyle()
     {
-        Roundedness = 0.5F;
+        Roundness = 0.5F;
         OutlineThickness = 1;
         Current = Default;
     }
@@ -32,7 +32,7 @@ public class TextBoxStyle
         }
     }
 
-    public float Roundedness
+    public float Roundness
     {
         set
         {

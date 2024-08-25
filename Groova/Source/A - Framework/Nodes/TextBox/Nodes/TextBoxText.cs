@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace Sonique;
+namespace Groova;
 
 public class TextBoxText : Node2D
 {

@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace Sonique;
+namespace Groova;
 
 class TexturedRectangle : Node2D
 {

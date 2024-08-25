@@ -1,4 +1,4 @@
-﻿namespace Sonique;
+﻿namespace Groova;
 
 public class ButtonStyle
 {

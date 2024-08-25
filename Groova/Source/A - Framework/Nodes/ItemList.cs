@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Numerics;
 
-namespace Sonique;
+namespace Groova;
 
 public partial class ItemList : ClickableRectangle
 {

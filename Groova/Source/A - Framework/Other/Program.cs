@@ -1,7 +1,7 @@
 ﻿using Raylib_cs;
 using System.Reflection;
 
-namespace Sonique;
+namespace Groova;
 
 public class Program(WindowData windowData, Node rootNode, string[] args)
 {
@@ -29,7 +29,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         Raylib.SetWindowMinSize(width, height);
         Raylib.InitAudioDevice();
 
-        Raylib.SetWindowIcon(Raylib.LoadImage("Assets/Icon.png"));
+        Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon.png"));
         
         //Scene scene = new(rootNode);
         //var mainNode = scene.Instantiate<MainNode>();

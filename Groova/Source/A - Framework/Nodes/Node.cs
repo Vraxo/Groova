@@ -1,4 +1,4 @@
-﻿namespace Sonique;
+﻿namespace Groova;
 
 public class Node
 {
@@ -121,8 +121,6 @@ public class Node
         }
 
         string[] nodeNames = path.Split('/');
-
-        Console.WriteLine(Program is null);
 
         Node currentNode = Program.RootNode;
 
