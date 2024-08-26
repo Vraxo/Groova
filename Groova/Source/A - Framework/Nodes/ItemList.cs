@@ -1,5 +1,4 @@
 ﻿using Raylib_cs;
-using System.Numerics;
 
 namespace Groova;
 
@@ -60,7 +59,7 @@ public partial class ItemList : ClickableRectangle
         UpdateList(StartingIndex);
     }
 
-    public void AddItem(Node2D item)
+    public void Add(Node2D item)
     {
         item.InheritsOrigin = true;
         Items.Add(item);
@@ -68,7 +67,7 @@ public partial class ItemList : ClickableRectangle
         OnItemCountChanged(this);
     }
 
-    public void RemoveItem(Node2D item)
+    public void Remove(Node2D item)
     {
         Items.Remove(item);
         Children.Remove(item);
@@ -76,10 +75,18 @@ public partial class ItemList : ClickableRectangle
         OnItemCountChanged(this);
     }
 
-    public void RemoveItem(int index)
+    public void Remove(int index)
     {
         Node2D item = Items[index];
-        RemoveItem(item);
+        Remove(item);
+    }
+
+    public void Clear()
+    {
+        while (Items.Count > 0)
+        {
+            Remove(0);
+        }
     }
 
     private void OnSliderValueChanged(object? sender, float e)

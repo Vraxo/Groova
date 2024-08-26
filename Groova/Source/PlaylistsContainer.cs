@@ -15,6 +15,12 @@ public class PlaylistsContainer : Node
         Save();
     }
 
+    public void AddMusic(Playlist playlist, string musicPath)
+    {
+        playlist.Paths.Add(musicPath);
+        Save();
+    }
+
     public void Save()
     {
         try

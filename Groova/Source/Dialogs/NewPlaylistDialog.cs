@@ -31,6 +31,7 @@ public partial class NewPlaylistDialog : Node2D
 
     private void Close()
     {
+        GetNode<MainNode>("").LoadPlaylists();
         GetNode<ClickManager>().MinLayer = 0;
         Destroy();
     }

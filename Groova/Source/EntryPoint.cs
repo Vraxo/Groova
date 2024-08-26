@@ -14,9 +14,6 @@ public class EntryPoint
 
         MainNode rootNode = new()
         {
-            AudioPath = args.Length > 0 ?
-                        args[0] :
-                        "Assets/Audio.mp3"
         };
 
         Program program = new(windowData, rootNode, args);

@@ -5,6 +5,7 @@ namespace Groova;
 public class Button : ClickableRectangle
 {
     public string Text { get; set; } = "";
+    public Vector2 TextPadding { get; set; } = Vector2.Zero;
     public Vector2 TextOrigin { get; set; } = Vector2.Zero;
     public OriginPreset TextOriginPreset { get; set; } = OriginPreset.Center;
     public ButtonStyle Style { get; set; } = new();
@@ -335,7 +336,7 @@ public class Button : ClickableRectangle
     //    Vector2 halfFontDimensions = fontDimensions / 2;
     //    Vector2 center = Size / 2;
     //
-    //    if (Name == "PlaylistButton")
+    //    if (Text == "PlaylistButton")
     //    {
     //        Console.WriteLine("origin: " + Origin);
     //        Console.WriteLine("trigin: " + TextOrigin);
@@ -368,7 +369,6 @@ public class Button : ClickableRectangle
         );
 
         // Calculate the text position based on the alignment and origin
-        return GlobalPosition + TextOrigin + alignmentAdjustment - Origin;
+        return GlobalPosition + TextOrigin + alignmentAdjustment - Origin + TextPadding;
     }
-
 }

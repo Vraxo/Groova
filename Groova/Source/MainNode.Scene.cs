@@ -78,10 +78,9 @@ public partial class MainNode : Node
             Percentage = 1,
         }, "VolumeSlider");
         
-
-
         AddChild(new ItemList
         {
+            ItemSize = new(100, 40),
             OnUpdate = (list) =>
             {
                 float x = list.Position.X;

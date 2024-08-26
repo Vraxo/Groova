@@ -4,36 +4,26 @@ namespace Groova;
 
 public partial class MainNode : Node
 {
-    public string AudioPath = "Assets/Audio.mp3";
+    public MusicPlayer MusicPlayer;
 
-    private MusicPlayer musicPlayer;
+    private PlaylistsContainer playlistsContainer;
+    private ItemList playlistsList;
+    private Playlist? currentPlaylist = null;
+    private bool inPlaylists = true;
 
     public override void Ready()
     {
-        //var list = GetChild<ItemList>();
-        //list.ItemSize = new(list.ItemSize.X, list.ItemSize.Y * 3);
-        //
-        //list.AddItem(new Label { Text = "Item 1" });
-        //list.AddItem(new Label { Text = "Item 2" });
-        //list.AddItem(new Label { Text = "Item 3" });
-        //list.AddItem(new Label { Text = "Item 4" });
-        //list.AddItem(new Label { Text = "Item 5" });
-        //list.AddItem(new Label { Text = "Item 6" });
-        //list.AddItem(new Label { Text = "Item 7" });
-        //list.AddItem(new Label { Text = "Item 8" });
-        //list.AddItem(new Label { Text = "Item 9" });
-        //list.AddItem(new Label { Text = "Item 10" });
-        //list.AddItem(new Label { Text = "Item 11" });
-        //list.AddItem(new Label { Text = "Item 12" });
+        MusicPlayer = GetChild<MusicPlayer>();
+        //MusicPlayer.Audio = Raylib.LoadMusicStream(audioPath);
+        //MusicPlayer.Play();
 
-        musicPlayer = GetChild<MusicPlayer>();
-        //musicPlayer.Audio = Raylib.LoadMusicStream(audioPath);
-        //musicPlayer.Play();
-        
+        playlistsContainer = GetChild<PlaylistsContainer>();
+        playlistsList = GetChild<ItemList>();
+
         GetChild<Button>("PlayButton").LeftClicked += OnPlayButtonLeftClicked;
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
 
-        Setup();
+        LoadPlaylists();
     }
 
     public override void Update()
@@ -45,13 +35,13 @@ public partial class MainNode : Node
 
     private void OnPlayButtonLeftClicked(object? sender, EventArgs e)
     {
-        if (musicPlayer.Playing)
+        if (MusicPlayer.Playing)
         {
-            musicPlayer.Pause();
+            MusicPlayer.Pause();
         }
         else
         {
-            musicPlayer.Resume();
+            MusicPlayer.Resume();
         }
 
         var button = sender as Button;
@@ -63,24 +53,50 @@ public partial class MainNode : Node
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)
     {
-        Program.RootNode.AddChild(new NewPlaylistDialog());
+        if (inPlaylists)
+        {
+            AddChild(new NewPlaylistDialog());
+        }
+        else
+        {
+            OpenFileDialog dialog = new();
+            dialog.ShowDialog();
+
+            if (dialog.FileNames.Length > 0)
+            {
+                foreach (string name in dialog.FileNames)
+                {
+                    playlistsContainer.AddMusic(currentPlaylist, name);
+                }
+            }
+
+            //LoadMusics(currentPlaylist);
+        }
     }
 
-    private void Setup()
+    private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
     {
-        var playlistsContainer = GetChild<PlaylistsContainer>();
-        playlistsContainer.Load();
+        var playlistButton = sender as PlaylistButton;
+        Playlist playlist = playlistButton.Playlist;
+        LoadMusics(playlist);
+    }
 
-        var list = GetChild<ItemList>();
+    public void LoadPlaylists()
+    {
+        playlistsList.Activate();
+        playlistsList.Clear();
+        playlistsContainer.Load();
 
         foreach (Playlist playlist in playlistsContainer.Playlists)
         {
-            Button button = new()
+            PlaylistButton button = new()
             {
                 Size = new(100, 40),
                 OriginPreset = OriginPreset.TopLeft,
                 TextOriginPreset = OriginPreset.CenterLeft,
+                TextPadding = new(25, 0),
                 Text = playlist.Name,
+                Playlist = playlist,
                 Style = new()
                 {
                     Roundness = 0
@@ -90,18 +106,47 @@ public partial class MainNode : Node
                     float width = Raylib.GetScreenWidth();
                     float height = button.Size.Y;
                     button.Size = new(width, height);
-                }
+                },
             };
 
-            list.AddChild(button);
+            playlistsList.Add(button);
 
             button.LeftClicked += OnPlaylistButtonLeftClicked;
         }
     }
 
-    private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
+    private void LoadMusics(Playlist playlist)
     {
+        inPlaylists = false;
+        currentPlaylist = playlist;
+        playlistsList.Deactivate();
 
+        ItemList musicList = new()
+        {
+            ItemSize = new(100, 40),
+            OnUpdate = (list) =>
+            {
+                float x = list.Position.X;
+                float y = 50;
+                list.Position = new(x, y);
+
+                float width = Raylib.GetScreenWidth();
+                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+                list.Size = new(width, height);
+            }
+        };
+
+        AddChild(musicList);
+
+        foreach (string path in playlist.Paths)
+        {
+            MusicItem musicItem = new()
+            {
+                MusicPath = path
+            };
+
+            musicList.Add(musicItem);
+        }
     }
 
     private void UpdateVolumeSlider()
