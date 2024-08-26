@@ -8,17 +8,19 @@ public partial class MainNode : Node
 
     private PlaylistsContainer playlistsContainer;
     private ItemList playlistsList;
+    private ItemList musicsList;
     private Playlist? currentPlaylist = null;
     private bool inPlaylists = true;
 
-    public override void Ready()
+    public override void Start()
     {
         MusicPlayer = GetChild<MusicPlayer>();
-        //MusicPlayer.Audio = Raylib.LoadMusicStream(audioPath);
-        //MusicPlayer.Play();
 
         playlistsContainer = GetChild<PlaylistsContainer>();
-        playlistsList = GetChild<ItemList>();
+        playlistsList = GetChild<ItemList>("PlaylistsList");
+        
+        musicsList = GetChild<ItemList>("MusicsList");
+        musicsList.Deactivate();
 
         GetChild<Button>("PlayButton").LeftClicked += OnPlayButtonLeftClicked;
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
@@ -59,7 +61,11 @@ public partial class MainNode : Node
         }
         else
         {
-            OpenFileDialog dialog = new();
+            OpenFileDialog dialog = new()
+            {
+                Multiselect = true
+            }
+            ;
             dialog.ShowDialog();
 
             if (dialog.FileNames.Length > 0)
@@ -70,7 +76,7 @@ public partial class MainNode : Node
                 }
             }
 
-            //LoadMusics(currentPlaylist);
+            LoadMusics(currentPlaylist);
         }
     }
 
@@ -89,54 +95,40 @@ public partial class MainNode : Node
 
         foreach (Playlist playlist in playlistsContainer.Playlists)
         {
-            PlaylistButton button = new()
+            PlaylistItem playlistItem = new()
             {
-                Size = new(100, 40),
-                OriginPreset = OriginPreset.TopLeft,
-                TextOriginPreset = OriginPreset.CenterLeft,
-                TextPadding = new(25, 0),
                 Text = playlist.Name,
-                Playlist = playlist,
-                Style = new()
-                {
-                    Roundness = 0
-                },
-                OnUpdate = (button) =>
-                {
-                    float width = Raylib.GetScreenWidth();
-                    float height = button.Size.Y;
-                    button.Size = new(width, height);
-                },
+                Playlist = playlist
             };
 
-            playlistsList.Add(button);
-
-            button.LeftClicked += OnPlaylistButtonLeftClicked;
+            playlistsList.Add(playlistItem);
         }
     }
 
-    private void LoadMusics(Playlist playlist)
+    public void LoadMusics(Playlist playlist)
     {
         inPlaylists = false;
         currentPlaylist = playlist;
         playlistsList.Deactivate();
+        musicsList.Activate();
+        musicsList.Clear();
 
-        ItemList musicList = new()
-        {
-            ItemSize = new(100, 40),
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
+        //ItemList musicList = new()
+        //{
+        //    ItemSize = new(100, 40),
+        //    OnUpdate = (list) =>
+        //    {
+        //        float x = list.Position.X;
+        //        float y = 50;
+        //        list.Position = new(x, y);
+        //
+        //        float width = Raylib.GetScreenWidth();
+        //        float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+        //        list.Size = new(width, height);
+        //    }
+        //};
 
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
-        };
-
-        AddChild(musicList);
+        //AddChild(musicsList);
 
         foreach (string path in playlist.Paths)
         {
@@ -145,13 +137,15 @@ public partial class MainNode : Node
                 MusicPath = path
             };
 
-            musicList.Add(musicItem);
+            musicsList.Add(musicItem);
         }
     }
 
     private void UpdateVolumeSlider()
     {
         var slider = GetChild<HorizontalSlider>("VolumeSlider");
+
+        slider.MaxExternalValue = 100;
 
         float screenWidth = Raylib.GetScreenWidth();
 
@@ -160,7 +154,7 @@ public partial class MainNode : Node
         float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 
         float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
-        float y = Raylib.GetScreenHeight() * 0.5f;
+        float y = Raylib.GetScreenHeight() - 15;
         slider.Position = new(x, y);
 
         float width = screenWidth / 5;

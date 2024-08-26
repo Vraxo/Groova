@@ -36,8 +36,8 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         //RootNode = mainNode;
         RootNode.Program = this;
 
-        RootNode.Start();
         RootNode.Build();
+        RootNode.Start();
     }
 
     private void SetCurrentDirectory()

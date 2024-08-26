@@ -19,6 +19,11 @@ public class VerticalGrabber : BaseGrabber
 
     private void UpdatePositionVertical(BaseSlider parent, bool initial)
     {
+        if (Raylib.IsWindowMinimized())
+        {
+            return;
+        }
+
         float minY = parent.GlobalPosition.Y - parent.Origin.Y;
         float maxY = minY + parent.Size.Y;
 
