@@ -8,6 +8,8 @@ public class Node
     //public Program? Program { get; set; } = null;
     public bool Active { get; private set; } = true;
 
+    public Node RootNode => Program.RootNode;
+
     private Program _program;
     public Program Program
     {

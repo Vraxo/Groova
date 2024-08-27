@@ -47,5 +47,14 @@ public partial class NewPlaylistDialog : Node2D
             },
             MaxCharacters = 30
         });
+
+        AddChild(new Label
+        {
+            Position = new(10, 125),
+            InheritsOrigin = true,
+            Visible = false,
+            Color = new(255, 0, 0, 255),
+            Text = "Playlist already exists."
+        });
     }
 }

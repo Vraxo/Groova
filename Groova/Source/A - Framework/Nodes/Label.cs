@@ -18,7 +18,7 @@ public class Label : Node2D
     public override void Update()
     {
         UpdateSize();
-        DrawText();
+        Draw();
         OnUpdate(this);
         base.Update();
     }
@@ -28,8 +28,13 @@ public class Label : Node2D
         Size = Raylib.MeasureTextEx(Font, Text, FontSize, 1);
     }
 
-    private void DrawText()
+    private void Draw()
     {
+        if (!Visible)
+        {
+            return;
+        }
+
         Raylib.DrawTextEx(
             Font, 
             Text, 

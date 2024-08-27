@@ -28,7 +28,7 @@ public partial class TopSection : Node2D
     {
         if (InPlaylists)
         {
-            AddChild(new NewPlaylistDialog());
+            RootNode.AddChild(new NewPlaylistDialog());
         }
         else
         {
