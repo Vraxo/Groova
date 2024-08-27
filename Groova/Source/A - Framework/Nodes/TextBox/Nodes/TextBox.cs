@@ -9,7 +9,7 @@ public partial class TextBox : ClickableRectangle
     public int MaxCharacters = int.MaxValue;
     public int MinCharacters = 0;
     public List<char> AllowedCharacters = [];
-    public TextBoxStyle Style = new();
+    public ButtonStyle Style = new();
     public bool Selected = false;
     public bool Editable = true;
     public bool RevertToDefaultText = true;
@@ -27,10 +27,13 @@ public partial class TextBox : ClickableRectangle
         Size = new(300, 25);
     }
 
-    public override void Ready()
+    public override void Start()
     {
+        Style.Pressed.FillColor = new(34, 34, 34, 255);
+        Style.Pressed.OutlineColor = new(71, 114, 179, 255);
+
         caret = GetChild<TextBoxCaret>();
-        base.Ready();
+        base.Start();
     }
 
     public override void Update()
@@ -69,7 +72,7 @@ public partial class TextBox : ClickableRectangle
             if (Raylib.IsMouseButtonDown(MouseButton.Left) && OnTopLeft)
             {
                 Selected = true;
-                Style.Current = Style.Selected;
+                Style.Current = Style.Pressed;
             }
         }
         else

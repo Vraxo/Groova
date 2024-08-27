@@ -1,8 +1,6 @@
-﻿using Raylib_cs;
+﻿namespace Groova;
 
-namespace Groova;
-
-public partial class MainNode : Node
+public partial class MainScene : Node
 {
     public MusicPlayer MusicPlayer;
 
@@ -12,9 +10,13 @@ public partial class MainNode : Node
     private Playlist? currentPlaylist = null;
     private bool inPlaylists = true;
 
+    private TopSection topSection;
+
     public override void Start()
     {
         MusicPlayer = GetChild<MusicPlayer>();
+
+        topSection = GetChild<TopSection>();
 
         playlistsContainer = GetChild<PlaylistsContainer>();
         playlistsList = GetChild<ItemList>("PlaylistsList");
@@ -22,63 +24,7 @@ public partial class MainNode : Node
         musicsList = GetChild<ItemList>("MusicsList");
         musicsList.Deactivate();
 
-        GetChild<Button>("PlayButton").LeftClicked += OnPlayButtonLeftClicked;
-        GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
-        GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
-
         LoadPlaylists();
-    }
-
-    public override void Update()
-    {
-        //UpdateAudioSlider();
-        UpdateVolumeSlider();
-        //UpdateButton();
-    }
-
-    private void OnPlayButtonLeftClicked(object? sender, EventArgs e)
-    {
-        if (MusicPlayer.Playing)
-        {
-            MusicPlayer.Pause();
-        }
-        else
-        {
-            MusicPlayer.Resume();
-        }
-
-        var button = sender as Button;
-
-        button.Text = button.Text == ">" ?
-                      "||" :
-                      ">";
-    }
-
-    private void OnAddButtonLeftClicked(object? sender, EventArgs e)
-    {
-        if (inPlaylists)
-        {
-            AddChild(new NewPlaylistDialog());
-        }
-        else
-        {
-            OpenFileDialog dialog = new()
-            {
-                Multiselect = true
-            }
-            ;
-            dialog.ShowDialog();
-
-            if (dialog.FileNames.Length > 0)
-            {
-                foreach (string name in dialog.FileNames)
-                {
-                    playlistsContainer.AddMusic(currentPlaylist, name);
-                }
-            }
-
-            LoadMusics(currentPlaylist);
-        }
     }
 
     private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
@@ -86,14 +32,6 @@ public partial class MainNode : Node
         var playlistButton = sender as PlaylistButton;
         Playlist playlist = playlistButton.Playlist;
         LoadMusics(playlist);
-    }
-
-    private void OnReturnButtonLeftClicked(object? sender, EventArgs e)
-    {
-        if (!inPlaylists)
-        {
-            LoadPlaylists();
-        }
     }
 
     public void LoadPlaylists()
@@ -117,7 +55,7 @@ public partial class MainNode : Node
 
     public void LoadMusics(Playlist playlist)
     {
-        inPlaylists = false;
+        topSection.InPlaylists = false;
         currentPlaylist = playlist;
         playlistsList.Deactivate();
         musicsList.Activate();
@@ -132,24 +70,5 @@ public partial class MainNode : Node
 
             musicsList.Add(musicItem);
         }
-    }
-
-    private void UpdateVolumeSlider()
-    {
-        var slider = GetChild<HorizontalSlider>("VolumeSlider");
-
-        float screenWidth = Raylib.GetScreenWidth();
-
-        var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
-
-        float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
-
-        float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
-        float y = Raylib.GetScreenHeight() - 15;
-        slider.Position = new(x, y);
-
-        float width = screenWidth / 5;
-        float height = slider.Size.Y;
-        slider.Size = new(width, height);
     }
 }

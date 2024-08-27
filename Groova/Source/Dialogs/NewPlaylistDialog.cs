@@ -6,7 +6,7 @@ public partial class NewPlaylistDialog : Node2D
 {
     public override void Start()
     {
-        Origin = GetChild<Panel>().Size / 2;
+        Origin = GetChild<ColoredRectangle>().Size / 2;
         GetNode<ClickManager>().MinLayer = ClickableLayer.DialogButtons;
         GetChild<Button>().LeftClicked += OnButtonLeftClicked;
         GetChild<TextBox>().Confirmed += OnTextBoxConfirmed;
@@ -31,7 +31,7 @@ public partial class NewPlaylistDialog : Node2D
 
     private void Close()
     {
-        GetNode<MainNode>("").LoadPlaylists();
+        GetNode<MainScene>("").LoadPlaylists();
         GetNode<ClickManager>().MinLayer = 0;
         Destroy();
     }

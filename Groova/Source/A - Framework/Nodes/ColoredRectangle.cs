@@ -2,10 +2,10 @@
 
 namespace Groova;
 
-public class Panel : ClickableRectangle
+public class ColoredRectangle : ClickableRectangle
 {
-    private readonly Color color = new(24, 24, 24, 255);
-    private readonly Color outlineColor = new(128, 128, 128, 255);
+    public Color FillColor = new(24, 24, 24, 255);
+    public Color OutlineColor = new(128, 128, 128, 255);
 
     public override void Start()
     {
@@ -22,13 +22,16 @@ public class Panel : ClickableRectangle
 
     private void Draw()
     {
-        Raylib.DrawRectangleV(GlobalPosition - Origin, Size, color);
+        Raylib.DrawRectangleV(
+            GlobalPosition - Origin, 
+            Size, 
+            FillColor);
 
         Raylib.DrawRectangleLines(
             (int)(GlobalPosition.X - Origin.X),
             (int)(GlobalPosition.Y - Origin.Y),
             (int)Size.X,
             (int)Size.Y,
-            outlineColor);
+            OutlineColor);
     }
 }

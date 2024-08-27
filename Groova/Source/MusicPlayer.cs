@@ -6,10 +6,11 @@ public class MusicPlayer : AudioPlayer
 
     public override void Ready()
     {
-        slider = Parent.GetChild<HorizontalSlider>("AudioSlider");
+        Program.RootNode.PrintChildren();
+        slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");
         slider.Released += OnSliderReleased;
 
-        var volumeSlider = Parent.GetChild<HorizontalSlider>("VolumeSlider");
+        var volumeSlider = GetNode<HorizontalSlider>("BottomSection/VolumeSlider");
         volumeSlider.PercentageChanged += OnVolumeSliderPercentageChanged;
 
         base.Ready();

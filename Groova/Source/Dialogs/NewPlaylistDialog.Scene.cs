@@ -4,7 +4,7 @@ public partial class NewPlaylistDialog : Node2D
 {
     public override void Build()
     {
-        AddChild(new Panel
+        AddChild(new ColoredRectangle
         {
             Size = new(300, 150),
             InheritsOrigin = true

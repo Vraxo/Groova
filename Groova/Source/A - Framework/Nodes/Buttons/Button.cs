@@ -363,7 +363,7 @@ public class Button : ClickableRectangle
         Vector2 center = Size / 2;
 
         // Determine the alignment adjustment based on the TextOrigin
-        Vector2 alignmentAdjustment = new Vector2(
+        Vector2 alignmentAdjustment = new(
             TextOrigin.X < center.X ? 0 : TextOrigin.X > center.X ? -fontDimensions.X : -fontDimensions.X / 2,
             TextOrigin.Y < center.Y ? 0 : TextOrigin.Y > center.Y ? -fontDimensions.Y : -fontDimensions.Y / 2
         );

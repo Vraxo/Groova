@@ -56,7 +56,7 @@
 //            Size = Size
 //        };
 //        
-//        Raylib.DrawRectangleRounded(rectangle, 0.0F, (int)Size.X, Color.DarkGray);
+//        Raylib.DrawRectangleRounded(rectangle, 0.0F, (int)Size.X, FillColor.DarkGray);
 //    }
 //
 //    private void AddTopButton()

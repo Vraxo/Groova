@@ -52,7 +52,7 @@ public class TextBoxText : Node2D
     {
         Font font = parent.Style.Current.Font;
         string text = parent.Text;
-        uint fontSize = parent.Style.Current.FontSize;
+        uint fontSize = (uint)parent.Style.Current.FontSize;
 
         int halfFontHeight = (int)(Raylib.MeasureTextEx(font, text, fontSize, 1).Y / 2);
         return halfFontHeight;

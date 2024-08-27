@@ -12,7 +12,7 @@ public class EntryPoint
             ClearColor = new(57, 57, 57, 255)
         };
 
-        MainNode rootNode = new()
+        MainScene rootNode = new()
         {
         };
 
