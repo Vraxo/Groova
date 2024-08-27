@@ -54,41 +54,57 @@ public partial class VerticalSlider : BaseSlider
 
     protected override void Draw()
     {
-        Rectangle rectangle = new()
+        Vector2 position = GlobalPosition - Origin;
+
+        Rectangle emptyRectangle = new()
         {
-            Position = GlobalPosition - Origin,
+            Position = position,
             Size = Size
         };
 
-        // Draw the empty part of the slider
+        DrawOutline(emptyRectangle, EmptyStyle.Current);
+
         Raylib.DrawRectangleRounded(
-            rectangle,
+            emptyRectangle,
             EmptyStyle.Current.Roundness,
-            (int)Size.Y,
+            (int)Size.X,
             EmptyStyle.Current.FillColor);
 
-        // Draw the filled part of the slider
         Rectangle filledRectangle = new()
         {
-            Position = new(rectangle.Position.X, rectangle.Position.Y + (1 - Percentage) * rectangle.Size.Y),
-            Size = new(rectangle.Size.X, Percentage * rectangle.Size.Y)
+            Position = new(position.X, position.Y + (1 - Percentage) * Size.Y),
+            Size = new(Size.X, Percentage * Size.Y)
         };
+
+        DrawOutline(filledRectangle, FilledStyle.Current);
 
         Raylib.DrawRectangleRounded(
             filledRectangle,
             FilledStyle.Current.Roundness,
             (int)Size.X,
             FilledStyle.Current.FillColor);
+    }
 
-        // Draw the outline
-        if (EmptyStyle.Current.OutlineThickness > 0)
+    private void DrawOutline(Rectangle rectangle, ButtonStateStyle style)
+    {
+        if (style.OutlineThickness <= 0)
         {
-            Raylib.DrawRectangleRoundedLines(
-                rectangle,
-                EmptyStyle.Current.Roundness,
-                (int)Size.X,
-                EmptyStyle.Current.OutlineThickness,
-                EmptyStyle.Current.OutlineColor);
+            return;
+        }
+
+        for (int i = 0; i <= style.OutlineThickness; i++)
+        {
+            Rectangle outlineRectangle = new()
+            {
+                Position = rectangle.Position - new Vector2(i, i),
+                Size = new(rectangle.Size.X + i + 1, rectangle.Size.Y + i + 1)
+            };
+
+            Raylib.DrawRectangleRounded(
+                outlineRectangle,
+                style.Roundness,
+                (int)rectangle.Size.X,
+                style.OutlineColor);
         }
     }
 

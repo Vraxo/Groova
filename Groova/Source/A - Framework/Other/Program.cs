@@ -49,9 +49,9 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
     private static void SetWindowFlags()
     {
         Raylib.SetConfigFlags(
-            //ConfigFlags.VSyncHint | 
-            //ConfigFlags.Msaa4xHint |
-            //ConfigFlags.HighDpiWindow |
+            ConfigFlags.VSyncHint | 
+            ConfigFlags.Msaa4xHint |
+            ConfigFlags.HighDpiWindow |
             ConfigFlags.ResizableWindow |
             ConfigFlags.AlwaysRunWindow);
     }
