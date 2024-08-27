@@ -24,6 +24,7 @@ public partial class MainNode : Node
 
         GetChild<Button>("PlayButton").LeftClicked += OnPlayButtonLeftClicked;
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
+        GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
 
         LoadPlaylists();
     }
@@ -87,8 +88,17 @@ public partial class MainNode : Node
         LoadMusics(playlist);
     }
 
+    private void OnReturnButtonLeftClicked(object? sender, EventArgs e)
+    {
+        if (!inPlaylists)
+        {
+            LoadPlaylists();
+        }
+    }
+
     public void LoadPlaylists()
     {
+        musicsList.Deactivate();
         playlistsList.Activate();
         playlistsList.Clear();
         playlistsContainer.Load();

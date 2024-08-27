@@ -31,6 +31,20 @@ public partial class MainNode : Node
             Text = "+",
         }, "AddButton");
 
+        AddChild(new Button
+        {
+            Position = new(20, 25),
+            Size = new(24, 24),
+            Text = "<-",
+            OnUpdate = (button) =>
+            {
+                float x = Raylib.GetScreenWidth() - 20;
+                float y = button.Position.Y;
+
+                button.Position = new(x, y);
+            }
+        }, "ReturnButton");
+
         AddChild(new TextBox
         {
             Position = new(0, 25),
@@ -102,7 +116,6 @@ public partial class MainNode : Node
                 float x = list.Position.X;
                 float y = 50;
                 list.Position = new(x, y);
-
 
                 float width = Raylib.GetScreenWidth();
                 float height = Raylib.GetScreenHeight() - list.Position.Y - 80;

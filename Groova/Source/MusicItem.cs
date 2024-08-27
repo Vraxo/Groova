@@ -19,7 +19,6 @@ public partial class MusicItem : Node2D
     {
         var musicPlayer = GetNode<MusicPlayer>("MusicPlayer");
 
-        //musicPlayer.Audio = Raylib.LoadMusicStream(MusicPath);
         musicPlayer.Load(MusicPath);
         musicPlayer.Play();
     }
