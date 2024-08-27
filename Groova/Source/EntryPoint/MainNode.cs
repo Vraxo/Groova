@@ -113,23 +113,6 @@ public partial class MainNode : Node
         musicsList.Activate();
         musicsList.Clear();
 
-        //ItemList musicList = new()
-        //{
-        //    ItemSize = new(100, 40),
-        //    OnUpdate = (list) =>
-        //    {
-        //        float x = list.Position.X;
-        //        float y = 50;
-        //        list.Position = new(x, y);
-        //
-        //        float width = Raylib.GetScreenWidth();
-        //        float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-        //        list.Size = new(width, height);
-        //    }
-        //};
-
-        //AddChild(musicsList);
-
         foreach (string path in playlist.Paths)
         {
             MusicItem musicItem = new()
@@ -144,8 +127,6 @@ public partial class MainNode : Node
     private void UpdateVolumeSlider()
     {
         var slider = GetChild<HorizontalSlider>("VolumeSlider");
-
-        slider.MaxExternalValue = 100;
 
         float screenWidth = Raylib.GetScreenWidth();
 

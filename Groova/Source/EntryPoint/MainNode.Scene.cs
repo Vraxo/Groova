@@ -40,11 +40,11 @@ public partial class MainNode : Node
             },
             OnUpdate = (textBox) =>
             {
-                float x = 10 + Raylib.GetScreenWidth() / 2;
+                float x = Raylib.GetScreenWidth() / 2;
                 float y = textBox.Position.Y;
                 textBox.Position = new(x, y);
 
-                float width = Raylib.GetScreenWidth() * 0.85f;
+                float width = Raylib.GetScreenWidth() * 0.75f;
                 float height = textBox.Size.Y;
                 textBox.Size = new(width, height);
             }
@@ -74,7 +74,7 @@ public partial class MainNode : Node
         AddChild(new HorizontalSlider()
         {
             Position = new(50, 0),
-            HasButtons = true,
+            HasButtons = false,
             Percentage = 1,
         }, "VolumeSlider");
         

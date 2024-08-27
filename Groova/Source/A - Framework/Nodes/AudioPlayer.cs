@@ -5,6 +5,7 @@ namespace Groova;
 public class AudioPlayer : Node
 {
     public Music Audio { get; set; }
+    public bool HasAudio = false;
     public bool AutoPlay { get; set; } = false;
     public bool Loop { get; set; } = false;
     public bool Playing => Raylib.IsMusicStreamPlaying(Audio);
@@ -15,6 +16,11 @@ public class AudioPlayer : Node
     {
         set
         {
+            if (!HasAudio)
+            {
+                return;
+            }
+
             Raylib.SetMusicVolume(Audio, value);
         }
     }
@@ -23,6 +29,11 @@ public class AudioPlayer : Node
     {
         set
         {
+            if (!HasAudio)
+            {
+                return;
+            }
+
             Raylib.SetMusicPitch(Audio, value);
         }
     }
@@ -31,12 +42,22 @@ public class AudioPlayer : Node
     {
         set
         {
+            if (!HasAudio)
+            {
+                return;
+            }
+
             Raylib.SetMusicPan(Audio, value);
         }
     }
 
     public override void Ready()
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         if (AutoPlay)
         {
             Play();
@@ -60,8 +81,19 @@ public class AudioPlayer : Node
         }
     }
 
+    public void Load(string path)
+    {
+        Audio = Raylib.LoadMusicStream(path);
+        HasAudio = true;
+    }
+
     public void Play(float timestamp = 0.1f)
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         timestamp = Math.Clamp(timestamp, 0.1f, AudioLength);
 
         Raylib.PlayMusicStream(Audio);
@@ -70,21 +102,41 @@ public class AudioPlayer : Node
 
     public void Resume()
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         Raylib.ResumeMusicStream(Audio);
     }
 
     public void Pause()
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         Raylib.PauseMusicStream(Audio);
     }
 
     public void Stop()
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         Raylib.StopMusicStream(Audio);
     }
 
     public void Seek(float timestamp)
     {
+        if (!HasAudio)
+        {
+            return;
+        }
+
         timestamp = Math.Clamp(timestamp, 0.1f, AudioLength);
 
         Raylib.SeekMusicStream(Audio, timestamp);
