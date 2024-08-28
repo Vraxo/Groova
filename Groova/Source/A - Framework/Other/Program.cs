@@ -61,7 +61,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
-                Raylib.ClearBackground(windowData.ClearColor);
+                Raylib.ClearBackground(Color.Black);
                 RootNode.Process();
             Raylib.EndDrawing();
 

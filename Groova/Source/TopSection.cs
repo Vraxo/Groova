@@ -28,27 +28,37 @@ public partial class TopSection : Node2D
     {
         if (InPlaylists)
         {
-            RootNode.AddChild(new NewPlaylistDialog());
+            CreateNewPlaylistDialog();
         }
         else
         {
-            OpenFileDialog dialog = new()
-            {
-                Multiselect = true
-            }
-            ;
-            dialog.ShowDialog();
-
-            if (dialog.FileNames.Length > 0)
-            {
-                foreach (string name in dialog.FileNames)
-                {
-                    //playlistsContainer.AddMusic(currentPlaylist, name);
-                }
-            }
-
-            //parent.LoadMusics(currentPlaylist);
+            CreateNewMusicDialog();
         }
+    }
+
+    private void CreateNewPlaylistDialog()
+    {
+        RootNode.AddChild(new NewPlaylistDialog());
+    }
+
+    private void CreateNewMusicDialog()
+    {
+        OpenFileDialog dialog = new()
+        {
+            Multiselect = true
+        }
+;
+        dialog.ShowDialog();
+
+        if (dialog.FileNames.Length > 0)
+        {
+            foreach (string name in dialog.FileNames)
+            {
+                //playlistsContainer.AddMusic(currentPlaylist, name);
+            }
+        }
+
+        //parent.LoadMusics(currentPlaylist);
     }
 
     private void Return()

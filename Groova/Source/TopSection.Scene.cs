@@ -13,6 +13,9 @@ public partial class TopSection : Node2D
             {
                 Roundness = 1
             },
+            Text = "⌕ Search...",
+            TemporaryDefaultText = true,
+            DefaultText = "Search songs and playlists...",
             OnUpdate = (textBox) =>
             {
                 float x = Raylib.GetScreenWidth() / 2;

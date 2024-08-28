@@ -52,12 +52,12 @@ public class TextBoxShape : Node2D
             return;
         }
 
-        for (int i = 0; i <= Style.Current.OutlineThickness; i++)
+        for (int i = 0; i <= parent.Style.Current.OutlineThickness; i++)
         {
             Rectangle rectangle = new()
             {
-                Position = GlobalPosition - Origin - new Vector2(i, i),
-                Size = new(Size.X + i + 1, Size.Y + i + 1)
+                Position = parent.GlobalPosition - parent.Origin - new Vector2(i, i),
+                Size = new(parent.Size.X + i + 1, parent.Size.Y + i + 1)
             };
 
             Raylib.DrawRectangleRounded(
