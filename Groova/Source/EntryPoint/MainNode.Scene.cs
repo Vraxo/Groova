@@ -20,7 +20,23 @@ public partial class MainScene : Node
 
         AddChild(new BottomSection());
         
-        AddChild(new PlaylistItemlist
+        AddChild(new ItemList
+        {
+            ItemSize = new(100, 40),
+            OnUpdate = (list) =>
+            {
+                float x = list.Position.X;
+                float y = 50;
+                list.Position = new(x, y);
+
+
+                float width = Raylib.GetScreenWidth();
+                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+                list.Size = new(width, height);
+            }
+        }, "PlaylistsList");
+
+        AddChild(new ItemList
         {
             ItemSize = new(100, 40),
             OnUpdate = (list) =>
@@ -33,21 +49,6 @@ public partial class MainScene : Node
                 float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
                 list.Size = new(width, height);
             }
-        }, "PlaylistsList");
-
-        //AddChild(new ItemList
-        //{
-        //    ItemSize = new(100, 40),
-        //    OnUpdate = (list) =>
-        //    {
-        //        float x = list.Position.X;
-        //        float y = 50;
-        //        list.Position = new(x, y);
-        //
-        //        float width = Raylib.GetScreenWidth();
-        //        float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-        //        list.Size = new(width, height);
-        //    }
-        //}, "MusicsList");
+        }, "MusicsList");
     }
 }

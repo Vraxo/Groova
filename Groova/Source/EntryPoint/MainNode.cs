@@ -5,7 +5,7 @@ public partial class MainScene : Node
     public MusicPlayer MusicPlayer;
 
     private PlaylistsContainer playlistsContainer;
-    private PlaylistItemlist playlistsList;
+    private ItemList playlistsList;
     private ItemList musicsList;
     private Playlist? currentPlaylist = null;
     private bool inPlaylists = true;
@@ -19,12 +19,38 @@ public partial class MainScene : Node
         topSection = GetChild<TopSection>();
 
         playlistsContainer = GetChild<PlaylistsContainer>();
-        playlistsList = GetChild<PlaylistItemlist>("PlaylistsList");
+        playlistsList = GetChild<ItemList>("PlaylistsList");
         
-        //musicsList = GetChild<ItemList>("MusicsList");
-        //musicsList.Deactivate();
+        musicsList = GetChild<ItemList>("MusicsList");
+        musicsList.Deactivate();
 
         LoadPlaylists();
+    }
+
+    private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
+    {
+        var playlistButton = sender as PlaylistButton;
+        Playlist playlist = playlistButton.Playlist;
+        LoadMusics(playlist);
+    }
+
+    public void LoadPlaylists()
+    {
+        musicsList.Deactivate();
+        playlistsList.Activate();
+        playlistsList.Clear();
+        playlistsContainer.Load();
+
+        foreach (Playlist playlist in playlistsContainer.Playlists)
+        {
+            PlaylistItem playlistItem = new()
+            {
+                Text = playlist.Name,
+                Playlist = playlist
+            };
+
+            playlistsList.Add(playlistItem);
+        }
     }
 
     public void LoadMusics(Playlist playlist)

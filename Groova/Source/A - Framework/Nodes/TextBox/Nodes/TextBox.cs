@@ -31,7 +31,6 @@ public partial class TextBox : ClickableRectangle
     {
         Style.Pressed.FillColor = new(34, 34, 34, 255);
         Style.Pressed.OutlineColor = new(71, 114, 179, 255);
-        Style.Pressed.OutlineThickness = 1;
 
         caret = GetChild<TextBoxCaret>();
         base.Start();

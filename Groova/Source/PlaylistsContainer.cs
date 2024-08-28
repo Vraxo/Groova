@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace Groova;
 
@@ -24,26 +23,37 @@ public class PlaylistsContainer : Node
 
     public void Save()
     {
-        Sort();
-        string json = JsonSerializer.Serialize(Playlists, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(path, json);
+        try
+        {
+            // Serialize the playlists to a JSON string
+            string json = JsonSerializer.Serialize(Playlists, new JsonSerializerOptions { WriteIndented = true });
+
+            // Write the JSON string to a file
+            File.WriteAllText(path, json);
+            Console.WriteLine($"Playlists saved to {path}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to save playlists: {ex.Message}");
+        }
     }
 
+    // Method to load playlists from a JSON file
     public void Load()
     {
-        string json = File.ReadAllText(path);
-        Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
-    }
+        try
+        {
+            // Read the JSON string from the file
+            string json = File.ReadAllText(path);
 
-    private static string PadNumbers(string input)
-    {
-        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
-    }
+            // Deserialize the JSON string back to the playlists list
+            Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
 
-    private void Sort()
-    {
-        Playlists = Playlists
-                    .OrderBy(o => PadNumbers(o.Name))
-                    .ToList();
+            Console.WriteLine($"Playlists loaded from {path}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Failed to load playlists: {ex.Message}");
+        }
     }
 }

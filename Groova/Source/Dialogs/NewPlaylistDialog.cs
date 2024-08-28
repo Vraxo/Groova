@@ -25,19 +25,7 @@ public partial class NewPlaylistDialog : Node2D
 
     private void OnTextBoxConfirmed(object? sender, string e)
     {
-        string playlistName = e;
-        var playlistsContainer = GetNode<PlaylistsContainer>("PlaylistsContainer");
-
-        foreach (Playlist playlist in playlistsContainer.Playlists)
-        {
-            if (playlist.Name == playlistName)
-            {
-                GetChild<Label>("ErrorLabel").Visible = true;
-                return;
-            }
-        }
-
-        playlistsContainer.AddPlaylist(e);
+        GetNode<PlaylistsContainer>("PlaylistsContainer").AddPlaylist(e);
         Close();
     }
 

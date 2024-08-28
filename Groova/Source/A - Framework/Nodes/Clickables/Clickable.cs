@@ -12,7 +12,7 @@ public abstract class Clickable : Node2D
     {
         clickManager = GetNode<ClickManager>();
 
-        if (clickManager is null)
+        if (clickManager == null)
         {
             //Program.RootNode.AddChild(new ClickManager());
             Program.RootNode.Children.Insert(0, new ClickManager { Name = "ClickManager" });

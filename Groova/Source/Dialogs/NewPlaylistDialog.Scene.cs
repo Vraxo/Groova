@@ -55,6 +55,6 @@ public partial class NewPlaylistDialog : Node2D
             Visible = false,
             Color = new(255, 0, 0, 255),
             Text = "Playlist already exists."
-        }, "ErrorLabel");
+        });
     }
 }

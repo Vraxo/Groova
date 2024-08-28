@@ -12,7 +12,6 @@ public partial class PlaylistItem : Node2D
         button = GetChild<Button>();
         button.Text = Text;
         button.LeftClicked += OnButtonLeftclicked;
-        base.Start();
     }
 
     private void OnButtonLeftclicked(object? sender, EventArgs e)

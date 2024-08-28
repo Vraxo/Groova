@@ -13,7 +13,6 @@ public partial class MusicItem : Node2D
         button = GetChild<Button>();
         button.Text = Path.GetFileNameWithoutExtension(MusicPath);
         button.LeftClicked += OnButtonLeftclicked;
-        base.Start();
     }
 
     private void OnButtonLeftclicked(object? sender, EventArgs e)
