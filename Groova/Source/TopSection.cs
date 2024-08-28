@@ -65,7 +65,7 @@ public partial class TopSection : Node2D
     {
         if (!InPlaylists)
         {
-            parent.LoadPlaylists();
+            //parent.LoadPlaylists();
         }
     }
 }

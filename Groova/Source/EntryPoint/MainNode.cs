@@ -15,34 +15,31 @@ public partial class MainScene : Node
     public override void Start()
     {
         MusicPlayer = GetChild<MusicPlayer>();
-
         topSection = GetChild<TopSection>();
-
         playlistsContainer = GetChild<PlaylistsContainer>();
-        playlistsList = GetChild<PlaylistItemlist>("PlaylistsList");
-        
-        //musicsList = GetChild<ItemList>("MusicsList");
-        //musicsList.Deactivate();
 
-        LoadPlaylists();
+        playlistsList = GetChild<PlaylistItemlist>("PlaylistsList");
+        playlistsList.Load();
+
+        musicsList = GetChild<ItemList>("MusicsList");
     }
 
     public void LoadMusics(Playlist playlist)
     {
-        topSection.InPlaylists = false;
-        currentPlaylist = playlist;
-        playlistsList.Deactivate();
-        musicsList.Activate();
-        musicsList.Clear();
-
-        foreach (string path in playlist.Paths)
-        {
-            MusicItem musicItem = new()
-            {
-                MusicPath = path
-            };
-
-            musicsList.Add(musicItem);
-        }
+        //topSection.InPlaylists = false;
+        //currentPlaylist = playlist;
+        //playlistsList.Deactivate();
+        //musicsList.Activate();
+        //musicsList.Clear();
+        //
+        //foreach (string path in playlist.Paths)
+        //{
+        //    MusicItem musicItem = new()
+        //    {
+        //        MusicPath = path
+        //    };
+        //
+        //    musicsList.Add(musicItem);
+        //}
     }
 }

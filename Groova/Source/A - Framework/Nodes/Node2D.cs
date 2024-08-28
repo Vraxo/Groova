@@ -7,6 +7,7 @@ public class Node2D : Node
     public bool InheritPosition { get; set; } = true;
     public bool InheritsOrigin { get; set; } = false;
     public bool Visible { get; set; } = true;
+    public int Layer { get; set; } = 0;
 
     private Vector2 _size = Vector2.Zero;
     public Vector2 Size
