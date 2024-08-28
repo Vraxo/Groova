@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Groova;
 
@@ -28,37 +29,48 @@ public class PlaylistsContainer : Node
 
     public void Save()
     {
-        try
-        {
-            // Serialize the playlists to a JSON string
-            string json = JsonSerializer.Serialize(Playlists, new JsonSerializerOptions { WriteIndented = true });
+        Sort();
 
-            // Write the JSON string to a file
-            File.WriteAllText(path, json);
-            Console.WriteLine($"Playlists saved to {path}");
-        }
-        catch (Exception ex)
+        JsonSerializerOptions options = new()
         {
-            Console.WriteLine($"Failed to save playlists: {ex.Message}");
-        }
+            WriteIndented = true
+        };
+
+        string json = JsonSerializer.Serialize(Playlists, options);
+        File.WriteAllText(path, json);
     }
 
-    // Method to load playlists from a JSON file
     public void Load()
     {
-        try
-        {
-            // Read the JSON string from the file
-            string json = File.ReadAllText(path);
+        string json = File.ReadAllText(path);
+        Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
+    }
 
-            // Deserialize the JSON string back to the playlists list
-            Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
+    private static string PadNumbers(string input)
+    {
+        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
+    }
 
-            Console.WriteLine($"Playlists loaded from {path}");
-        }
-        catch (Exception ex)
+    private void Sort()
+    {
+        SortPlaylists();
+        SortSongs();
+    }
+
+    private void SortPlaylists()
+    {
+        Playlists = Playlists
+            .OrderBy(o => PadNumbers(o.Name))
+            .ToList();
+    }
+
+    private void SortSongs()
+    {
+        foreach (Playlist playlist in Playlists)
         {
-            Console.WriteLine($"Failed to load playlists: {ex.Message}");
+            playlist.Paths = playlist.Paths
+                .OrderBy(PadNumbers)
+                .ToList();
         }
     }
 }
