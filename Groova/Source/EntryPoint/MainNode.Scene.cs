@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class MainScene : Node
 {

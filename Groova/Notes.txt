@@ -1,7 +1,12 @@
 ﻿ItemList's vertical horizontal only responds to
 clicks when Clickable is on Ready, not Start. Why?
 
-
+This is preventing me from switching click manager
+from Ready to Start, which would remove the need for
+checking if the clickable is active, which is there
+because deactivated unshown items in ItemLists never
+run their Ready method and therefore don't get their
+click manager.
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 

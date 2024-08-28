@@ -72,8 +72,8 @@ public partial class VerticalSlider : BaseSlider
 
         Rectangle filledRectangle = new()
         {
-            Position = new(position.X, position.Y + (1 - Percentage) * Size.Y),
-            Size = new(Size.X, Percentage * Size.Y)
+            Position = position,  // Keep the filledRectangle's position the same as the emptyRectangle
+            Size = new(Size.X, Percentage * Size.Y)  // Adjust the size based on the Percentage
         };
 
         DrawOutline(filledRectangle, FilledStyle.Current);
