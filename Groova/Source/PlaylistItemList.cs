@@ -23,6 +23,8 @@ public class PlaylistItemlist() : ItemList
             };
 
             Add(playlistItem);
+
+            Console.WriteLine("added");
         }
     }
 }

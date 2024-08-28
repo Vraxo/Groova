@@ -35,15 +35,15 @@ public class PlaylistsContainer : Node
         Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
     }
 
+    private static string PadNumbers(string input)
+    {
+        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
+    }
+
     private void Sort()
     {
         Playlists = Playlists
                     .OrderBy(o => PadNumbers(o.Name))
                     .ToList();
-    }
-
-    private static string PadNumbers(string input)
-    {
-        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
     }
 }

@@ -62,7 +62,6 @@ public partial class ItemList : ClickableRectangle
     public void Add(Node2D item)
     {
         item.InheritsOrigin = true;
-        item.Layer = Layer + 1;
         Items.Add(item);
         AddChild(item);
         OnItemCountChanged(this);

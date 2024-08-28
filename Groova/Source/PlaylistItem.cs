@@ -17,6 +17,6 @@ public partial class PlaylistItem : Node2D
 
     private void OnButtonLeftclicked(object? sender, EventArgs e)
     {
-        GetNode<MusicItemlist>("MusicsList").Load(Playlist);
+        GetNode<MainScene>("").LoadMusics(Playlist);
     }
 }
