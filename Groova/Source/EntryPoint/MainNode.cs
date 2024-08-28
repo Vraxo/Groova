@@ -27,13 +27,6 @@ public partial class MainScene : Node
         LoadPlaylists();
     }
 
-    private void OnPlaylistButtonLeftClicked(object? sender, EventArgs e)
-    {
-        var playlistButton = sender as PlaylistButton;
-        Playlist playlist = playlistButton.Playlist;
-        LoadMusics(playlist);
-    }
-
     public void LoadPlaylists()
     {
         musicsList.Deactivate();
