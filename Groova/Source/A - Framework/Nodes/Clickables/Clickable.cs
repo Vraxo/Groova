@@ -24,7 +24,12 @@ public abstract class Clickable : Node2D
 
     public override void Destroy()
     {
-        clickManager.Remove(this);
+        if (Active)
+        {
+            clickManager.Remove(this);
+        }
+
+        base.Destroy();
     }
 
     public abstract bool IsMouseOver();

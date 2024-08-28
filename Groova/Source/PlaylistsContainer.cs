@@ -8,6 +8,11 @@ public class PlaylistsContainer : Node
 
     private readonly string path = "Resources/Playlists.json";
 
+    public override void Start()
+    {
+        Load();
+    }
+
     public void AddPlaylist(string name)
     {
         Playlist playlist = new(name);

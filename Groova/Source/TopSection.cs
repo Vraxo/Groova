@@ -3,12 +3,15 @@
 public partial class TopSection : Node2D
 {
     public bool InPlaylists = true;
+    public Playlist? CurrentPlaylist = null;
 
     private MainScene parent;
+    private PlaylistsContainer playlistsContainer;
 
     public override void Start()
     {
         parent = Parent as MainScene;
+        playlistsContainer = GetNode<PlaylistsContainer>();
 
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
@@ -43,11 +46,19 @@ public partial class TopSection : Node2D
             {
                 foreach (string name in dialog.FileNames)
                 {
-                    //playlistsContainer.AddMusic(currentPlaylist, name);
+                    foreach (string songName in CurrentPlaylist.Paths)
+                    {
+                        if (name == songName)
+                        {
+                            break;
+                        }
+                    }
+
+                    playlistsContainer.AddMusic(CurrentPlaylist, name);
                 }
             }
 
-            //parent.LoadMusics(currentPlaylist);
+            parent.LoadMusics(CurrentPlaylist);
         }
     }
 

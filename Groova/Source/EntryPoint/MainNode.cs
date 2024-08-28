@@ -1,13 +1,12 @@
-﻿namespace Groova;
+﻿using Raylib_cs;
+
+namespace Groova;
 
 public partial class MainScene : Node
 {
     public MusicPlayer MusicPlayer;
 
     private PlaylistsContainer playlistsContainer;
-    private ItemList playlistsList;
-    private ItemList musicsList;
-    private Playlist? currentPlaylist = null;
     private bool inPlaylists = true;
 
     private TopSection topSection;
@@ -19,20 +18,31 @@ public partial class MainScene : Node
         topSection = GetChild<TopSection>();
 
         playlistsContainer = GetChild<PlaylistsContainer>();
-        playlistsList = GetChild<ItemList>("PlaylistsList");
-        
-        musicsList = GetChild<ItemList>("MusicsList");
-        musicsList.Deactivate();
 
         LoadPlaylists();
     }
 
     public void LoadPlaylists()
     {
-        musicsList.Deactivate();
-        playlistsList.Activate();
-        playlistsList.Clear();
-        playlistsContainer.Load();
+        var musicsItemlist = GetChild<ItemList>("MusicsList");
+        musicsItemlist?.Destroy();
+
+        ItemList playlistItemList = new()
+        {
+            ItemSize = new(100, 40),
+            OnUpdate = (list) =>
+            {
+                float x = list.Position.X;
+                float y = 50;
+                list.Position = new(x, y);
+
+                float width = Raylib.GetScreenWidth();
+                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+                list.Size = new(width, height);
+            }
+        };
+
+        AddChild(playlistItemList, "PlaylistsList");
 
         foreach (Playlist playlist in playlistsContainer.Playlists)
         {
@@ -41,18 +51,34 @@ public partial class MainScene : Node
                 Text = playlist.Name,
                 Playlist = playlist
             };
-
-            playlistsList.Add(playlistItem);
+        
+            playlistItemList.Add(playlistItem);
         }
     }
 
     public void LoadMusics(Playlist playlist)
     {
         topSection.InPlaylists = false;
-        currentPlaylist = playlist;
-        playlistsList.Deactivate();
-        musicsList.Activate();
-        musicsList.Clear();
+        topSection.CurrentPlaylist = playlist;
+
+        GetChild<ItemList>("PlaylistsList")?.Destroy();
+
+        ItemList musicsList = new()
+        {
+            ItemSize = new(100, 40),
+            OnUpdate = (list) =>
+            {
+                float x = list.Position.X;
+                float y = 50;
+                list.Position = new(x, y);
+
+                float width = Raylib.GetScreenWidth();
+                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+                list.Size = new(width, height);
+            }
+        };
+
+        AddChild(musicsList, "MusicsList");
 
         foreach (string path in playlist.Paths)
         {
@@ -60,7 +86,7 @@ public partial class MainScene : Node
             {
                 MusicPath = path
             };
-
+        
             musicsList.Add(musicItem);
         }
     }

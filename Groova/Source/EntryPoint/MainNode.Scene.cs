@@ -6,7 +6,7 @@ public partial class MainScene : Node
 {
     public override void Build()
     {
-        //AddChild(new ClickManager());
+        AddChild(new ClickManager());
 
         AddChild(new PlaylistsContainer());
 
@@ -20,35 +20,35 @@ public partial class MainScene : Node
 
         AddChild(new BottomSection());
         
-        AddChild(new ItemList
-        {
-            ItemSize = new(100, 40),
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
+        //AddChild(new ItemList
+        //{
+        //    ItemSize = new(100, 40),
+        //    OnUpdate = (list) =>
+        //    {
+        //        float x = list.Position.X;
+        //        float y = 50;
+        //        list.Position = new(x, y);
+        //
+        //
+        //        float width = Raylib.GetScreenWidth();
+        //        float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+        //        list.Size = new(width, height);
+        //    }
+        //}, "PlaylistsList");
 
-
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
-        }, "PlaylistsList");
-
-        AddChild(new ItemList
-        {
-            ItemSize = new(100, 40),
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
-
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
-        }, "MusicsList");
+        //AddChild(new ItemList
+        //{
+        //    ItemSize = new(100, 40),
+        //    OnUpdate = (list) =>
+        //    {
+        //        float x = list.Position.X;
+        //        float y = 50;
+        //        list.Position = new(x, y);
+        //
+        //        float width = Raylib.GetScreenWidth();
+        //        float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
+        //        list.Size = new(width, height);
+        //    }
+        //}, "MusicsList");
     }
 }
