@@ -10,7 +10,7 @@ click manager.
 
 Make padding in button style to text origin for textbox
 
-
+Add a way to access window resolution without raylib
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 
