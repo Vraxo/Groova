@@ -189,7 +189,10 @@ public class Button : ClickableRectangle
 
         if (IsMouseOver())
         {
-            Style.Current = Style.Hover;
+            if (!PressedLeft)
+            {
+                Style.Current = Style.Hover;
+            }
 
             if (Raylib.IsMouseButtonDown(MouseButton.Right))
             {
@@ -298,7 +301,7 @@ public class Button : ClickableRectangle
             return;
         }
 
-        for (int i = 0; i <= Style.Current.OutlineThickness; i++)
+        for (int i = 0; i < Style.Current.OutlineThickness; i++)
         {
             Rectangle rectangle = new()
             {

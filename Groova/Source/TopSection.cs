@@ -58,7 +58,7 @@ public partial class TopSection : Node2D
         {
             foreach (string name in dialog.FileNames)
             {
-                foreach (string songName in CurrentPlaylist.Paths)
+                foreach (string songName in CurrentPlaylist.SongPaths)
                 {
                     if (name == songName)
                     {
@@ -66,7 +66,7 @@ public partial class TopSection : Node2D
                     }
                 }
 
-                playlistsContainer.AddMusic(CurrentPlaylist, name);
+                playlistsContainer.AddSong(CurrentPlaylist, name);
             }
         }
 

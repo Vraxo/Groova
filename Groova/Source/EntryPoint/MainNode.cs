@@ -20,6 +20,8 @@ public partial class MainScene : Node
 
     public void LoadPlaylists()
     {
+        topSection.InPlaylists = true;
+
         var songsItemList = GetChild<ItemList>("SongItemList");
         songsItemList?.Destroy();
 
@@ -80,7 +82,7 @@ public partial class MainScene : Node
 
         AddChild(musicsList, "SongItemList");
 
-        foreach (string path in playlist.Paths)
+        foreach (string path in playlist.SongPaths)
         {
             MusicItem musicItem = new()
             {

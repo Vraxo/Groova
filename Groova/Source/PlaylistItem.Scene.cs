@@ -26,19 +26,20 @@ public partial class PlaylistItem : Node2D
 
         AddChild(new Button
         {
-            Position = new(20, 20),
-            Size = new(24, 24),
+            Position = new(24, 20),
+            Size = new(32, 32),
             Style = new()
             {
+                OutlineThickness = 0,
                 Roundness = 0,
-                FillColor = Color.RayWhite
+                FillColor = Theme.Accent
             }
         }, "ImageButton");
 
         AddChild(new TexturedRectangle
         {
-            Position = new(20, 20),
-            Size = new(24, 24)
+            Position = new(24, 20),
+            Size = new(32, 32)
         });
     }
 }

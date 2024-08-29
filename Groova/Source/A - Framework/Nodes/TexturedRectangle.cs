@@ -4,7 +4,7 @@ namespace Groova;
 
 public class TexturedRectangle : Node2D
 {
-    public Texture2D Texture;
+    public Texture2D Texture { get; set; } = Raylib.LoadTexture("");
     public Action<TexturedRectangle> OnUpdate = (rectangle) => { };
 
     public TexturedRectangle()

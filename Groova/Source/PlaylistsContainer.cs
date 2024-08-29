@@ -21,9 +21,9 @@ public class PlaylistsContainer : Node
         Save();
     }
 
-    public void AddMusic(Playlist playlist, string musicPath)
+    public void AddSong(Playlist playlist, string musicPath)
     {
-        playlist.Paths.Add(musicPath);
+        playlist.SongPaths.Add(musicPath);
         Save();
     }
 
@@ -33,9 +33,9 @@ public class PlaylistsContainer : Node
         Save();
     }
 
-    public void RemoveMusic(Playlist playlist, string musicPath)
+    public void RemoveSong(Playlist playlist, string musicPath)
     {
-        playlist.Paths.Remove(musicPath);
+        playlist.SongPaths.Remove(musicPath);
         Save();
     }
 
@@ -45,7 +45,7 @@ public class PlaylistsContainer : Node
         Save();
     }
 
-    public void SetPlaylistImage(Playlist playlist, string musicPath, string imagePath)
+    public void SetSongImage(Playlist playlist, string musicPath, string imagePath)
     {
 
     }
@@ -86,7 +86,7 @@ public class PlaylistsContainer : Node
     {
         foreach (Playlist playlist in Playlists)
         {
-            playlist.Paths = playlist.Paths
+            playlist.SongPaths = playlist.SongPaths
                 .OrderBy(PadNumbers)
                 .ToList();
         }
