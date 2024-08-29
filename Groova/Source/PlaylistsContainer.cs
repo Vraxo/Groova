@@ -27,6 +27,12 @@ public class PlaylistsContainer : Node
         Save();
     }
 
+    public void RemoveMusic(Playlist playlist, string musicPath)
+    {
+        playlist.Paths.Remove(musicPath);
+        Save();
+    }
+
     public void Save()
     {
         Sort();
@@ -44,11 +50,6 @@ public class PlaylistsContainer : Node
     {
         string json = File.ReadAllText(path);
         Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
-    }
-
-    private static string PadNumbers(string input)
-    {
-        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
     }
 
     private void Sort()
@@ -72,5 +73,10 @@ public class PlaylistsContainer : Node
                 .OrderBy(PadNumbers)
                 .ToList();
         }
+    }
+
+    private static string PadNumbers(string input)
+    {
+        return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
     }
 }

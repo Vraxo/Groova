@@ -14,9 +14,7 @@ public partial class MainScene : Node
     public override void Start()
     {
         MusicPlayer = GetChild<MusicPlayer>();
-
         topSection = GetChild<TopSection>();
-
         playlistsContainer = GetChild<PlaylistsContainer>();
 
         LoadPlaylists();
@@ -61,6 +59,7 @@ public partial class MainScene : Node
         topSection.InPlaylists = false;
         topSection.CurrentPlaylist = playlist;
 
+        GetChild<ItemList>("MusicsList")?.Destroy();
         GetChild<ItemList>("PlaylistsList")?.Destroy();
 
         ItemList musicsList = new()
@@ -84,7 +83,8 @@ public partial class MainScene : Node
         {
             MusicItem musicItem = new()
             {
-                MusicPath = path
+                SongPath = path,
+                Playlist = playlist
             };
         
             musicsList.Add(musicItem);

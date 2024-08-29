@@ -2,22 +2,39 @@
 
 public partial class MusicItem : Node2D
 {
-    public string MusicPath = "";
+    public Playlist Playlist;
+    public string SongPath = "";
 
-    private Button button;
+    private PlaylistsContainer playlistsContainer;
 
     public override void Start()
     {
-        button = GetChild<Button>();
-        button.Text = Path.GetFileNameWithoutExtension(MusicPath);
+        var button = GetChild<Button>();
+        button.Text = Path.GetFileNameWithoutExtension(SongPath);
         button.LeftClicked += OnButtonLeftclicked;
+        button.RightClicked += OnButtonRightClicked;
+
+        playlistsContainer = GetNode<PlaylistsContainer>();
     }
 
     private void OnButtonLeftclicked(object? sender, EventArgs e)
     {
         var musicPlayer = GetNode<MusicPlayer>("MusicPlayer");
-
-        musicPlayer.Load(MusicPath);
+        musicPlayer.Load(SongPath);
         musicPlayer.Play();
+    }
+
+    private void OnButtonRightClicked(object? sender, EventArgs e)
+    {
+        //playlistsContainer.RemoveMusic(Playlist, SongPath);
+        //GetNode<MainScene>("").LoadMusics(Playlist);
+
+        DeleteSongDialog dialog = new()
+        {
+            Playlist = Playlist,
+            SongPath = SongPath
+        };
+
+        RootNode.AddChild(dialog);
     }
 }

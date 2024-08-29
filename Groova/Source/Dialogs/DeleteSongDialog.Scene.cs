@@ -1,0 +1,49 @@
+﻿namespace Groova;
+
+public partial class DeleteSongDialog : Node2D
+{
+    public override void Build()
+    {
+        AddChild(new ColoredRectangle
+        {
+            Size = new(300, 150),
+            InheritsOrigin = true
+        });
+
+        AddChild(new Button
+        {
+            Text = "X",
+            Size = new(25, 25),
+            InheritsOrigin = true,
+            Layer = ClickableLayer.DialogButtons,
+            Style = new()
+            {
+                TextColor = Color.Red
+            },
+            OnUpdate = (button) =>
+            {
+                float x = 300 - 35;
+                float y = 10;
+
+                button.Position = new(x, y);
+            }
+        }, "CloseButton");
+
+        AddChild(new Label
+        {
+            Position = new(10, 50),
+            InheritsOrigin = true,
+        });
+
+        AddChild(new Button
+        {
+            Position = new(0, 50),
+            Layer = ClickableLayer.DialogButtons,
+            Text = "Delete",
+            Style = new()
+            {
+                TextColor = new(255, 0, 0, 255)
+            }
+        }, "DeleteButton");
+    }
+}
