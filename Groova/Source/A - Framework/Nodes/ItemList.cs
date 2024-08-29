@@ -41,15 +41,16 @@ public partial class ItemList : ClickableRectangle
         Size = new(250, 150);
     }
 
-    public override void Ready()
+    public override void Start()
     {
         Slider = GetChild<VerticalSlider>();
         Slider.PercentageChanged += OnSliderValueChanged;
-        Slider.Layer = SliderButtonLayer;
+        //Slider.Layer = SliderButtonLayer;
+        Slider.Layer = Layer + 1;
 
         UpdateList(StartingIndex);
 
-        base.Ready();
+        base.Start();
     }
 
     public override void Update()

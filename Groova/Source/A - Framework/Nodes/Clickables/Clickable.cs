@@ -8,7 +8,7 @@ public abstract class Clickable : Node2D
 
     protected ClickManager? clickManager;
 
-    public override void Ready()
+    public override void Start()
     {
         clickManager = GetNode<ClickManager>();
 
