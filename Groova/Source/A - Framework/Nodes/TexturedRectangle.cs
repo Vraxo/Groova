@@ -2,10 +2,15 @@
 
 namespace Groova;
 
-class TexturedRectangle : Node2D
+public class TexturedRectangle : Node2D
 {
     public Texture2D Texture;
     public Action<TexturedRectangle> OnUpdate = (rectangle) => { };
+
+    public TexturedRectangle()
+    {
+        Size = new(32, 32);
+    }
 
     public override void Update()
     {

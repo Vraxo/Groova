@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Groova;
@@ -38,6 +37,17 @@ public class PlaylistsContainer : Node
     {
         playlist.Paths.Remove(musicPath);
         Save();
+    }
+
+    public void SetPlaylistImage(Playlist playlist, string imagePath)
+    {
+        playlist.ImagePath = imagePath;
+        Save();
+    }
+
+    public void SetPlaylistImage(Playlist playlist, string musicPath, string imagePath)
+    {
+
     }
 
     public void Save()

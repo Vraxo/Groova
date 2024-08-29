@@ -23,5 +23,22 @@ public partial class PlaylistItem : Node2D
                 button.Size = new(width, height);
             }
         });
+
+        AddChild(new Button
+        {
+            Position = new(20, 20),
+            Size = new(24, 24),
+            Style = new()
+            {
+                Roundness = 0,
+                FillColor = Color.RayWhite
+            }
+        }, "ImageButton");
+
+        AddChild(new TexturedRectangle
+        {
+            Position = new(20, 20),
+            Size = new(24, 24)
+        });
     }
 }
