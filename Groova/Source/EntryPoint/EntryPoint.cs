@@ -9,7 +9,8 @@ public class EntryPoint
         {
             Title = "Groova",
             Resolution = new(360, 640),
-            ClearColor = new(57, 57, 57, 255)
+            //ClearColor = new(57, 57, 57, 255)
+            ClearColor = new(16, 16, 16, 255)
         };
 
         MainScene rootNode = new()

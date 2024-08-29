@@ -1,44 +1,14 @@
 ﻿namespace Groova;
 
-public partial class NewPlaylistDialog : Node2D
+public partial class NewPlaylistDialog : Dialog
 {
     public override void Build()
     {
-        AddChild(new ColoredRectangle
-        {
-            Size = new(300, 150),
-            InheritsOrigin = true
-        });
-
-        AddChild(new Button
-        {
-            Text = "X",
-            Size = new(25, 25),
-            InheritsOrigin = true,
-            Layer = ClickableLayer.DialogButtons,
-            Style = new()
-            {
-                TextColor = Color.Red
-            },
-            OnUpdate = (button) =>
-            {
-                float x = 300 - 35;
-                float y = 10;
-
-                button.Position = new(x, y);
-            }
-        });
-
-        AddChild(new Label
-        {
-            Position = new(10, 20),
-            InheritsOrigin = true,
-            Text = "Enter playlist name:"
-        });
+        base.Build();
 
         AddChild(new TextBox
         {
-            Position = new(0, 10),
+            Position = new(0, 25),
             Size = new(250, 25),
             Layer = ClickableLayer.DialogButtons,
             Style = new()
@@ -55,6 +25,6 @@ public partial class NewPlaylistDialog : Node2D
             Visible = false,
             Color = new(255, 0, 0, 255),
             Text = "Playlist already exists."
-        });
+        }, "ErrorLabel");
     }
 }

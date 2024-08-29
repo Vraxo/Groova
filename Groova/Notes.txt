@@ -12,6 +12,11 @@ Make padding in button style to text origin for textbox
 
 Add a way to access window resolution without raylib
 
+File dialog is opening when clicking + after entering
+playlist and returning to playlists
+
+
+
 - - - - - - - - - - Long Term - - - - - - - - - -
 
 
