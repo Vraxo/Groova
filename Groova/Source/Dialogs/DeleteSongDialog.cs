@@ -1,17 +1,17 @@
 ﻿namespace Groova;
 
-public partial class DeleteSongDialog : Dialog
+public class DeleteSongDialog : ConfirmDialog
 {
     public Playlist Playlist;
     public string SongPath;
 
     public override void Start()
     {
-        GetChild<Button>("DeleteButton").LeftClicked += OnDeleteButtonLeftClicked;
         SetLabelText();
         base.Start();
     }
-    private void OnDeleteButtonLeftClicked(object? sender, EventArgs e)
+
+    protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
         var playlistsContainer = GetNode<PlaylistsContainer>();
         playlistsContainer.RemoveMusic(Playlist, SongPath);

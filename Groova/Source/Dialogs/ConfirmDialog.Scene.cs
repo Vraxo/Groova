@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public partial class DeleteSongDialog : Dialog
+public partial class ConfirmDialog : Dialog
 {
     public override void Build()
     {
@@ -10,11 +10,7 @@ public partial class DeleteSongDialog : Dialog
         {
             Position = new(0, 50),
             Layer = ClickableLayer.DialogButtons,
-            Text = "Delete",
-            Style = new()
-            {
-                TextColor = new(255, 0, 0, 255)
-            }
-        }, "DeleteButton");
+            Text = "Confirm",
+        }, "ConfirmButton");
     }
 }
