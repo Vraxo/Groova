@@ -23,13 +23,7 @@ public partial class NewPlaylistDialog : Dialog
         }
 
         playlistsContainer.AddPlaylist(e);
-        Close();
-    }
-
-    private void Close()
-    {
         GetNode<MainScene>("").LoadPlaylists();
-        GetNode<ClickManager>().MinLayer = 0;
-        Destroy();
+        Close();
     }
 }

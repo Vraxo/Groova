@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Reflection;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Groova;
@@ -24,6 +25,12 @@ public class PlaylistsContainer : Node
     public void AddMusic(Playlist playlist, string musicPath)
     {
         playlist.Paths.Add(musicPath);
+        Save();
+    }
+
+    public void RemovePlaylist(Playlist playlist)
+    {
+        Playlists.Remove(playlist);
         Save();
     }
 

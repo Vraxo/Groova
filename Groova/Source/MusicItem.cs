@@ -26,9 +26,6 @@ public partial class MusicItem : Node2D
 
     private void OnButtonRightClicked(object? sender, EventArgs e)
     {
-        //playlistsContainer.RemoveMusic(Playlist, SongPath);
-        //GetNode<MainScene>("").LoadMusics(Playlist);
-
         DeleteSongDialog dialog = new()
         {
             Playlist = Playlist,
