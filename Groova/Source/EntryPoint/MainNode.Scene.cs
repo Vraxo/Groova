@@ -8,7 +8,7 @@ public partial class MainScene : Node
 
         AddChild(new PlaylistsContainer());
 
-        AddChild(new MusicPlayer
+        AddChild(new SongPlayer
         {
             AutoPlay = false,
             Loop = true,

@@ -25,6 +25,7 @@ public partial class TextBox : ClickableRectangle
     public TextBox()
     {
         Size = new(300, 25);
+        Visible = false;
     }
 
     public override void Start()
@@ -33,15 +34,17 @@ public partial class TextBox : ClickableRectangle
         Style.Pressed.OutlineColor = new(71, 114, 179, 255);
 
         caret = GetChild<TextBoxCaret>();
+
         base.Start();
     }
 
     public override void Update()
     {
+        OnUpdate(this);
         HandleInput();
         PasteText();
-        OnUpdate(this);
         base.Update();
+        Visible = true;
     }
 
     private void HandleInput()

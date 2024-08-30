@@ -2,7 +2,7 @@
 
 namespace Groova;
 
-public partial class MusicItem : Node2D
+public abstract partial class MediaItemBase
 {
     public override void Build()
     {
@@ -22,6 +22,24 @@ public partial class MusicItem : Node2D
                 float height = button.Size.Y;
                 button.Size = new(width, height);
             }
+        });
+
+        AddChild(new Button
+        {
+            Position = new(24, 20),
+            Size = new(32, 32),
+            Style = new()
+            {
+                OutlineThickness = 0,
+                Roundness = 0,
+                FillColor = Theme.Accent
+            }
+        }, "ImageButton");
+
+        AddChild(new TexturedRectangle
+        {
+            Position = new(24, 20),
+            Size = new(32, 32)
         });
     }
 }

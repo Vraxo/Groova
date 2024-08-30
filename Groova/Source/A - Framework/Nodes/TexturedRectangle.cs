@@ -14,13 +14,23 @@ public class TexturedRectangle : Node2D
 
     public override void Update()
     {
-        Draw();
         OnUpdate(this);
+        Draw();
         base.Update();
+    }
+
+    public void Load(string texturePath)
+    {
+        Texture = Raylib.LoadTexture(texturePath);
     }
 
     private void Draw()
     {
+        if (!Visible)
+        {
+            return;
+        }
+
         Rectangle source = new(0, 0, Texture.Width, Texture.Height);
         Rectangle destination = new(GlobalPosition, Size);
 

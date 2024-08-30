@@ -3,14 +3,14 @@
 public partial class BottomSection : Node2D
 {
     private Button pauseOrResumeButton;
-    private MusicPlayer musicPlayer;
+    private SongPlayer musicPlayer;
 
     public override void Start()
     {
         pauseOrResumeButton = GetChild<Button>("PauseOrResumeButton");
         pauseOrResumeButton.LeftClicked += OnPlayButtonLeftClicked;
 
-        musicPlayer = GetNode<MusicPlayer>("MusicPlayer");
+        musicPlayer = GetNode<SongPlayer>("MusicPlayer");
     }
 
     private void OnPlayButtonLeftClicked(object? sender, EventArgs e)

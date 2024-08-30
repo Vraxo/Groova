@@ -6,7 +6,7 @@ public class Node2D : Node
     public OriginPreset OriginPreset { get; set; } = OriginPreset.Center;
     public bool InheritPosition { get; set; } = true;
     public bool InheritsOrigin { get; set; } = false;
-    public bool Visible { get; set; } = true;
+    public bool Visible { get; set; } = false;
 
     private Vector2 _size = Vector2.Zero;
     public Vector2 Size
@@ -71,6 +71,7 @@ public class Node2D : Node
     public override void Update()
     {
         UpdateOrigin();
+        Visible = true;
     }
 
     private void UpdateOrigin()

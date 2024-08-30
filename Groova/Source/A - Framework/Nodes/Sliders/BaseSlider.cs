@@ -4,7 +4,6 @@ public abstract class BaseSlider : ClickableRectangle
 {
     public float MaxExternalValue = 0;
 
-    private bool _hasButtons = true;
     public bool HasButtons { get; set; } = true;
     public ButtonStyle FilledStyle = new();
     public ButtonStyle EmptyStyle = new();
@@ -67,7 +66,7 @@ public abstract class BaseSlider : ClickableRectangle
 
     public override void Start()
     {
-        Grabber = GetChild<BaseGrabber>("MiddleButton");
+        Grabber = GetChild<BaseGrabber>("Grabber");
         Grabber.Layer = Layer;
 
         var decrementButton = GetChild<Button>("DecrementButton");
@@ -98,10 +97,10 @@ public abstract class BaseSlider : ClickableRectangle
             grabberUpdated = true;
         }
 
+        OnUpdate(this);
         UpdatePercentage();
         HandleClicks();
         Draw();
-        OnUpdate(this);
         base.Update();
     }
 

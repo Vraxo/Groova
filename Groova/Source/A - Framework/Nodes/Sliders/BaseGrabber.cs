@@ -19,18 +19,18 @@ public abstract class BaseGrabber : ClickableRectangle
         InheritPosition = false;
     }
 
-    public override void Ready()
+    public override void Start()
     {
         UpdatePosition(true);
-        base.Ready();
+        base.Start();
     }
 
     public override void Update()
     {
+        OnUpdate(this);
         UpdatePosition();
         CheckForClicks();
         Draw();
-        OnUpdate(this);
         base.Update();
     }
 

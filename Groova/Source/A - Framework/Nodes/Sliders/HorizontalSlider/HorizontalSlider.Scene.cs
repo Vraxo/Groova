@@ -5,7 +5,7 @@ public partial class HorizontalSlider : BaseSlider
     public override void Build()
     {
         HorizontalGrabber middleButton = new();
-        AddChild(middleButton, "MiddleButton");
+        AddChild(middleButton, "Grabber");
 
         AddChild(new Button
         {

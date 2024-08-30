@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public class MusicPlayer : AudioPlayer
+public class SongPlayer : AudioPlayer
 {
     private HorizontalSlider slider;
 

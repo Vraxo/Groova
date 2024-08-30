@@ -26,10 +26,10 @@ public class Button : ClickableRectangle
 
     public override void Update()
     {
+        OnUpdate(this);
         UpdateTextOrigin();
         Draw();
         HandleInput();
-        OnUpdate(this);
         base.Update();
     }
 
@@ -332,14 +332,14 @@ public class Button : ClickableRectangle
     //{
     //    Vector2 fontDimensions = Raylib.MeasureTextEx(
     //                                Style.Current.Font,
-    //                                Text,
+    //                                text,
     //                                Style.Current.FontSize,
     //                                1);
     //
     //    Vector2 halfFontDimensions = fontDimensions / 2;
     //    Vector2 center = Size / 2;
     //
-    //    if (Text == "PlaylistButton")
+    //    if (text == "PlaylistButton")
     //    {
     //        Console.WriteLine("origin: " + Origin);
     //        Console.WriteLine("trigin: " + TextOrigin);

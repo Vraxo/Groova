@@ -58,15 +58,20 @@ public partial class TopSection : Node2D
         {
             foreach (string name in dialog.FileNames)
             {
-                foreach (string songName in CurrentPlaylist.SongPaths)
+                bool valid = true;
+
+                foreach (Song song in CurrentPlaylist.Songs)
                 {
-                    if (name == songName)
+                    if (song.Path == name || Path.GetExtension(name) != ".mp3")
                     {
-                        break;
+                        valid = false;
                     }
                 }
 
-                playlistsContainer.AddSong(CurrentPlaylist, name);
+                if (valid)
+                {
+                    playlistsContainer.AddSong(CurrentPlaylist, name);
+                }
             }
         }
 

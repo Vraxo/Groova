@@ -61,6 +61,11 @@ public partial class HorizontalSlider : BaseSlider
 
     protected override void Draw()
     {
+        if (!Visible)
+        {
+            return;
+        }
+
         Vector2 position = GlobalPosition - Origin;
 
         Rectangle emptyRectangle = new()

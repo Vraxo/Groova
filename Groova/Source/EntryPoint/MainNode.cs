@@ -4,14 +4,14 @@ namespace Groova;
 
 public partial class MainScene : Node
 {
-    public MusicPlayer MusicPlayer;
+    public SongPlayer MusicPlayer;
 
     private PlaylistsContainer playlistsContainer;
     private TopSection topSection;
 
     public override void Start()
     {
-        MusicPlayer = GetChild<MusicPlayer>();
+        MusicPlayer = GetChild<SongPlayer>();
         topSection = GetChild<TopSection>();
         playlistsContainer = GetChild<PlaylistsContainer>();
 
@@ -49,7 +49,6 @@ public partial class MainScene : Node
         {
             PlaylistItem playlistItem = new()
             {
-                Text = playlist.Name,
                 Playlist = playlist
             };
         
@@ -82,12 +81,12 @@ public partial class MainScene : Node
 
         AddChild(musicsList, "SongItemList");
 
-        foreach (string path in playlist.SongPaths)
+        foreach (Song song in playlist.Songs)
         {
-            MusicItem musicItem = new()
+            SongItem musicItem = new()
             {
-                SongPath = path,
-                Playlist = playlist
+                Playlist = playlist,
+                Song = song
             };
         
             musicsList.Add(musicItem);

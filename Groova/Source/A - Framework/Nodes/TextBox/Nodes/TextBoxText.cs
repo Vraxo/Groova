@@ -20,6 +20,11 @@ public class TextBoxText : Node2D
 
     private void Draw()
     {
+        if (!Visible)
+        {
+            return;
+        }
+
         Raylib.DrawTextEx(
             parent.Style.Current.Font,
             parent.Text,

@@ -4,18 +4,19 @@ public partial class VerticalSlider : BaseSlider
 {
     public override void Build()
     {
-        VerticalGrabber middleButton = new();
-        AddChild(middleButton, "MiddleButton");
+        VerticalGrabber grabber = new() { Visible = false };
+        AddChild(grabber, "Grabber");
 
         AddChild(new Button
         {
-            Position = new(0, middleButton.Size.Y * -2),
+            Visible = false,
+            Position = new(0, grabber.Size.Y * -2),
             Size = new(10, 10),
             Layer = ClickableLayer.PanelButtons,
             OnUpdate = (button) =>
             {
                 float x = button.Position.X;
-                float y = -Origin.Y - middleButton.Size.Y * 2;
+                float y = -Origin.Y - grabber.Size.Y * 2;
 
                 button.Position = new(x, y);
             }
@@ -23,12 +24,13 @@ public partial class VerticalSlider : BaseSlider
 
         AddChild(new Button
         {
+            Visible = false,
             Size = new(10, 10),
             Layer = ClickableLayer.PanelButtons,
             OnUpdate = (button) =>
             {
                 float x = button.Position.X;
-                float y = Size.Y - Origin.Y + middleButton.Size.Y * 2 - 1;
+                float y = Size.Y - Origin.Y + grabber.Size.Y * 2 - 1;
 
                 button.Position = new(x, y);
                 

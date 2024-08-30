@@ -3,7 +3,7 @@
 public class DeleteSongDialog : ConfirmDialog
 {
     public Playlist Playlist;
-    public string SongPath;
+    public Song Song;
 
     public override void Start()
     {
@@ -14,7 +14,7 @@ public class DeleteSongDialog : ConfirmDialog
     protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
         var playlistsContainer = GetNode<PlaylistsContainer>();
-        playlistsContainer.RemoveSong(Playlist, SongPath);
+        playlistsContainer.RemoveSong(Playlist, Song);
         GetNode<MainScene>("").LoadMusics(Playlist);
 
         Close();
@@ -22,7 +22,7 @@ public class DeleteSongDialog : ConfirmDialog
 
     private void SetLabelText()
     {
-        string songName = Path.GetFileNameWithoutExtension(SongPath);
+        string songName = Path.GetFileNameWithoutExtension(Song.Path);
         string truncatedSongName = TruncateSongName(songName);
 
         GetChild<Label>().Text = $"Delete '{truncatedSongName}'?";

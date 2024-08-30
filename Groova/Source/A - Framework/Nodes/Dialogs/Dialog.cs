@@ -4,9 +4,6 @@ namespace Groova;
 
 public partial class Dialog : Node2D
 {
-    public Playlist Playlist;
-    public string SongPath;
-
     public override void Start()
     {
         Origin = GetChild<ColoredRectangle>().Size / 2;

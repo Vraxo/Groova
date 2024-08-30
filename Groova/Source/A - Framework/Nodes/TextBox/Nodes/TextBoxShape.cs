@@ -8,7 +8,7 @@ public class TextBoxShape : Node2D
 
     private TextBox parent;
 
-    public override void Ready()
+    public override void Start()
     {
         parent = GetParent<TextBox>();
     }
@@ -21,7 +21,7 @@ public class TextBoxShape : Node2D
 
     private void DrawShape()
     {
-        if (!Visible)
+        if (!parent.Visible)
         {
             return;
         }
@@ -41,7 +41,7 @@ public class TextBoxShape : Node2D
         Raylib.DrawRectangleRounded(
             rectangle,
             parent.Style.Current.Roundness,
-            (int)Size.Y,
+            (int)parent.Size.Y,
             parent.Style.Current.FillColor);
     }
 
