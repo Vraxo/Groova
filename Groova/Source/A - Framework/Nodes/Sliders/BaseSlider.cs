@@ -11,10 +11,12 @@ public abstract class BaseSlider : ClickableRectangle
     public Action<BaseSlider> OnUpdate = (slider) => { };
     public event EventHandler<float>? PercentageChanged;
     public event EventHandler<float>? Released;
+    public float InitialPercentage = 0;
 
     protected bool wasPressed = false;
 
     private bool grabberUpdated = true;
+    private bool initialValueSet = false;
 
     public float Value
     {
@@ -32,7 +34,7 @@ public abstract class BaseSlider : ClickableRectangle
         set
         {
             _percentage = Math.Clamp(value, 0, 1);
-            grabberUpdated = false;
+            //grabberUpdated = false;
         }
     }
 
@@ -91,16 +93,23 @@ public abstract class BaseSlider : ClickableRectangle
 
     public override void Update()
     {
-        if (!grabberUpdated)
-        {
-            MoveGrabberTo(Percentage);
-            grabberUpdated = true;
-        }
+        //if (!grabberUpdated)
+        //{
+        //    MoveGrabberTo(Percentage);
+        //    grabberUpdated = true;
+        //}
 
         OnUpdate(this);
         UpdatePercentage();
         HandleClicks();
         Draw();
+
+        if (!initialValueSet)
+        {
+            MoveGrabberTo(InitialPercentage);
+        }
+
+
         base.Update();
     }
 
@@ -145,7 +154,7 @@ public abstract class BaseSlider : ClickableRectangle
 
     protected abstract void Draw();
 
-    protected abstract void MoveGrabberTo(float percentage);
+    public abstract void MoveGrabberTo(float percentage);
 
     protected void OnPercentageChanged()
     {

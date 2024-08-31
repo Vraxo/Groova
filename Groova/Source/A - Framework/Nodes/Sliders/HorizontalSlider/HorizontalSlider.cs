@@ -1,4 +1,5 @@
 ﻿using Raylib_cs;
+using System.Diagnostics;
 
 namespace Groova;
 
@@ -36,12 +37,17 @@ public partial class HorizontalSlider : BaseSlider
         UpdatePercentageBasedOnGrabber();
     }
 
-    protected override void MoveGrabberTo(float percentage)
+    public override void MoveGrabberTo(float percentage)
     {
         float x = GlobalPosition.X + percentage * Size.X;
         float y = GlobalPosition.Y;
 
         Grabber.GlobalPosition = new(x, y);
+
+        if (Name == "PitchSlider")
+        {
+            Console.WriteLine(percentage);
+        }
     }
 
     protected override void HandleClicks()

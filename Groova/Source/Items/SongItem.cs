@@ -14,7 +14,7 @@ public partial class SongItem : MediaItemBase
 
     protected override void OnButtonLeftclicked(object? sender, EventArgs e)
     {
-        var musicPlayer = GetNode<SongPlayer>("MusicPlayer");
+        var musicPlayer = GetNode<SongPlayer>("SongPlayer");
         musicPlayer.Load(Song.Path);
         musicPlayer.Play();
     }

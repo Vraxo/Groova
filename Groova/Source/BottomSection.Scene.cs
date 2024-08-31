@@ -39,7 +39,7 @@ public partial class BottomSection : Node2D
         {
             Position = new(50, 0),
             HasButtons = false,
-            Percentage = 1,
+            InitialPercentage = 1,
             OnUpdate = (slider) =>
             {
                 float screenWidth = Raylib.GetScreenWidth();
@@ -57,5 +57,29 @@ public partial class BottomSection : Node2D
                 slider.Size = new(width, height);
             }
         }, "VolumeSlider");
+
+        AddChild(new HorizontalSlider()
+        {
+            Position = new(50, 0),
+            HasButtons = false,
+            //Percentage = 1f,
+            InitialPercentage = 0.5f,
+            OnUpdate = (slider) =>
+            {
+                float screenWidth = Raylib.GetScreenWidth();
+
+                var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
+
+                float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
+
+                float x = slider.Position.X;
+                float y = Raylib.GetScreenHeight() - 15;
+                slider.Position = new(x, y);
+
+                float width = screenWidth / 3;
+                float height = slider.Size.Y;
+                slider.Size = new(width, height);
+            }
+        }, "PitchSlider");
     }
 }
