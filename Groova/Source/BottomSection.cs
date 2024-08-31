@@ -10,15 +10,22 @@ public partial class BottomSection : Node2D
         pauseOrResumeButton = GetChild<Button>("PauseOrResumeButton");
         pauseOrResumeButton.LeftClicked += OnPauseOrResumeButtonLeftClicked;
 
-        GetChild<HorizontalSlider>("PitchSlider").Released += OnPitchSliderReleased;
+        GetChild<HorizontalSlider>("PitchSlider").SizeChanged += OnPitchSliderSizeChanged;
+        GetChild<HorizontalSlider>("VolumeSlider").SizeChanged += OnVolumeSliderSizeChanged;
 
         musicPlayer = GetNode<SongPlayer>("SongPlayer");
-        GetChild<HorizontalSlider>("PitchSlider").MoveGrabberTo(1);
     }
 
-    private void OnPitchSliderReleased(object? sender, float e)
+    private void OnPitchSliderSizeChanged(object? sender, EventArgs e)
     {
-        musicPlayer.Pitch = e * 2;
+        var pitchSlider = GetChild<HorizontalSlider>("PitchSlider");
+        pitchSlider.Percentage = pitchSlider.Percentage;
+    }
+
+    private void OnVolumeSliderSizeChanged(object? sender, EventArgs e)
+    {
+        var volumeSlider = GetChild<HorizontalSlider>("VolumeSlider");
+        volumeSlider.Percentage = volumeSlider.Percentage;
     }
 
     private void OnPauseOrResumeButtonLeftClicked(object? sender, EventArgs e)

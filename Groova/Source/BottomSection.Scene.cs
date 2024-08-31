@@ -8,7 +8,7 @@ public partial class BottomSection : Node2D
     {
         AddChild(new Button
         {
-            Position = new(25, 20),
+            Position = new(20, 20),
             Size = new(32, 32),
             Text = "||",
             OnUpdate = (button) =>
@@ -39,19 +39,19 @@ public partial class BottomSection : Node2D
         {
             Position = new(50, 0),
             HasButtons = false,
-            InitialPercentage = 1,
+            InitialPercentage = 1f,
             OnUpdate = (slider) =>
             {
                 float screenWidth = Raylib.GetScreenWidth();
-
+                
                 var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
-
+                
                 float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
-
+                
                 float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
                 float y = Raylib.GetScreenHeight() - 15;
                 slider.Position = new(x, y);
-
+                
                 float width = screenWidth / 5;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
@@ -62,7 +62,6 @@ public partial class BottomSection : Node2D
         {
             Position = new(50, 0),
             HasButtons = false,
-            //Percentage = 1f,
             InitialPercentage = 0.5f,
             OnUpdate = (slider) =>
             {

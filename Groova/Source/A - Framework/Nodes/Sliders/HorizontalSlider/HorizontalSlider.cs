@@ -37,7 +37,23 @@ public partial class HorizontalSlider : BaseSlider
         UpdatePercentageBasedOnGrabber();
     }
 
-    public override void MoveGrabberTo(float percentage)
+    //public override void MoveGrabber(float)
+    //{
+    //    if (MaxExternalValue == 0)
+    //    {
+    //        return;
+    //    }
+    //
+    //    float unit = Size.X / MaxExternalValue;
+    //    float x = Grabber.GlobalPosition.X + direction * unit;
+    //    float y = Grabber.GlobalPosition.Y;
+    //
+    //    Grabber.GlobalPosition = new(x, y);
+    //
+    //    UpdatePercentageBasedOnGrabber();
+    //}
+
+    protected override void MoveGrabberTo(float percentage)
     {
         float x = GlobalPosition.X + percentage * Size.X;
         float y = GlobalPosition.Y;

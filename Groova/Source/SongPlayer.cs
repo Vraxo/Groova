@@ -1,4 +1,6 @@
-﻿namespace Groova;
+﻿using Raylib_cs;
+
+namespace Groova;
 
 public class SongPlayer : AudioPlayer
 {
@@ -6,7 +8,6 @@ public class SongPlayer : AudioPlayer
 
     public override void Ready()
     {
-        Program.RootNode.PrintChildren();
         slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");
         slider.Released += OnSliderReleased;
 
@@ -37,27 +38,32 @@ public class SongPlayer : AudioPlayer
 
     public override void Update()
     {
-        slider.MaxExternalValue = AudioLength;
+        //slider.MaxExternalValue = AudioLength;
 
-        if (slider.Grabber != null)
+        if (Playing)
         {
-            if (!slider.Grabber.Pressed)
-            {
-                slider.ExternalValue = TimePlayed;
-
-                // Calculate the percentage of the song played
-                float percentage = TimePlayed / AudioLength;
-
-                slider.Percentage = percentage;
-
-                // Calculate the new X position of the middle button based on the slider's width
-                float x = slider.Position.X + percentage * slider.Size.X;
-                float y = slider.Grabber.GlobalPosition.Y;
-
-                // Update the middle button's position
-                //slider.Grabber.GlobalPosition = new(x, y);
-            }
+            slider.Percentage = TimePlayed / AudioLength;
         }
+
+        //if (slider.Grabber != null)
+        //{
+        //if (!slider.Grabber.Pressed)
+        //{
+        //    slider.ExternalValue = TimePlayed;
+        //
+        //    // Calculate the percentage of the song played
+        //    float percentage = TimePlayed / AudioLength;
+        //
+        //    slider.Percentage = percentage;
+        //
+        //    // Calculate the new X position of the middle button based on the slider's width
+        //    float x = slider.Position.X + percentage * slider.Size.X;
+        //    float y = slider.Grabber.GlobalPosition.Y;
+        //
+        //    // Update the middle button's position
+        //    //slider.Grabber.GlobalPosition = new(x, y);
+        //}
+        //}
 
         base.Update();
     }

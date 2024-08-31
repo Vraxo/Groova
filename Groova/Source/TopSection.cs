@@ -1,4 +1,7 @@
-﻿namespace Groova;
+﻿using System.Drawing.Imaging;
+using System.Xml.Linq;
+
+namespace Groova;
 
 public partial class TopSection : Node2D
 {
@@ -54,28 +57,37 @@ public partial class TopSection : Node2D
 ;
         dialog.ShowDialog();
 
-        if (dialog.FileNames.Length > 0)
+        if (dialog.FileNames.Length == 0)
         {
-            foreach (string name in dialog.FileNames)
+            return;
+        }
+
+        foreach (string name in dialog.FileNames)
+        {
+            if (IsFileValid(name))
             {
-                bool valid = true;
-
-                foreach (Song song in CurrentPlaylist.Songs)
-                {
-                    if (song.Path == name || Path.GetExtension(name) != ".mp3")
-                    {
-                        valid = false;
-                    }
-                }
-
-                if (valid)
-                {
-                    playlistsContainer.AddSong(CurrentPlaylist, name);
-                }
+                playlistsContainer.AddSong(CurrentPlaylist, name);
             }
         }
 
         parent.LoadMusics(CurrentPlaylist);
+    }
+
+    private bool IsFileValid(string path)
+    {
+        bool original = true;
+
+        foreach (Song song in CurrentPlaylist.Songs)
+        {
+            if (song.Path == path)
+            {
+                original = false;
+            }
+        }
+
+        bool supported = Path.GetExtension(path) == ".mp3";
+
+        return original && supported;
     }
 
     private void Return()

@@ -5,12 +5,13 @@ because deactivated unshown items in ItemLists never
 run their Ready method and therefore don't get their
 click manager.
 
-Make padding in button style to text origin for textbox
+Make padding in button style 
+to text origin for textbox
 
-Add a way to access window resolution without raylib
+Add a way to access window resolution 
+and delta time without raylib
 
-File dialog is opening when clicking + after entering
-playlist and returning to playlists
+Screenshots are still being loaded
 
 
 
@@ -21,7 +22,6 @@ playlist and returning to playlists
 * when left & right click are both enabled on a button,
   the button only changes color on pressed on right clicks.
 
-* remove ready method
 
 * horizontal slider button is one pixel high
 

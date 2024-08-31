@@ -2,29 +2,22 @@
 
 public abstract class BaseSlider : ClickableRectangle
 {
-    public float MaxExternalValue = 0;
-
+    public float InitialPercentage { get; set; } = 0;
+    public float MaxExternalValue { get; set; } = 0;
     public bool HasButtons { get; set; } = true;
-    public ButtonStyle FilledStyle = new();
-    public ButtonStyle EmptyStyle = new();
+    public ButtonStyle FilledStyle { get; set; } = new();
+    public ButtonStyle EmptyStyle { get; set; } = new();
     public BaseGrabber Grabber;
     public Action<BaseSlider> OnUpdate = (slider) => { };
+
     public event EventHandler<float>? PercentageChanged;
     public event EventHandler<float>? Released;
-    public float InitialPercentage = 0;
 
     protected bool wasPressed = false;
 
-    private bool grabberUpdated = true;
-    private bool initialValueSet = false;
+    private bool initialPercentageSet = false;
 
-    public float Value
-    {
-        get
-        {
-            return MathF.Ceiling(Percentage * MaxExternalValue);
-        }
-    }
+    public float Value => MathF.Ceiling(Percentage * MaxExternalValue);
 
     private float _percentage = 0;
     public float Percentage
@@ -34,7 +27,7 @@ public abstract class BaseSlider : ClickableRectangle
         set
         {
             _percentage = Math.Clamp(value, 0, 1);
-            //grabberUpdated = false;
+            MoveGrabberTo(_percentage);
         }
     }
 
@@ -93,12 +86,6 @@ public abstract class BaseSlider : ClickableRectangle
 
     public override void Update()
     {
-        //if (!grabberUpdated)
-        //{
-        //    MoveGrabberTo(Percentage);
-        //    grabberUpdated = true;
-        //}
-
         OnUpdate(this);
         UpdatePercentage();
         HandleClicks();
@@ -162,9 +149,10 @@ public abstract class BaseSlider : ClickableRectangle
 
     private void SetInitialPercentage()
     {
-        if (!initialValueSet)
+        if (!initialPercentageSet)
         {
-            MoveGrabberTo(InitialPercentage);
+            Percentage = InitialPercentage;
+            initialPercentageSet = true;
         }
     }
 }

@@ -8,6 +8,8 @@ public class Node2D : Node
     public bool InheritsOrigin { get; set; } = false;
     public bool Visible { get; set; } = false;
 
+    public event EventHandler? SizeChanged;
+
     private Vector2 _size = Vector2.Zero;
     public Vector2 Size
     {
@@ -16,7 +18,11 @@ public class Node2D : Node
         set
         {
             //UpdateTextOrigin();
-            _size = value;
+            if (value != _size)
+            {
+                _size = value;
+                SizeChanged?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 

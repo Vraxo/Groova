@@ -52,6 +52,11 @@ public partial class VerticalSlider : BaseSlider
         }
     }
 
+    protected override void MoveGrabberTo(float percentage)
+    {
+
+    }
+
     protected override void Draw()
     {
         if (!Visible)
@@ -111,10 +116,5 @@ public partial class VerticalSlider : BaseSlider
                 (int)rectangle.Size.X,
                 style.OutlineColor);
         }
-    }
-
-    public override void MoveGrabberTo(float percentage)
-    {
-
     }
 }
