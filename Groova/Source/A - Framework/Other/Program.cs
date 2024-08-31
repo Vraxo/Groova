@@ -1,6 +1,5 @@
 ﻿using Raylib_cs;
 using System.Reflection;
-using System.Security.AccessControl;
 
 namespace Groova;
 
@@ -30,7 +29,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         Raylib.SetWindowMinSize(width, height);
         Raylib.InitAudioDevice();
 
-        Raylib.SetTargetFPS(1);
+        //Raylib.SetTargetFPS(1);
 
         Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon.png"));
         
