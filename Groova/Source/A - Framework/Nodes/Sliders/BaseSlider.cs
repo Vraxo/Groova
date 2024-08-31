@@ -103,13 +103,7 @@ public abstract class BaseSlider : ClickableRectangle
         UpdatePercentage();
         HandleClicks();
         Draw();
-
-        if (!initialValueSet)
-        {
-            MoveGrabberTo(InitialPercentage);
-        }
-
-
+        SetInitialPercentage();
         base.Update();
     }
 
@@ -154,7 +148,7 @@ public abstract class BaseSlider : ClickableRectangle
 
     protected abstract void Draw();
 
-    public abstract void MoveGrabberTo(float percentage);
+    protected abstract void MoveGrabberTo(float percentage);
 
     protected void OnPercentageChanged()
     {
@@ -164,5 +158,13 @@ public abstract class BaseSlider : ClickableRectangle
     protected void OnReleased()
     {
         Released?.Invoke(this, Percentage);
+    }
+
+    private void SetInitialPercentage()
+    {
+        if (!initialValueSet)
+        {
+            MoveGrabberTo(InitialPercentage);
+        }
     }
 }

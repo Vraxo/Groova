@@ -43,11 +43,6 @@ public partial class HorizontalSlider : BaseSlider
         float y = GlobalPosition.Y;
 
         Grabber.GlobalPosition = new(x, y);
-
-        if (Name == "PitchSlider")
-        {
-            Console.WriteLine(percentage);
-        }
     }
 
     protected override void HandleClicks()
