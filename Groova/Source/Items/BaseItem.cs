@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public abstract partial class MediaItemBase : Node2D
+public abstract partial class BaseItem : Node2D
 {
     protected string text;
     protected TexturedRectangle image;

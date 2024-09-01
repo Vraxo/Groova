@@ -32,3 +32,6 @@ Screenshots are still being loaded
 * sync slider button with actual value
 
 * add rapid deletion to textbox
+
+* currently I think visiblity is not working properly
+  because it always goes back to true

@@ -1,71 +1,14 @@
-﻿using Raylib_cs;
+﻿namespace Groova;
 
-namespace Groova;
-
-public class TextBoxPlaceHolderText : Node2D
+public class TextBoxPlaceholderText : TextBoxBaseText
 {
-    public TextBoxStyle Style;
-
-    private TextBox parent;
-
-    public override void Ready()
+    protected override string GetText()
     {
-        parent = GetParent<TextBox>();
+        return parent.PlaceholderText;
     }
 
-    public override void Update()
+    protected override bool ShouldSkipDrawing()
     {
-        Draw();
-        base.Update();
-    }
-
-    private void Draw()
-    {
-        if (!Visible)
-        {
-            return;
-        }
-
-        if (parent.Text.Length != 0)
-        {
-            return;
-        }
-
-        Raylib.DrawTextEx(
-            parent.Style.Current.Font,
-            parent.PlaceholderText,
-            GetPosition(),
-            parent.Style.Current.FontSize,
-            parent.Style.Current.Spacing,
-            parent.Style.Current.TextColor);
-    }
-
-    private Vector2 GetPosition()
-    {
-        Vector2 position = new(GetX(), GetY());
-        return position;
-    }
-
-    private int GetX()
-    {
-        int x = (int)(GlobalPosition.X - parent.Origin.X + parent.Style.Current.Padding);
-        return x;
-    }
-
-    private int GetY()
-    {
-        int halfFontHeight = GetHalfFontHeight();
-        int y = (int)(GlobalPosition.Y + (parent.Size.Y / 2) - halfFontHeight - parent.Origin.Y);
-        return y;
-    }
-
-    private int GetHalfFontHeight()
-    {
-        Font font = parent.Style.Current.Font;
-        string text = parent.Text;
-        uint fontSize = (uint)parent.Style.Current.FontSize;
-
-        int halfFontHeight = (int)(Raylib.MeasureTextEx(font, text, fontSize, 1).Y / 2);
-        return halfFontHeight;
+        return parent.Text.Length > 0;
     }
 }

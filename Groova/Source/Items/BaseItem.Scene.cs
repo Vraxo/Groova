@@ -2,7 +2,7 @@
 
 namespace Groova;
 
-public abstract partial class MediaItemBase
+public abstract partial class BaseItem
 {
     public override void Build()
     {

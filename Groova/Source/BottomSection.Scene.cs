@@ -43,11 +43,11 @@ public partial class BottomSection : Node2D
             OnUpdate = (slider) =>
             {
                 float screenWidth = Raylib.GetScreenWidth();
-                
+
                 var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
-                
+
                 float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
-                
+
                 float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
                 float y = Raylib.GetScreenHeight() - 15;
                 slider.Position = new(x, y);

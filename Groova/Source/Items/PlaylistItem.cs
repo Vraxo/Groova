@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public partial class PlaylistItem : MediaItemBase
+public partial class PlaylistItem : BaseItem
 {
     public Playlist Playlist;
 
