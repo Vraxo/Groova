@@ -4,17 +4,19 @@ namespace Groova;
 
 public partial class TextBox : ClickableRectangle
 {
-    public string Text = "";
-    public string DefaultText = "";
-    public int MaxCharacters = int.MaxValue;
-    public int MinCharacters = 0;
-    public List<char> AllowedCharacters = [];
-    public ButtonStyle Style = new();
-    public bool Selected = false;
-    public bool Editable = true;
-    public bool RevertToDefaultText = true;
-    public bool TemporaryDefaultText = true;
+    public string Text { get; set; } = "";
+    public string DefaultText { get; set; } = "";
+    public string PlaceholderText { get; set; } = "";
+    public int MaxCharacters { get; set; } = int.MaxValue;
+    public int MinCharacters { get; set; } = 0;
+    public List<char> AllowedCharacters { get; set; } = [];
+    public ButtonStyle Style { get; set; } = new();
+    public bool Selected { get; set; } = false;
+    public bool Editable { get; set; } = true;
+    public bool RevertToDefaultText { get; set; } = true;
+    public bool TemporaryDefaultText { get; set; } = true;
     public Action<TextBox> OnUpdate = (textBox) => { };
+
     public event EventHandler<string>? TextChanged;
     public event EventHandler<string>? Confirmed;
 

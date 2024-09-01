@@ -8,6 +8,8 @@ public partial class TextBox : ClickableRectangle
 
         AddChild(new TextBoxText());
 
+        AddChild(new TextBoxPlaceHolderText());
+
         AddChild(new TextBoxCaret());
     }
 }

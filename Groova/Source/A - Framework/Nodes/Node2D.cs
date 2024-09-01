@@ -17,7 +17,6 @@ public class Node2D : Node
 
         set
         {
-            //UpdateTextOrigin();
             if (value != _size)
             {
                 _size = value;

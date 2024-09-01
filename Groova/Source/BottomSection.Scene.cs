@@ -51,7 +51,7 @@ public partial class BottomSection : Node2D
                 float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
                 float y = Raylib.GetScreenHeight() - 15;
                 slider.Position = new(x, y);
-                
+
                 float width = screenWidth / 5;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);

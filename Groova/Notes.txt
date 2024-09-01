@@ -30,3 +30,5 @@ Screenshots are still being loaded
 * make horizontal slider work with origins
 
 * sync slider button with actual value
+
+* add rapid deletion to textbox

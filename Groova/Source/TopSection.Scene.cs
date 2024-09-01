@@ -9,6 +9,7 @@ public partial class TopSection : Node2D
         AddChild(new TextBox
         {
             Position = new(0, 25),
+            PlaceholderText = "Search...",
             Style = new()
             {
                 Roundness = 1

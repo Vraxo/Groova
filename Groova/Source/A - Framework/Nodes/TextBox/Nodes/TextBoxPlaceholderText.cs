@@ -2,7 +2,7 @@
 
 namespace Groova;
 
-public class TextBoxText : Node2D
+public class TextBoxPlaceHolderText : Node2D
 {
     public TextBoxStyle Style;
 
@@ -26,9 +26,14 @@ public class TextBoxText : Node2D
             return;
         }
 
+        if (parent.Text.Length != 0)
+        {
+            return;
+        }
+
         Raylib.DrawTextEx(
             parent.Style.Current.Font,
-            parent.Text,
+            parent.PlaceholderText,
             GetPosition(),
             parent.Style.Current.FontSize,
             parent.Style.Current.Spacing,
