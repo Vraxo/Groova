@@ -17,11 +17,8 @@ public class Node2D : Node
 
         set
         {
-            if (value != _size)
-            {
-                _size = value;
-                SizeChanged?.Invoke(this, EventArgs.Empty);
-            }
+            _size = value;
+            SizeChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 

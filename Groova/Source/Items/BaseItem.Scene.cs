@@ -6,7 +6,7 @@ public abstract partial class BaseItem
 {
     public override void Build()
     {
-        AddChild(new Button
+        AddChild(new ItemButton
         {
             Size = new(100, 40),
             OriginPreset = OriginPreset.TopLeft,

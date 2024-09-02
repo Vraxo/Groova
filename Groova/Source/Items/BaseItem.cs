@@ -2,14 +2,15 @@
 
 public abstract partial class BaseItem : Node2D
 {
-    protected string text;
+    protected string Text;
     protected TexturedRectangle image;
     protected PlaylistsContainer playlistsContainer;
 
     public override void Start()
     {
-        var button = GetChild<Button>();
-        button.Text = text;
+        var button = GetChild<ItemButton>();
+        button.OriginalText = Text;
+        button.Text = Text;
         button.LeftClicked += OnButtonLeftclicked;
         button.RightClicked += OnButtonRightClicked;
 

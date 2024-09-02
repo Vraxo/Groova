@@ -2,8 +2,7 @@
 
 public class ButtonStateStyle
 {
-    public float Padding { get; set; } = 8;
-    public float Spacing { get; set; } = 1;
+    public float TextSpacing { get; set; } = 1;
 
     public float Roundness { get; set; } = 0F;
     public float OutlineThickness { get; set; } = 0;

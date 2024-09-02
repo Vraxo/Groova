@@ -6,7 +6,7 @@ public partial class PlaylistItem : BaseItem
 
     public override void Start()
     {
-        text = Playlist.Name;
+        Text = Playlist.Name;
         base.Start();
         image.Load(Playlist.ImagePath);
     }

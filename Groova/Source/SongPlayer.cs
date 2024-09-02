@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public class SongPlayer : AudioPlayer
 {
@@ -14,7 +12,15 @@ public class SongPlayer : AudioPlayer
         var volumeSlider = GetNode<HorizontalSlider>("BottomSection/VolumeSlider");
         volumeSlider.PercentageChanged += OnVolumeSliderPercentageChanged;
 
+        var pitchSlider = GetNode<HorizontalSlider>("BottomSection/PitchSlider");
+        pitchSlider.PercentageChanged += OnPitchSliderPercentageChanged;
+
         base.Ready();
+    }
+
+    private void OnPitchSliderPercentageChanged(object? sender, float e)
+    {
+        Pitch = e * 2;
     }
 
     private void OnSliderReleased(object? sender, float e)

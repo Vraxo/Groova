@@ -25,8 +25,8 @@ public partial class MainScene : Node
         var songsItemList = GetChild<ItemList>("SongItemList");
         songsItemList?.Destroy();
 
-        var playlistsItemlist = GetChild<ItemList>("PlaylistItemList");
-        playlistsItemlist?.Destroy();
+        var playlistsItemList = GetChild<ItemList>("PlaylistItemList");
+        playlistsItemList?.Destroy();
 
         ItemList playlistItemList = new()
         {

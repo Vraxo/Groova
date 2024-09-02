@@ -30,7 +30,7 @@ public abstract class TextBoxBaseText : Node2D
             GetText(),
             GetPosition(),
             parent.Style.Current.FontSize,
-            parent.Style.Current.Spacing,
+            parent.Style.Current.TextSpacing,
             parent.Style.Current.TextColor);
     }
 
@@ -42,7 +42,7 @@ public abstract class TextBoxBaseText : Node2D
 
     private int GetX()
     {
-        int x = (int)(GlobalPosition.X - parent.Origin.X + parent.Style.Current.Padding);
+        int x = (int)(GlobalPosition.X - parent.Origin.X + parent.TextOrigin.X);
         return x;
     }
 

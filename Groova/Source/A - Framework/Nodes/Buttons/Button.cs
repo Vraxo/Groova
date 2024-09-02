@@ -332,14 +332,14 @@ public class Button : ClickableRectangle
     //{
     //    Vector2 fontDimensions = Raylib.MeasureTextEx(
     //                                Style.Current.Font,
-    //                                text,
+    //                                Text,
     //                                Style.Current.FontSize,
     //                                1);
     //
     //    Vector2 halfFontDimensions = fontDimensions / 2;
     //    Vector2 center = Size / 2;
     //
-    //    if (text == "PlaylistButton")
+    //    if (Text == "PlaylistButton")
     //    {
     //        Console.WriteLine("origin: " + Origin);
     //        Console.WriteLine("trigin: " + TextOrigin);
@@ -354,7 +354,7 @@ public class Button : ClickableRectangle
 
     private Vector2 GetTextPosition()
     {
-        // Measure the dimensions of the text
+        // Measure the dimensions of the Text
         Vector2 fontDimensions = Raylib.MeasureTextEx(
             Style.Current.Font,
             Text,
@@ -371,7 +371,7 @@ public class Button : ClickableRectangle
             TextOrigin.Y < center.Y ? 0 : TextOrigin.Y > center.Y ? -fontDimensions.Y : -fontDimensions.Y / 2
         );
 
-        // Calculate the text position based on the alignment and origin
+        // Calculate the Text position based on the alignment and origin
         return GlobalPosition + TextOrigin + alignmentAdjustment - Origin + TextPadding;
     }
 }

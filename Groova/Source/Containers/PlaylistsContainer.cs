@@ -66,6 +66,11 @@ public class PlaylistsContainer : Node
 
     public void Load()
     {
+        if (!File.Exists(path))
+        {
+            return;
+        }
+
         string json = File.ReadAllText(path);
         Playlists = JsonSerializer.Deserialize<List<Playlist>>(json);
     }

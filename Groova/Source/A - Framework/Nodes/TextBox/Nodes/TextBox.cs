@@ -7,6 +7,7 @@ public partial class TextBox : ClickableRectangle
     public string Text { get; set; } = "";
     public string DefaultText { get; set; } = "";
     public string PlaceholderText { get; set; } = "";
+    public Vector2 TextOrigin { get; set; } = new(8, 0);
     public int MaxCharacters { get; set; } = int.MaxValue;
     public int MinCharacters { get; set; } = 0;
     public List<char> AllowedCharacters { get; set; } = [];

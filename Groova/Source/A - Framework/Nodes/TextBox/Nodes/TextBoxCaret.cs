@@ -6,9 +6,9 @@ public class TextBoxCaret : Node2D
 {
     public float MaxTime = 0.5F;
 
-    private const int MinTime = 0;
-    private const byte MinAlpha = 0;
-    private const byte MaxAlpha = 255;
+    private const int minTime = 0;
+    private const byte minAlpha = 0;
+    private const byte maxAlpha = 255;
     private float timer = 0;
     private byte alpha = 255;
     private TextBox parent;
@@ -35,7 +35,7 @@ public class TextBoxCaret : Node2D
                 }
             }
 
-            alpha = MaxAlpha;
+            alpha = maxAlpha;
         }
     }
 
@@ -96,7 +96,7 @@ public class TextBoxCaret : Node2D
         {
             //float x = mouseX - parent.GlobalPosition.X + parent.Origin.X;
 
-            float x = mouseX - parent.GlobalPosition.X + parent.Origin.X - parent.Style.Current.Padding / 2;
+            float x = mouseX - parent.GlobalPosition.X + parent.Origin.X - parent.TextOrigin.X / 2;
 
             int characterWidth = GetCharacterWidth();
 
@@ -113,7 +113,7 @@ public class TextBoxCaret : Node2D
         int width = GetWidth();
         int height = GetHeight();
 
-        int x = (int)(GlobalPosition.X - parent.Origin.X + parent.Style.Current.Padding + X * width - width / 2) + X;
+        int x = (int)(GlobalPosition.X - parent.Origin.X + parent.TextOrigin.X + X * width - width / 2) + X;
         int y = (int)(GlobalPosition.Y + parent.Size.Y / 2 - height / 2 - parent.Origin.Y);
 
         return new(x, y);
@@ -164,8 +164,8 @@ public class TextBoxCaret : Node2D
     {
         if (timer > MaxTime)
         {
-            alpha = alpha == MaxAlpha ? MinAlpha : MaxAlpha;
-            timer = MinTime;
+            alpha = alpha == maxAlpha ? minAlpha : maxAlpha;
+            timer = minTime;
         }
 
         timer += Raylib.GetFrameTime();

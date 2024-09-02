@@ -1,4 +1,6 @@
-﻿namespace Groova;
+﻿using System.Security.AccessControl;
+
+namespace Groova;
 
 public abstract class BaseSlider : ClickableRectangle
 {

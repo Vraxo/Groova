@@ -7,7 +7,7 @@ public partial class SongItem : BaseItem
 
     public override void Start()
     {
-        text = Path.GetFileNameWithoutExtension(Song.Path);
+        Text = Path.GetFileNameWithoutExtension(Song.Path);
         base.Start();
         image.Load(Song.ImagePath);
     }
