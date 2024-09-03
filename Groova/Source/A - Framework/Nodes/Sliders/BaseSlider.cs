@@ -99,7 +99,12 @@ public abstract class BaseSlider : ClickableRectangle
         UpdatePercentage();
         HandleClicks();
         Draw();
-        SetInitialPercentage();
+
+        if (!initialPercentageSet)
+        {
+            SetInitialPercentage();
+        }
+
         base.Update();
     }
 
@@ -156,12 +161,9 @@ public abstract class BaseSlider : ClickableRectangle
         Released?.Invoke(this, Percentage);
     }
 
-    private void SetInitialPercentage()
+    protected void SetInitialPercentage()
     {
-        if (!initialPercentageSet)
-        {
-            Percentage = InitialPercentage;
-            initialPercentageSet = true;
-        }
+        Percentage = InitialPercentage;
+        initialPercentageSet = true;
     }
 }

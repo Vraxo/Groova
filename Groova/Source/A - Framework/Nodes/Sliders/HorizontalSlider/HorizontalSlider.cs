@@ -77,6 +77,13 @@ public partial class HorizontalSlider : BaseSlider
                 Grabber.GlobalPosition = new(x, y);
                 Grabber.Pressed = true;
             }
+
+            if (Raylib.IsMouseButtonPressed(MouseButton.Right) && OnTopRight)
+            {
+                SetInitialPercentage();
+                OnPercentageChanged();
+                OnReleased();
+            }
         }
     }
 
