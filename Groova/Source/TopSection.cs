@@ -2,9 +2,6 @@
 
 public partial class TopSection : Node2D
 {
-    public bool InPlaylists = true;
-    public Playlist? CurrentPlaylist = null;
-
     private MainScene mainScene;
     private PlaylistContainer playlistsContainer;
 
@@ -41,7 +38,7 @@ public partial class TopSection : Node2D
 
     private void AddPlaylistOrMusic()
     {
-        if (InPlaylists)
+        if (mainScene.InPlaylists)
         {
             CreateNewPlaylistDialog();
         }
@@ -75,18 +72,18 @@ public partial class TopSection : Node2D
         {
             if (IsFileValid(name))
             {
-                playlistsContainer.AddSong(CurrentPlaylist, name);
+                playlistsContainer.AddSong(mainScene.CurrentPlaylist, name);
             }
         }
 
-        mainScene.LoadSongs(CurrentPlaylist);
+        mainScene.LoadSongs(mainScene.CurrentPlaylist);
     }
 
     private bool IsFileValid(string path)
     {
         bool original = true;
 
-        foreach (Song song in CurrentPlaylist.Songs)
+        foreach (Song song in mainScene.CurrentPlaylist.Songs)
         {
             if (song.Path == path)
             {
@@ -101,7 +98,11 @@ public partial class TopSection : Node2D
 
     private void Return()
     {
-        if (!InPlaylists)
+        if (mainScene.Searching)
+        {
+            mainScene.StopSearch();
+        }
+        else if (!mainScene.InPlaylists)
         {
             mainScene.LoadPlaylists();
         }
