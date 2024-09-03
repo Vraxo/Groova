@@ -67,7 +67,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
                 RootNode.Process();
             Raylib.EndDrawing();
 
-            PrintTree();
+            //PrintTree();
         }
     }
 
