@@ -12,7 +12,7 @@ public partial class SongItem : BaseItem
         image.Load(Song.ImagePath);
     }
 
-    protected override void OnButtonLeftclicked(object? sender, EventArgs e)
+    protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
         var musicPlayer = GetNode<SongPlayer>("SongPlayer");
         musicPlayer.Load(Song.Path);

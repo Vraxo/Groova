@@ -11,7 +11,7 @@ public partial class PlaylistItem : BaseItem
         image.Load(Playlist.ImagePath);
     }
 
-    protected override void OnButtonLeftclicked(object? sender, EventArgs e)
+    protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
         GetNode<MainScene>("").LoadMusics(Playlist);
     }

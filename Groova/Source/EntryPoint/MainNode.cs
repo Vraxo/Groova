@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class MainScene : Node
 {
@@ -40,32 +38,11 @@ public partial class MainScene : Node
         GetChild<ItemList>("SongItemList")?.Destroy();
         GetChild<ItemList>("PlaylistItemList")?.Destroy();
 
-        ItemList musicsList = new()
+        SongItemList songItemList = new()
         {
-            ItemSize = new(100, 40),
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
-
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
+            Playlist = playlist
         };
 
-        AddChild(musicsList, "SongItemList");
-
-        foreach (Song song in playlist.Songs)
-        {
-            SongItem musicItem = new()
-            {
-                Playlist = playlist,
-                Song = song
-            };
-        
-            musicsList.Add(musicItem);
-        }
+        AddChild(songItemList);
     }
 }

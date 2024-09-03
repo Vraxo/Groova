@@ -11,7 +11,7 @@ public abstract partial class BaseItem : Node2D
         var button = GetChild<ItemButton>();
         button.OriginalText = Text;
         button.Text = Text;
-        button.LeftClicked += OnButtonLeftclicked;
+        button.LeftClicked += OnButtonLeftClicked;
         button.RightClicked += OnButtonRightClicked;
 
         var imageButton = GetChild<Button>("ImageButton");
@@ -22,8 +22,10 @@ public abstract partial class BaseItem : Node2D
         playlistsContainer = GetNode<PlaylistContainer>("PlaylistsContainer");
     }
 
-    protected abstract void OnButtonLeftclicked(object? sender, EventArgs e);
+    protected abstract void OnButtonLeftClicked(object? sender, EventArgs e);
     protected abstract void OnButtonRightClicked(object? sender, EventArgs e);
+    
+    protected abstract void SetImage(string imagePath);
 
     private void OnImageButtonLeftClicked(object? sender, EventArgs e)
     {
@@ -42,6 +44,4 @@ public abstract partial class BaseItem : Node2D
         SetImage("");
         image.Load("");
     }
-
-    protected abstract void SetImage(string imagePath);
 }
