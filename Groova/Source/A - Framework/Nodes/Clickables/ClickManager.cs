@@ -48,7 +48,7 @@ public class ClickManager : Node
                 else
                 {
                     topClickable.OnTopRight = true;
-                    //Console.WriteLine("on top right set to true");
+                    Console.WriteLine("on top right set to true " + topClickable.Name);
                 }
             }
         }

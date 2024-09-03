@@ -156,7 +156,7 @@ public abstract class BaseSlider : ClickableRectangle
         Released?.Invoke(this, Percentage);
     }
 
-    private void SetInitialPercentage()
+    public void SetInitialPercentage()
     {
         if (!initialPercentageSet)
         {
