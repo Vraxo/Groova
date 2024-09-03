@@ -26,7 +26,10 @@ public class SongPlayer : AudioPlayer
 
     private void OnPitchSliderPercentageChanged(object? sender, float e)
     {
-        Pitch = e * 2;
+        float exponent = 2.0f;
+        float factor = (float)Math.Pow(2, (e - 0.5f) * exponent);
+
+        Pitch = factor;
     }
 
     private void OnSliderReleased(object? sender, float e)
