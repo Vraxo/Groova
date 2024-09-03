@@ -76,8 +76,6 @@ public partial class HorizontalSlider : BaseSlider
 
                 Grabber.GlobalPosition = new(x, y);
                 Grabber.Pressed = true;
-
-                OnTopLeft = false;
             }
         }
     }
