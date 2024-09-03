@@ -35,3 +35,7 @@ Screenshots are still being loaded
 
 * currently I think visiblity is not working properly
   because it always goes back to true
+
+* clickable start needs to be called before adding children,
+  otherwise the node itself will the last node and therefore
+  absorb the clicks.

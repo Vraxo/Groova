@@ -2,29 +2,11 @@
 
 namespace Groova;
 
-public class SongItemList : ItemList
+public class BaseItemList : ItemList
 {
-    public Playlist Playlist;
-
-    public SongItemList()
+    public BaseItemList()
     {
         ItemSize = new(100, 40);
-    }
-
-    public override void Start()
-    {
-        base.Start();
-
-        foreach (Song song in Playlist.Songs)
-        {
-            SongItem musicItem = new()
-            {
-                Playlist = Playlist,
-                Song = song
-            };
-
-            Add(musicItem);
-        }
     }
 
     public override void Update()
