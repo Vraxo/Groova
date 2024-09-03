@@ -4,7 +4,7 @@ public abstract partial class BaseItem : Node2D
 {
     protected string Text;
     protected TexturedRectangle image;
-    protected PlaylistsContainer playlistsContainer;
+    protected PlaylistContainer playlistsContainer;
 
     public override void Start()
     {
@@ -19,7 +19,7 @@ public abstract partial class BaseItem : Node2D
         imageButton.RightClicked += OnImageButtonRightClicked;
 
         image = GetChild<TexturedRectangle>();
-        playlistsContainer = GetNode<PlaylistsContainer>("PlaylistsContainer");
+        playlistsContainer = GetNode<PlaylistContainer>("PlaylistsContainer");
     }
 
     protected abstract void OnButtonLeftclicked(object? sender, EventArgs e);

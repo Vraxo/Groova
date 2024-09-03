@@ -6,14 +6,14 @@ public partial class MainScene : Node
 {
     public SongPlayer MusicPlayer;
 
-    private PlaylistsContainer playlistsContainer;
+    private PlaylistContainer playlistsContainer;
     private TopSection topSection;
 
     public override void Start()
     {
         MusicPlayer = GetChild<SongPlayer>();
         topSection = GetChild<TopSection>();
-        playlistsContainer = GetChild<PlaylistsContainer>();
+        playlistsContainer = GetChild<PlaylistContainer>();
 
         LoadPlaylists();
     }
@@ -25,35 +25,11 @@ public partial class MainScene : Node
         var songsItemList = GetChild<ItemList>("SongItemList");
         songsItemList?.Destroy();
 
-        var playlistsItemList = GetChild<ItemList>("PlaylistItemList");
+        var playlistsItemList = GetChild<PlaylistItemList>("PlaylistItemList");
         playlistsItemList?.Destroy();
 
-        ItemList playlistItemList = new()
-        {
-            ItemSize = new(100, 40),
-            OnUpdate = (list) =>
-            {
-                float x = list.Position.X;
-                float y = 50;
-                list.Position = new(x, y);
-
-                float width = Raylib.GetScreenWidth();
-                float height = Raylib.GetScreenHeight() - list.Position.Y - 80;
-                list.Size = new(width, height);
-            }
-        };
-
-        AddChild(playlistItemList, "PlaylistItemList");
-
-        foreach (Playlist playlist in playlistsContainer.Playlists)
-        {
-            PlaylistItem playlistItem = new()
-            {
-                Playlist = playlist
-            };
-        
-            playlistItemList.Add(playlistItem);
-        }
+        PlaylistItemList playlistItemList = new();
+        AddChild(playlistItemList);
     }
 
     public void LoadMusics(Playlist playlist)

@@ -4,7 +4,7 @@ namespace Groova;
 
 public class ItemButton : Button
 {
-    public string OriginalText = "original text";
+    public string OriginalText;
 
     public override void Start()
     {

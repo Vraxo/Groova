@@ -4,6 +4,12 @@ public class SongPlayer : AudioPlayer
 {
     private HorizontalSlider slider;
 
+    public SongPlayer()
+    {
+        AutoPlay = false;
+        Loop = true;
+    }
+
     public override void Ready()
     {
         slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");

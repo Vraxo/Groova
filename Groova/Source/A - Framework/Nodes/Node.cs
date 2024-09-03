@@ -200,7 +200,7 @@ public class Node
         return null;
     }
 
-    // AddPlaylist child
+    // Add child
 
     public void AddChild(Node node, string name, bool start = true)
     {
@@ -214,7 +214,7 @@ public class Node
         {
             node.Start();
         }
-
+        
         Children.Add(node);
     }
 
@@ -226,11 +226,12 @@ public class Node
         
         node.Build();
 
+
         if (start)
         {
             node.Start();
         }
-
+        
         Children.Add(node);
     }
 

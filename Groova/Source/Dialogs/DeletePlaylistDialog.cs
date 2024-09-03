@@ -12,7 +12,7 @@ public class DeletePlaylistDialog : ConfirmDialog
 
     protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
-        var playlistsContainer = GetNode<PlaylistsContainer>();
+        var playlistsContainer = GetNode<PlaylistContainer>();
         playlistsContainer.RemovePlaylist(Playlist);
         GetNode<MainScene>("").LoadPlaylists(); ;
 

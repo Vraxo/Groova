@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Groova;
 
-public class PlaylistsContainer : Node
+public class PlaylistContainer : Node
 {
     public List<Playlist> Playlists { get; set; } = [];
 

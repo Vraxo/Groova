@@ -6,11 +6,12 @@ public class ItemList : ClickableRectangle
 {
     public List<Node2D> Items = [];
     public Vector2 ItemSize = new(100, 20);
-    public event EventHandler<int>? StartingIndexChanged;
+    public int SliderButtonLayer = 0;
     public VerticalSlider Slider;
     public Action<ItemList> OnUpdate = (list) => { };
-    public int SliderButtonLayer = 0;
     public Action<ItemList> OnItemCountChanged = (list) => { };
+
+    public event EventHandler<int>? StartingIndexChanged;
 
     private int maxItemsShownAtOnce = 0;
 
@@ -71,8 +72,9 @@ public class ItemList : ClickableRectangle
     {
         Slider = GetChild<VerticalSlider>();
         Slider.PercentageChanged += OnSliderValueChanged;
-        //Slider.Layer = SliderButtonLayer;
         Slider.Layer = Layer + 1;
+        Slider.GetChild<Button>("DecrementButton").Layer = Layer + 1;
+        Slider.GetChild<Button>("IncrementButton").Layer = Layer + 1;
 
         UpdateList(StartingIndex);
 

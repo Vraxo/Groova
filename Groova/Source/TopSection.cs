@@ -9,12 +9,12 @@ public partial class TopSection : Node2D
     public Playlist? CurrentPlaylist = null;
 
     private MainScene parent;
-    private PlaylistsContainer playlistsContainer;
+    private PlaylistContainer playlistsContainer;
 
     public override void Start()
     {
         parent = Parent as MainScene;
-        playlistsContainer = GetNode<PlaylistsContainer>();
+        playlistsContainer = GetNode<PlaylistContainer>();
 
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
