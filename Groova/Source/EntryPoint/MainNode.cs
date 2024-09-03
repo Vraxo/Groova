@@ -23,8 +23,8 @@ public partial class MainScene : Node
         inPlaylists = true;
         topSection.InPlaylists = true;
 
-        var songsItemList = GetChild<ItemList>("SongItemList");
-        songsItemList?.Destroy();
+        GetChild<ItemList>("SongItemList")?.Destroy();
+        GetChild<SearchItemList>()?.Destroy();
 
         var playlistsItemList = GetChild<PlaylistItemList>("PlaylistItemList");
         playlistsItemList?.Destroy();
@@ -42,6 +42,9 @@ public partial class MainScene : Node
 
         GetChild<ItemList>("SongItemList")?.Destroy();
         GetChild<ItemList>("PlaylistItemList")?.Destroy();
+        GetChild<SearchItemList>()?.Destroy();
+
+        GetNode<TextBox>("TopSection/SearchBar").Text = "";
 
         SongItemList songItemList = new()
         {
