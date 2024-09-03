@@ -12,8 +12,11 @@ public class AudioPlayer : Node
     public float TimePlayed => Raylib.GetMusicTimePlayed(Audio);
     public float AudioLength => Raylib.GetMusicTimeLength(Audio);
 
+    private float _volume = 1;
     public float Volume
     {
+        get => _volume;
+
         set
         {
             if (!HasAudio)
@@ -21,12 +24,16 @@ public class AudioPlayer : Node
                 return;
             }
 
-            Raylib.SetMusicVolume(Audio, value);
+            _volume = value;
+            Raylib.SetMusicVolume(Audio, _volume);
         }
     }
 
+    private float _pitch = 1;
     public float Pitch
     {
+        get => _pitch;
+
         set
         {
             if (!HasAudio)
@@ -34,12 +41,16 @@ public class AudioPlayer : Node
                 return;
             }
 
-            Raylib.SetMusicPitch(Audio, value);
+            _pitch = value;
+            Raylib.SetMusicPitch(Audio, _pitch);
         }
     }
 
+    private float _pan = 0.5f;
     public float Pan
     {
+        get => _pan;
+
         set
         {
             if (!HasAudio)
@@ -47,7 +58,8 @@ public class AudioPlayer : Node
                 return;
             }
 
-            Raylib.SetMusicPan(Audio, value);
+            _pan = value;
+            Raylib.SetMusicPan(Audio, _pan);
         }
     }
 
@@ -85,6 +97,9 @@ public class AudioPlayer : Node
     {
         Audio = Raylib.LoadMusicStream(path);
         HasAudio = true;
+        Volume = Volume;
+        Pitch = Pitch;
+        Pan = Pan;
     }
 
     public void Play(float timestamp = 0.1f)
