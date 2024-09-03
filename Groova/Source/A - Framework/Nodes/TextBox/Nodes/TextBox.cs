@@ -18,6 +18,7 @@ public partial class TextBox : ClickableRectangle
     public bool TemporaryDefaultText { get; set; } = true;
     public Action<TextBox> OnUpdate = (textBox) => { };
 
+    public event EventHandler? FirstCharacterEntered;
     public event EventHandler<string>? TextChanged;
     public event EventHandler<string>? Confirmed;
 
@@ -105,8 +106,9 @@ public partial class TextBox : ClickableRectangle
     private void InsertCharacter(int key)
     {
         bool isKeyInRange = key >= minAscii && key <= maxAscii;
+        bool isSpaceLeft = Text.Length < MaxCharacters;
 
-        if (isKeyInRange && (Text.Length < MaxCharacters))
+        if (isKeyInRange && isSpaceLeft)
         {
             if (AllowedCharacters.Count > 0)
             {
@@ -129,6 +131,12 @@ public partial class TextBox : ClickableRectangle
             Text = Text.Insert(caret.X, ((char)key).ToString());
             caret.X ++;
             TextChanged?.Invoke(this, Text);
+
+            if (Text.Length == 1)
+            {
+                FirstCharacterEntered?.Invoke(this, EventArgs.Empty);
+                Console.WriteLine("invoked");
+            }
         }
     }
 

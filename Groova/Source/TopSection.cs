@@ -18,6 +18,7 @@ public partial class TopSection : Node2D
 
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
+        GetChild<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)
@@ -28,6 +29,11 @@ public partial class TopSection : Node2D
     private void OnReturnButtonLeftClicked(object? sender, EventArgs e)
     {
         Return();
+    }
+
+    private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
+    {
+        
     }
 
     private void AddPlaylistOrMusic()
