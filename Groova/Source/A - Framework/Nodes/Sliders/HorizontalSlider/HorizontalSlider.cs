@@ -13,6 +13,11 @@ public partial class HorizontalSlider : BaseSlider
 
     protected override void UpdatePercentage()
     {
+        if (Raylib.IsWindowMinimized())
+        {
+            return;
+        }
+
         float currentPosition = Grabber.GlobalPosition.X;
         float minPos = GlobalPosition.X;
         float maxPos = minPos + Size.X;
@@ -53,7 +58,7 @@ public partial class HorizontalSlider : BaseSlider
     //    UpdatePercentageBasedOnGrabber();
     //}
 
-    protected override void MoveGrabberTo(float percentage)
+    protected override void MoveGrabberToPercentage(float percentage)
     {
         float x = GlobalPosition.X + percentage * Size.X;
         float y = GlobalPosition.Y;

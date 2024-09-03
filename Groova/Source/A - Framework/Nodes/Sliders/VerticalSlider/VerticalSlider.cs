@@ -52,7 +52,7 @@ public partial class VerticalSlider : BaseSlider
         }
     }
 
-    protected override void MoveGrabberTo(float percentage)
+    protected override void MoveGrabberToPercentage(float percentage)
     {
 
     }

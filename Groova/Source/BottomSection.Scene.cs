@@ -20,7 +20,7 @@ public partial class BottomSection : Node2D
             }
         }, "PauseOrResumeButton");
 
-        AddChild(new HorizontalSlider()
+        AddChild(new HorizontalSlider
         {
             Position = new(50, 0),
             HasButtons = false,
@@ -29,13 +29,25 @@ public partial class BottomSection : Node2D
                 float y = Raylib.GetScreenHeight() - slider.Size.Y * 4;
                 slider.Position = new(slider.Position.X, y);
 
-                float width = Raylib.GetScreenWidth() - 75;
+                float width = Raylib.GetScreenWidth() - 100;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
         }, "AudioSlider");
 
-        AddChild(new HorizontalSlider()
+        AddChild(new Label
+        {
+            Position = new(100, 10),
+            Text = "01:06",
+            OnUpdate = (label) =>
+            {
+                float x = Raylib.GetScreenWidth() - label.Size.X * 1.2f;
+                float y = Raylib.GetScreenHeight() - 40;
+                label.Position = new(x, y);
+            }
+        });
+
+        AddChild(new HorizontalSlider
         {
             Position = new(50, 0),
             HasButtons = false,
@@ -58,7 +70,7 @@ public partial class BottomSection : Node2D
             }
         }, "VolumeSlider");
 
-        AddChild(new HorizontalSlider()
+        AddChild(new HorizontalSlider
         {
             Position = new(50, 0),
             HasButtons = false,

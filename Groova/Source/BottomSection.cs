@@ -10,22 +10,14 @@ public partial class BottomSection : Node2D
         pauseOrResumeButton = GetChild<Button>("PauseOrResumeButton");
         pauseOrResumeButton.LeftClicked += OnPauseOrResumeButtonLeftClicked;
 
-        GetChild<HorizontalSlider>("PitchSlider").SizeChanged += OnPitchSliderSizeChanged;
-        GetChild<HorizontalSlider>("VolumeSlider").SizeChanged += OnVolumeSliderSizeChanged;
-
         musicPlayer = GetNode<SongPlayer>("SongPlayer");
     }
 
-    private void OnPitchSliderSizeChanged(object? sender, EventArgs e)
+    public override void Update()
     {
-        var pitchSlider = GetChild<HorizontalSlider>("PitchSlider");
-        pitchSlider.Percentage = pitchSlider.Percentage;
-    }
+        GetChild<Label>().Text = FormatTime(musicPlayer.TimePlayed);
 
-    private void OnVolumeSliderSizeChanged(object? sender, EventArgs e)
-    {
-        var volumeSlider = GetChild<HorizontalSlider>("VolumeSlider");
-        volumeSlider.Percentage = volumeSlider.Percentage;
+        base.Update();
     }
 
     private void OnPauseOrResumeButtonLeftClicked(object? sender, EventArgs e)
@@ -48,4 +40,18 @@ public partial class BottomSection : Node2D
                                    "||" :
                                    ">";
     }
+
+    private static string FormatTime(float seconds)
+    {
+        // Ensure seconds is not negative
+        if (seconds < 0) seconds = 0;
+
+        // Calculate minutes and remaining seconds
+        int minutes = (int)(seconds / 60);
+        int remainingSeconds = (int)(seconds % 60);
+
+        // Format and return as MM:SS
+        return $"{minutes:D2}:{remainingSeconds:D2}";
+    }
+
 }

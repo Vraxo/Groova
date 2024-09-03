@@ -29,7 +29,7 @@ public abstract class BaseSlider : ClickableRectangle
         set
         {
             _percentage = Math.Clamp(value, 0, 1);
-            MoveGrabberTo(_percentage);
+            MoveGrabberToPercentage(_percentage);
         }
     }
 
@@ -83,7 +83,14 @@ public abstract class BaseSlider : ClickableRectangle
             incrementButton.Layer = Layer;
         }
 
+        SizeChanged += OnSizeChanged;
+
         base.Start();
+    }
+
+    private void OnSizeChanged(object? sender, EventArgs e)
+    {
+        MoveGrabberToPercentage(Percentage);
     }
 
     public override void Update()
@@ -137,7 +144,7 @@ public abstract class BaseSlider : ClickableRectangle
 
     protected abstract void Draw();
 
-    protected abstract void MoveGrabberTo(float percentage);
+    protected abstract void MoveGrabberToPercentage(float percentage);
 
     protected void OnPercentageChanged()
     {
