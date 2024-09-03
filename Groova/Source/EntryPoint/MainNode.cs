@@ -4,6 +4,8 @@ public partial class MainScene : Node
 {
     public SongPlayer MusicPlayer;
 
+    private bool inPlaylists = true;
+    private Playlist currentPlaylist = null;
     private PlaylistContainer playlistsContainer;
     private TopSection topSection;
 
@@ -18,6 +20,7 @@ public partial class MainScene : Node
 
     public void LoadPlaylists()
     {
+        inPlaylists = true;
         topSection.InPlaylists = true;
 
         var songsItemList = GetChild<ItemList>("SongItemList");
@@ -30,8 +33,10 @@ public partial class MainScene : Node
         AddChild(playlistItemList);
     }
 
-    public void LoadMusics(Playlist playlist)
+    public void LoadSongs(Playlist playlist)
     {
+        inPlaylists = false;
+        currentPlaylist = playlist;
         topSection.InPlaylists = false;
         topSection.CurrentPlaylist = playlist;
 
@@ -44,5 +49,28 @@ public partial class MainScene : Node
         };
 
         AddChild(songItemList);
+    }
+
+    public void Search()
+    {
+        GetChild<ItemList>("SongItemList")?.Destroy();
+        GetChild<ItemList>("PlaylistItemList")?.Destroy();
+
+        SearchItemList searchItemList = new();
+        AddChild(searchItemList);
+    }
+
+    public void StopSearch()
+    {
+        GetChild<SearchItemList>()?.Destroy();
+
+        if (inPlaylists)
+        {
+            LoadPlaylists();
+        }
+        else
+        {
+            LoadSongs(currentPlaylist);
+        }
     }
 }

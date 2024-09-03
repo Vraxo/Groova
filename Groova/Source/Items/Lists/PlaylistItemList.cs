@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public class PlaylistItemList : BaseItemList
+public class PlaylistItemList : BaseItemItemList
 {
     public override void Start()
     {

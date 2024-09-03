@@ -15,7 +15,7 @@ public class DeleteSongDialog : ConfirmDialog
     {
         var playlistsContainer = GetNode<PlaylistContainer>();
         playlistsContainer.RemoveSong(Playlist, Song);
-        GetNode<MainScene>("").LoadMusics(Playlist);
+        GetNode<MainScene>("").LoadSongs(Playlist);
 
         Close();
     }

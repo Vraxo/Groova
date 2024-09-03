@@ -1,6 +1,6 @@
 ﻿namespace Groova;
 
-public class SongItemList : BaseItemList
+public class SongItemList : BaseItemItemList
 {
     public Playlist Playlist;
 

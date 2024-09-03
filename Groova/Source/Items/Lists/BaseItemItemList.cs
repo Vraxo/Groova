@@ -2,9 +2,9 @@
 
 namespace Groova;
 
-public class BaseItemList : ItemList
+public class BaseItemItemList : ItemList
 {
-    public BaseItemList()
+    public BaseItemItemList()
     {
         ItemSize = new(100, 40);
     }

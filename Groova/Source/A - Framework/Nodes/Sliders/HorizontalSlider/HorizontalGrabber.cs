@@ -58,7 +58,7 @@ public class HorizontalGrabber : BaseGrabber
         {
             if (!Pressed)
             {
-                //float _x = maxX * (parent.ExternalValue / parent.MaxExternalValue);
+                //float _x = maxX * (mainScene.ExternalValue / mainScene.MaxExternalValue);
                 //float _y = GlobalPosition.Y;
                 //
                 //GlobalPosition = new(_x, _y);

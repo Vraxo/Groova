@@ -4,7 +4,7 @@ public partial class MainScene : Node
 {
     public override void Build()
     {
-        AddChild(new ClickManager());
+        //AddChild(new ClickManager());
 
         AddChild(new PlaylistContainer());
 

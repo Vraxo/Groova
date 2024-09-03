@@ -19,6 +19,7 @@ public partial class TextBox : ClickableRectangle
     public Action<TextBox> OnUpdate = (textBox) => { };
 
     public event EventHandler? FirstCharacterEntered;
+    public event EventHandler? Cleared;
     public event EventHandler<string>? TextChanged;
     public event EventHandler<string>? Confirmed;
 
@@ -135,7 +136,6 @@ public partial class TextBox : ClickableRectangle
             if (Text.Length == 1)
             {
                 FirstCharacterEntered?.Invoke(this, EventArgs.Empty);
-                Console.WriteLine("invoked");
             }
         }
     }
@@ -153,6 +153,11 @@ public partial class TextBox : ClickableRectangle
             RevertTextToDefaultIfEmpty();
 
             TextChanged?.Invoke(this, Text);
+
+            if (Text.Length == 0)
+            {
+                Cleared?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 

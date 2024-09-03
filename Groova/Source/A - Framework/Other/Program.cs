@@ -34,8 +34,8 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon.png"));
         
         //Scene scene = new(rootNode);
-        //var parent = scene.Instantiate<MainScene>();
-        //RootNode = parent;
+        //var mainScene = scene.Instantiate<MainScene>();
+        //RootNode = mainScene;
         RootNode.Program = this;
 
         RootNode.Build();

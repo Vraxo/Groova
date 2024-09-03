@@ -94,7 +94,7 @@ public class TextBoxCaret : Node2D
         }
         else
         {
-            //float x = mouseX - parent.GlobalPosition.X + parent.Origin.X;
+            //float x = mouseX - mainScene.GlobalPosition.X + mainScene.Origin.X;
 
             float x = mouseX - parent.GlobalPosition.X + parent.Origin.X - parent.TextOrigin.X / 2;
 

@@ -72,8 +72,8 @@ public class TextBoxShape : Node2D
     //{
     //    Rectangle rectangle = new()
     //    {
-    //        Position = parent.GlobalPosition - parent.Origin,
-    //        Size = parent.Size
+    //        Position = mainScene.GlobalPosition - mainScene.Origin,
+    //        Size = mainScene.Size
     //    };
     //
     //    DrawRectangle(rectangle);
@@ -84,21 +84,21 @@ public class TextBoxShape : Node2D
     //{
     //    Raylib.DrawRectangleRounded(
     //        rectangle,
-    //        parent.Style.Current.Roundedness,
-    //        (int)parent.Size.Y,
-    //        parent.Style.Current.FillColor);
+    //        mainScene.Style.Current.Roundedness,
+    //        (int)mainScene.Size.Y,
+    //        mainScene.Style.Current.FillColor);
     //}
     //
     //private void DrawOutline(Rectangle rectangle)
     //{
-    //    if (parent.Style.Current.OutlineThickness > 0)
+    //    if (mainScene.Style.Current.OutlineThickness > 0)
     //    {
     //        Raylib.DrawRectangleRoundedLines(
     //            rectangle,
-    //            parent.Style.Current.Roundedness,
+    //            mainScene.Style.Current.Roundedness,
     //            (int)Size.Y,
-    //            parent.Style.Current.OutlineThickness,
-    //            parent.Style.Current.OutlineColor);
+    //            mainScene.Style.Current.OutlineThickness,
+    //            mainScene.Style.Current.OutlineColor);
     //    }
     //}
 }

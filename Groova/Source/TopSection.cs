@@ -1,24 +1,22 @@
-﻿using System.Drawing.Imaging;
-using System.Xml.Linq;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class TopSection : Node2D
 {
     public bool InPlaylists = true;
     public Playlist? CurrentPlaylist = null;
 
-    private MainScene parent;
+    private MainScene mainScene;
     private PlaylistContainer playlistsContainer;
 
     public override void Start()
     {
-        parent = Parent as MainScene;
+        mainScene = Parent as MainScene;
         playlistsContainer = GetNode<PlaylistContainer>();
 
         GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
         GetChild<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
+        GetChild<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)
@@ -33,7 +31,12 @@ public partial class TopSection : Node2D
 
     private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
     {
-        
+        mainScene.Search();
+    }
+
+    private void OnSearchBarCleared(object? sender, EventArgs e)
+    {
+        mainScene.StopSearch();
     }
 
     private void AddPlaylistOrMusic()
@@ -76,7 +79,7 @@ public partial class TopSection : Node2D
             }
         }
 
-        parent.LoadMusics(CurrentPlaylist);
+        mainScene.LoadSongs(CurrentPlaylist);
     }
 
     private bool IsFileValid(string path)
@@ -100,7 +103,7 @@ public partial class TopSection : Node2D
     {
         if (!InPlaylists)
         {
-            parent.LoadPlaylists();
+            mainScene.LoadPlaylists();
         }
     }
 }

@@ -6,11 +6,6 @@ public class ItemButton : Button
 {
     public string OriginalText;
 
-    public override void Start()
-    {
-        base.Start();
-    }
-
     public override void Update()
     {
         float availableWidth = Size.X - 100;
