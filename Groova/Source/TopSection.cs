@@ -85,7 +85,7 @@ public partial class TopSection : Node2D
 
         foreach (Song song in mainScene.CurrentPlaylist.Songs)
         {
-            if (song.Path == path)
+            if (song.FilePath == path)
             {
                 original = false;
             }

@@ -39,7 +39,7 @@ public class SearchItemList : BaseItemItemList
 
             foreach (Song song in playlist.Songs)
             {
-                string name = Path.GetFileNameWithoutExtension(song.Path);
+                string name = Path.GetFileNameWithoutExtension(song.FilePath);
 
                 if (name.ToLower().Contains(text))
                 {

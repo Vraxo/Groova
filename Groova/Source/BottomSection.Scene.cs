@@ -6,6 +6,16 @@ public partial class BottomSection : Node2D
 {
     public override void Build()
     {
+        AddChild(new CurrentSongDisplayer()
+        {
+            OnUpdate = (rectangle) =>
+            {
+                float x = rectangle.Position.X;
+                float y = Raylib.GetScreenHeight() - 110;
+                rectangle.Position = new(x, y);
+            }
+        });
+
         AddChild(new Button
         {
             Position = new(20, 20),

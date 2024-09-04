@@ -22,7 +22,7 @@ public class DeleteSongDialog : ConfirmDialog
 
     private void SetLabelText()
     {
-        string songName = Path.GetFileNameWithoutExtension(Song.Path);
+        string songName = Path.GetFileNameWithoutExtension(Song.FilePath);
         string truncatedSongName = TruncateSongName(songName);
 
         GetChild<Label>().Text = $"Delete '{truncatedSongName}'?";

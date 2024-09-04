@@ -6,17 +6,18 @@ public class ColoredRectangle : ClickableRectangle
 {
     public Color FillColor = new(24, 24, 24, 255);
     public Color OutlineColor = new(128, 128, 128, 255);
+    public Action<ColoredRectangle> OnUpdate = (rectangle) => { };
 
-    public override void Start()
+    public ColoredRectangle()
     {
+        Size = new(32, 32);
         OriginPreset = OriginPreset.TopLeft;
         Layer = ClickableLayer.Panels;
-
-        base.Start();
     }
 
     public override void Update()
     {
+        OnUpdate(this);
         Draw();
     }
 

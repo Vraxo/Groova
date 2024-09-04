@@ -2,7 +2,7 @@
 
 namespace Groova;
 
-public abstract partial class BaseItem
+public abstract partial class BaseItem : Node2D
 {
     public override void Build()
     {
@@ -39,7 +39,6 @@ public abstract partial class BaseItem
         AddChild(new TexturedRectangle
         {
             Position = new(24, 20),
-            Size = new(32, 32)
         });
     }
 }

@@ -7,7 +7,7 @@ public partial class SongItem : BaseItem
 
     public override void Start()
     {
-        Text = Path.GetFileNameWithoutExtension(Song.Path);
+        Text = Path.GetFileNameWithoutExtension(Song.FilePath);
         base.Start();
         image.Load(Song.ImagePath);
     }
@@ -15,8 +15,11 @@ public partial class SongItem : BaseItem
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
         var musicPlayer = GetNode<SongPlayer>("SongPlayer");
-        musicPlayer.Load(Song.Path);
+        musicPlayer.Load(Song.FilePath);
         musicPlayer.Play();
+
+        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+        currentSongDisplayer.SetSong(Song);
     }
 
     protected override void OnButtonRightClicked(object? sender, EventArgs e)

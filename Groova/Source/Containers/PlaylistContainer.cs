@@ -97,7 +97,7 @@ public class PlaylistContainer : Node
             //.ToList();
 
             playlist.Songs = playlist.Songs
-                .OrderBy(o => PadNumbers(o.Path))
+                .OrderBy(o => PadNumbers(o.FilePath))
                 .ToList();
         }
     }

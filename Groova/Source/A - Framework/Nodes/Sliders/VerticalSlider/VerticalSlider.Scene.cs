@@ -4,12 +4,11 @@ public partial class VerticalSlider : BaseSlider
 {
     public override void Build()
     {
-        VerticalGrabber grabber = new() { Visible = false };
+        VerticalGrabber grabber = new();
         AddChild(grabber, "Grabber");
 
         AddChild(new Button
         {
-            Visible = false,
             Position = new(0, grabber.Size.Y * -2),
             Size = new(10, 10),
             Layer = ClickableLayer.PanelButtons,
@@ -24,7 +23,6 @@ public partial class VerticalSlider : BaseSlider
 
         AddChild(new Button
         {
-            Visible = false,
             Size = new(10, 10),
             Layer = ClickableLayer.PanelButtons,
             OnUpdate = (button) =>

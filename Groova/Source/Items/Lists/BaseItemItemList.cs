@@ -16,7 +16,7 @@ public class BaseItemItemList : ItemList
         Position = new(x, y);
 
         float width = Raylib.GetScreenWidth();
-        float height = Raylib.GetScreenHeight() - Position.Y - 80;
+        float height = Raylib.GetScreenHeight() - Position.Y - 100; // - 80
         Size = new(width, height);
 
         base.Update();

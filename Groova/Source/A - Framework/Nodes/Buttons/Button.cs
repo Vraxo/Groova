@@ -14,6 +14,7 @@ public class Button : ClickableRectangle
     public ButtonClickMode LeftClickMode { get; set; } = ButtonClickMode.Limitless;
     public ButtonClickMode RightClickMode { get; set; } = ButtonClickMode.Limitless;
     public Action<Button> OnUpdate = (button) => { };
+
     public event EventHandler? LeftClicked;
     public event EventHandler? RightClicked;
 
@@ -266,11 +267,13 @@ public class Button : ClickableRectangle
 
     private void Draw()
     {
-        if (Visible)
+        if (!(Visible && readyForVisibility))
         {
-            DrawShape();
-            DrawText();
+            return;
         }
+
+        DrawShape();
+        DrawText();
     }
 
     private void DrawShape()

@@ -159,6 +159,7 @@ public class ItemList : ClickableRectangle
             }
             else
             {
+                Items[i].Position = new(Items[i].Position.X, -1000);
                 Items[i].Deactivate();
             }
         }

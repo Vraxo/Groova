@@ -82,7 +82,7 @@ public abstract class BaseGrabber : ClickableRectangle
 
     private void Draw()
     {
-        if (!Visible)
+        if (!(Visible && readyForVisibility))
         {
             return;
         }
