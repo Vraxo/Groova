@@ -30,7 +30,7 @@ public class Label : Node2D
 
     private void Draw()
     {
-        if (!Visible)
+        if (!(Visible && readyForVisibility))
         {
             return;
         }
