@@ -110,6 +110,11 @@ public partial class HorizontalSlider : BaseSlider
             (int)Size.Y,
             EmptyStyle.Current.FillColor);
 
+        if (Percentage == 0)
+        {
+            return;
+        }
+
         Rectangle filledRectangle = new()
         {
             Position = position,

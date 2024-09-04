@@ -66,6 +66,8 @@ public class AudioPlayer : Node
         }
     }
 
+    public event EventHandler? AudioFinished;
+
     public override void Ready()
     {
         if (!HasAudio)
@@ -83,11 +85,12 @@ public class AudioPlayer : Node
     {
         Raylib.UpdateMusicStream(Audio);
 
-        if (TimePlayed >= AudioLength)
+        if (TimePlayed >= AudioLength - 0.1 && Playing)
         {
             if (Loop)
             {
                 Play();
+                AudioFinished?.Invoke(this, EventArgs.Empty);
             }
             else
             {
@@ -111,11 +114,19 @@ public class AudioPlayer : Node
         {
             return;
         }
-
+     
         timestamp = Math.Clamp(timestamp, 0.1f, AudioLength);
 
-        Raylib.PlayMusicStream(Audio);
-        Raylib.SeekMusicStream(Audio, timestamp);
+        if (timestamp >= AudioLength - 0.1f)
+        {
+            Stop();
+            Console.WriteLine("stopping");
+        }
+        else
+        {
+            Raylib.SeekMusicStream(Audio, timestamp);
+            Raylib.PlayMusicStream(Audio);
+        }
     }
 
     public void Resume()
@@ -146,6 +157,7 @@ public class AudioPlayer : Node
         }
 
         Raylib.StopMusicStream(Audio);
+        AudioFinished?.Invoke(this, EventArgs.Empty);
     }
 
     public void Seek(float timestamp)

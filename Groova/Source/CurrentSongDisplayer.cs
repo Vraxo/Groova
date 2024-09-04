@@ -9,13 +9,46 @@ public partial class CurrentSongDisplayer : Node2D
     private string originalText = "";
     private Label label;
     private TexturedRectangle image;
+    private Button button;
 
     public override void Start()
     {
         image = GetChild<TexturedRectangle>();
         label = GetChild<Label>();
+        
+        button = GetChild<Button>();
+        button.LeftClicked += OnButtonLeftClicked;
 
         base.Start();
+    }
+
+    private void OnButtonLeftClicked(object? sender, EventArgs e)
+    {
+        var songPlayer = GetNode<SongPlayer>("SongPlayer");
+
+        string state = "Stop";
+
+        switch (button.Text)
+        {
+            case "Stop":
+                state = "Repeat";
+                break;
+
+            case "Repeat":
+                state = "Loop";
+                break;
+
+            case "Loop":
+                state = "Shuffle";
+                break;
+
+            case "Shuffle":
+                state = "Stop";
+                break;
+        }
+
+        button.Text = state;
+        songPlayer.State = state;
     }
 
     public override void Update()
@@ -27,13 +60,13 @@ public partial class CurrentSongDisplayer : Node2D
 
     public void SetSong(Song song)
     {
-        originalText = $"Now playing: {song.GetName()}";
+        originalText = song.GetName();
         image.Load(song.ImagePath);
     }
 
     private void UpdateLabel()
     {
-        float availableWidth = Raylib.GetScreenWidth() - 125;
+        float availableWidth = Raylib.GetScreenWidth() - 210;
         float characterWidth = GetCharacterWidth();
         int numFittingCharacters = (int)(availableWidth / characterWidth);
 

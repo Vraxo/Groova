@@ -2,18 +2,19 @@
 
 public class SongPlayer : AudioPlayer
 {
-    private HorizontalSlider slider;
+    public Song Song;
+    public Playlist Playlist;
+    public string State = "Stop";
 
-    public SongPlayer()
-    {
-        AutoPlay = false;
-        Loop = true;
-    }
+    private HorizontalSlider slider;
+    private CurrentSongDisplayer currentSongDisplayer;
 
     public override void Ready()
     {
+        AudioFinished += OnAudioFinished;
+
         slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");
-        slider.Released += OnSliderReleased;
+        slider.Released += OnAudioSliderReleased;
 
         var volumeSlider = GetNode<HorizontalSlider>("BottomSection/VolumeSlider");
         volumeSlider.PercentageChanged += OnVolumeSliderPercentageChanged;
@@ -21,7 +22,32 @@ public class SongPlayer : AudioPlayer
         var pitchSlider = GetNode<HorizontalSlider>("BottomSection/PitchSlider");
         pitchSlider.PercentageChanged += OnPitchSliderPercentageChanged;
 
+        currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+
         base.Ready();
+    }
+
+    private void OnAudioFinished(object? sender, EventArgs e)
+    {
+        slider.Percentage = 0;
+
+        switch (State)
+        {
+            case "Stop":
+                break;
+
+            case "Repeat":
+                Play();
+                break;
+
+            case "Loop":
+                Loop();
+                break;
+
+            case "Shuffle":
+                Shuffle();
+                break;
+        }
     }
 
     private void OnPitchSliderPercentageChanged(object? sender, float e)
@@ -32,18 +58,10 @@ public class SongPlayer : AudioPlayer
         Pitch = factor;
     }
 
-    private void OnSliderReleased(object? sender, float e)
+    private void OnAudioSliderReleased(object? sender, float e)
     {
         float timestamp = e * AudioLength;
-
-        if (Playing)
-        {
-            Play(timestamp);
-        }
-        else
-        {
-            Seek(timestamp);
-        }
+        Play(timestamp);
     }
 
     private void OnVolumeSliderPercentageChanged(object? sender, float e)
@@ -53,33 +71,50 @@ public class SongPlayer : AudioPlayer
 
     public override void Update()
     {
-        //slider.MaxExternalValue = AudioLength;
-
         if (Playing)
         {
             slider.Percentage = TimePlayed / AudioLength;
         }
 
-        //if (slider.Grabber != null)
-        //{
-        //if (!slider.Grabber.Pressed)
-        //{
-        //    slider.ExternalValue = TimePlayed;
-        //
-        //    // Calculate the percentage of the song played
-        //    float percentage = TimePlayed / AudioLength;
-        //
-        //    slider.Percentage = percentage;
-        //
-        //    // Calculate the new X position of the middle button based on the slider's width
-        //    float x = slider.Position.X + percentage * slider.Size.X;
-        //    float y = slider.Grabber.GlobalPosition.Y;
-        //
-        //    // Update the middle button's position
-        //    //slider.Grabber.GlobalPosition = new(x, y);
-        //}
-        //}
-
         base.Update();
+    }
+
+    private void Loop()
+    {
+        int index = Playlist.Songs.IndexOf(Song) + 1;
+
+        if (index >= 0 && index < Playlist.Songs.Count)
+        {
+            Song = Playlist.Songs[index];
+        }
+        else
+        {
+            Song = Playlist.Songs.First();
+        }
+
+        Load(Song.FilePath);
+        Play();
+
+        currentSongDisplayer.SetSong(Song);
+
+        Console.WriteLine("looped");
+    }
+
+    private void Shuffle()
+    {
+        Random random = new();
+        Song randomSong;
+
+        do
+        {
+            int randomIndex = random.Next(Playlist.Songs.Count);
+            randomSong = Playlist.Songs[randomIndex];
+        } 
+        while (randomSong == Song && Playlist.Songs.Count > 1);
+
+        Load(randomSong.FilePath);
+        Play();
+
+        currentSongDisplayer.SetSong(randomSong);
     }
 }

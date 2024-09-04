@@ -15,5 +15,17 @@ public partial class CurrentSongDisplayer : Node2D
         {
             Position = new(8+32+10, 25),
         });
+
+        AddChild(new Button
+        {
+            Position = new(10, 30),
+            Text = "Stop",
+            OnUpdate = (button) =>
+            {
+                float x = Raylib.GetScreenWidth() - 60;
+                float y = button.Position.Y;
+                button.Position = new(x, y);
+            }
+        });
     }
 }

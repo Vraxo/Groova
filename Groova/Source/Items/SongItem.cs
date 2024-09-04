@@ -14,9 +14,11 @@ public partial class SongItem : BaseItem
 
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
-        var musicPlayer = GetNode<SongPlayer>("SongPlayer");
-        musicPlayer.Load(Song.FilePath);
-        musicPlayer.Play();
+        var songPlayer = GetNode<SongPlayer>("SongPlayer");
+        songPlayer.Song = Song;
+        songPlayer.Playlist = Playlist;
+        songPlayer.Load(Song.FilePath);
+        songPlayer.Play();
 
         var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);
