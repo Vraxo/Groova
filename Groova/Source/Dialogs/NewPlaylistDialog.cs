@@ -11,7 +11,7 @@ public partial class NewPlaylistDialog : Dialog
     
     private void OnTextBoxConfirmed(object? sender, string e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>("PlaylistsContainer");
+        var playlistsContainer = GetNode<PlaylistContainer>("PlaylistContainer");
 
         foreach (Playlist playlist in playlistsContainer.Playlists)
         {

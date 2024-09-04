@@ -19,7 +19,7 @@ public abstract partial class BaseItem : Node2D
         imageButton.RightClicked += OnImageButtonRightClicked;
 
         image = GetChild<TexturedRectangle>();
-        playlistsContainer = GetNode<PlaylistContainer>("PlaylistsContainer");
+        playlistsContainer = GetNode<PlaylistContainer>("PlaylistContainer");
     }
 
     protected abstract void OnButtonLeftClicked(object? sender, EventArgs e);

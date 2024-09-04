@@ -10,7 +10,10 @@ public class AudioPlayer : Node
     public bool Loop { get; set; } = false;
     public bool Playing => Raylib.IsMusicStreamPlaying(Audio);
     public float TimePlayed => Raylib.GetMusicTimePlayed(Audio);
-    public float AudioLength => Raylib.GetMusicTimeLength(Audio);
+
+    public float AudioLength => HasAudio ?
+                                Raylib.GetMusicTimeLength(Audio) :
+                                0;
 
     private float _volume = 1;
     public float Volume

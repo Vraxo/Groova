@@ -22,18 +22,30 @@ public partial class BottomSection : Node2D
 
         AddChild(new HorizontalSlider
         {
-            Position = new(50, 0),
+            Position = new(100, 0),
             HasButtons = false,
             OnUpdate = (slider) =>
             {
                 float y = Raylib.GetScreenHeight() - slider.Size.Y * 4;
                 slider.Position = new(slider.Position.X, y);
 
-                float width = Raylib.GetScreenWidth() - 100;
+                float width = Raylib.GetScreenWidth() - 160;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
         }, "AudioSlider");
+
+        AddChild(new Label
+        {
+            Position = new(50, 10),
+            Text = "01:06",
+            OnUpdate = (label) =>
+            {
+                float x = label.Position.X;
+                float y = Raylib.GetScreenHeight() - 40;
+                label.Position = new(x, y);
+            }
+        }, "TimePlayedLabel");
 
         AddChild(new Label
         {
@@ -45,7 +57,7 @@ public partial class BottomSection : Node2D
                 float y = Raylib.GetScreenHeight() - 40;
                 label.Position = new(x, y);
             }
-        });
+        }, "TotalTimeLabel");
 
         AddChild(new HorizontalSlider
         {

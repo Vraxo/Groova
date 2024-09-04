@@ -3,6 +3,8 @@
 public partial class BottomSection : Node2D
 {
     private Button pauseOrResumeButton;
+    private Label timePlayedLabel;
+    private Label totalTimeLabel;
     private SongPlayer musicPlayer;
 
     public override void Start()
@@ -11,12 +13,15 @@ public partial class BottomSection : Node2D
         pauseOrResumeButton.LeftClicked += OnPauseOrResumeButtonLeftClicked;
 
         musicPlayer = GetNode<SongPlayer>("SongPlayer");
+
+        timePlayedLabel = GetChild<Label>("TimePlayedLabel");
+        totalTimeLabel = GetChild<Label>("TotalTimeLabel");
     }
 
     public override void Update()
     {
-        GetChild<Label>().Text = FormatTime(musicPlayer.TimePlayed);
-
+        timePlayedLabel.Text = FormatTime(musicPlayer.TimePlayed);
+        totalTimeLabel.Text = FormatTime(musicPlayer.AudioLength);
         base.Update();
     }
 
@@ -43,15 +48,14 @@ public partial class BottomSection : Node2D
 
     private static string FormatTime(float seconds)
     {
-        // Ensure seconds is not negative
-        if (seconds < 0) seconds = 0;
+        if (seconds < 0)
+        {
+            seconds = 0;
+        }
 
-        // Calculate minutes and remaining seconds
         int minutes = (int)(seconds / 60);
         int remainingSeconds = (int)(seconds % 60);
 
-        // Format and return as MM:SS
         return $"{minutes:D2}:{remainingSeconds:D2}";
     }
-
 }
