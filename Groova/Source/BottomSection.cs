@@ -56,34 +56,20 @@ public partial class BottomSection : Node2D
         {
             if (songPlayer.TimePlayed > -1)
             {
-                Console.WriteLine(songPlayer.TimePlayed);
                 songPlayer.Resume();
             }
             else
             {
                 songPlayer.Play();
             }
+
+            pauseOrResumeButton.Text = "||";
         }
         else
         {
             songPlayer.Pause();
+            pauseOrResumeButton.Text = ">";
         }
-        //if (songPlayer.Playing)
-        //{
-        //    songPlayer.Pause();
-        //}
-        //else if (songPlayer.TimePlayed > 0)
-        //{
-        //    songPlayer.Resume();
-        //}
-        //else
-        //{
-        //    songPlayer.Play();
-        //}
-
-        pauseOrResumeButton.Text = pauseOrResumeButton.Text == ">" ?
-                                   "||" :
-                                   ">";
     }
 
     private static string FormatTime(float seconds)

@@ -1,4 +1,5 @@
-﻿using System.Drawing.Design;
+﻿using Raylib_cs;
+using System.Drawing.Design;
 
 namespace Groova;
 
@@ -150,7 +151,7 @@ public class SongPlayer : AudioPlayer
         {
             int randomIndex = random.Next(Playlist.Songs.Count);
             randomSong = Playlist.Songs[randomIndex];
-        } 
+        }
         while (randomSong == Song && Playlist.Songs.Count > 1);
 
         LoadAndPlaySong(randomSong);
@@ -165,7 +166,7 @@ public class SongPlayer : AudioPlayer
         pauseOrResumeButton.Text = "||";
 
         Song = song;
-        
+
         mainScene.Settings.Song = Song;
         mainScene.SaveSettings();
     }

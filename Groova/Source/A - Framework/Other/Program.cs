@@ -29,7 +29,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         Raylib.SetWindowMinSize(width, height);
         Raylib.InitAudioDevice();
 
-        Raylib.SetTargetFPS(60);
+        //Raylib.SetTargetFPS(60);
 
         Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon.png"));
         
