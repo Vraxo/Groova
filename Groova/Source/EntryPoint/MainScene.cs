@@ -120,6 +120,8 @@ public partial class MainScene : Node
                 return;
             }
 
+            bottomSection.GetChild<CurrentSongDisplayer>().SetSong(Settings.Song);
+
             SongPlayer.Load(Settings.Song.FilePath);
 
             SongPlayer.Play();
