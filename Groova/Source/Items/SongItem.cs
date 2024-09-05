@@ -17,8 +17,7 @@ public partial class SongItem : BaseItem
         var songPlayer = GetNode<SongPlayer>("SongPlayer");
         songPlayer.Song = Song;
         songPlayer.Playlist = Playlist;
-        songPlayer.Load(Song.FilePath);
-        songPlayer.Play();
+        songPlayer.LoadAndPlaySong(Song);
 
         var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);

@@ -2,7 +2,7 @@
 
 public abstract class BaseSlider : ClickableRectangle
 {
-    public float InitialPercentage { get; set; } = 0;
+    public float InitialPercentage { get; set; } = -1;
     public float MaxExternalValue { get; set; } = 0;
     public bool HasButtons { get; set; } = true;
     public ButtonStyle FilledStyle { get; set; } = new();
@@ -161,6 +161,11 @@ public abstract class BaseSlider : ClickableRectangle
 
     protected void SetInitialPercentage()
     {
+        if (InitialPercentage < 0)
+        {
+            Percentage = Percentage;
+        }
+
         Percentage = InitialPercentage;
         initialPercentageSet = true;
     }

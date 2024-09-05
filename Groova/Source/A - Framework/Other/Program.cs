@@ -42,7 +42,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         RootNode.Start();
     }
 
-    private void SetCurrentDirectory()
+    private static void SetCurrentDirectory()
     {
         string assemblyLocation = Assembly.GetEntryAssembly().Location;
         Environment.CurrentDirectory = Path.GetDirectoryName(assemblyLocation);

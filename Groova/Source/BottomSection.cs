@@ -5,14 +5,14 @@ public partial class BottomSection : Node2D
     private Button pauseOrResumeButton;
     private Label timePlayedLabel;
     private Label totalTimeLabel;
-    private SongPlayer musicPlayer;
+    private SongPlayer songPlayer;
 
     public override void Start()
     {
         pauseOrResumeButton = GetChild<Button>("PauseOrResumeButton");
         pauseOrResumeButton.LeftClicked += OnPauseOrResumeButtonLeftClicked;
 
-        musicPlayer = GetNode<SongPlayer>("SongPlayer");
+        songPlayer = GetNode<SongPlayer>("SongPlayer");
 
         timePlayedLabel = GetChild<Label>("TimePlayedLabel");
         totalTimeLabel = GetChild<Label>("TotalTimeLabel");
@@ -20,9 +20,26 @@ public partial class BottomSection : Node2D
 
     public override void Update()
     {
-        timePlayedLabel.Text = FormatTime(musicPlayer.TimePlayed);
-        totalTimeLabel.Text = FormatTime(musicPlayer.AudioLength);
+        timePlayedLabel.Text = FormatTime(songPlayer.TimePlayed);
+        totalTimeLabel.Text = FormatTime(songPlayer.AudioLength);
         base.Update();
+    }
+
+    public void LoadSettings(Settings settings)
+    {
+        pauseOrResumeButton.Text = ">";
+
+        GetChild<HorizontalSlider>("AudioSlider").Percentage = settings.Timestamp;
+        GetChild<HorizontalSlider>("AudioSlider").InitialPercentage = settings.Timestamp;
+
+        GetChild<HorizontalSlider>("PitchSlider").Percentage = settings.Pitch;
+        GetChild<HorizontalSlider>("PitchSlider").InitialPercentage = settings.Pitch;
+
+        GetChild<HorizontalSlider>("VolumeSlider").Percentage = settings.Volume;
+        GetChild<HorizontalSlider>("VolumeSlider").InitialPercentage = settings.Volume;
+
+        songPlayer.Volume = settings.Volume;
+        songPlayer.Pitch = settings.Pitch;
     }
 
     private void OnPauseOrResumeButtonLeftClicked(object? sender, EventArgs e)
@@ -32,14 +49,34 @@ public partial class BottomSection : Node2D
 
     private void PauseOrResume()
     {
-        if (musicPlayer.Playing)
+        if (pauseOrResumeButton.Text == ">")
         {
-            musicPlayer.Pause();
+            if (songPlayer.TimePlayed > -1)
+            {
+                Console.WriteLine(songPlayer.TimePlayed);
+                songPlayer.Resume();
+            }
+            else
+            {
+                songPlayer.Play();
+            }
         }
         else
         {
-            musicPlayer.Resume();
+            songPlayer.Pause();
         }
+        //if (songPlayer.Playing)
+        //{
+        //    songPlayer.Pause();
+        //}
+        //else if (songPlayer.TimePlayed > 0)
+        //{
+        //    songPlayer.Resume();
+        //}
+        //else
+        //{
+        //    songPlayer.Play();
+        //}
 
         pauseOrResumeButton.Text = pauseOrResumeButton.Text == ">" ?
                                    "||" :

@@ -3,15 +3,36 @@
 public class SongPlayer : AudioPlayer
 {
     public Song Song;
-    public Playlist Playlist;
+    public Playlist Playlist
+    {
+        get => Playlist;
+
+        set
+        {
+            mainScene.Settings.Playlist = value;
+            mainScene.SaveSettings();
+        }
+    }
+
     public string State = "Stop";
 
     private HorizontalSlider slider;
     private CurrentSongDisplayer currentSongDisplayer;
+    private MainScene mainScene;
+    private Button pauseOrResumeButton;
+
+    public override void Start()
+    {
+        AudioFinished += OnAudioFinished;
+
+        mainScene = GetNode<MainScene>("");
+
+        base.Start();
+    }
 
     public override void Ready()
     {
-        AudioFinished += OnAudioFinished;
+        pauseOrResumeButton = GetNode<Button>("BottomSection/PauseOrResumeButton");
 
         slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");
         slider.Released += OnAudioSliderReleased;
@@ -27,6 +48,19 @@ public class SongPlayer : AudioPlayer
         base.Ready();
     }
 
+    public override void Update()
+    {
+        if (Playing)
+        {
+            slider.Percentage = TimePlayed / AudioLength;
+
+            mainScene.Settings.Timestamp = slider.Percentage;
+            mainScene.SaveSettings();
+        }
+
+        base.Update();
+    }
+
     private void OnAudioFinished(object? sender, EventArgs e)
     {
         slider.Percentage = 0;
@@ -34,6 +68,7 @@ public class SongPlayer : AudioPlayer
         switch (State)
         {
             case "Stop":
+                pauseOrResumeButton.Text = ">";
                 break;
 
             case "Repeat":
@@ -56,27 +91,35 @@ public class SongPlayer : AudioPlayer
         float factor = (float)Math.Pow(2, (e - 0.5f) * exponent);
 
         Pitch = factor;
+
+        mainScene.Settings.Pitch = Pitch;
+        mainScene.SaveSettings();
     }
 
     private void OnAudioSliderReleased(object? sender, float e)
     {
         float timestamp = e * AudioLength;
-        Play(timestamp);
+
+        if (Playing)
+        {
+            Play(timestamp);
+        }
+        else
+        {
+            Seek(timestamp);
+            slider.Percentage = e;
+        }
+
+        mainScene.Settings.Timestamp = e;
+        mainScene.SaveSettings();
     }
 
     private void OnVolumeSliderPercentageChanged(object? sender, float e)
     {
         Volume = e;
-    }
 
-    public override void Update()
-    {
-        if (Playing)
-        {
-            slider.Percentage = TimePlayed / AudioLength;
-        }
-
-        base.Update();
+        mainScene.Settings.Volume = Volume;
+        mainScene.SaveSettings();
     }
 
     private void Loop()
@@ -92,12 +135,8 @@ public class SongPlayer : AudioPlayer
             Song = Playlist.Songs.First();
         }
 
-        Load(Song.FilePath);
-        Play();
-
+        LoadAndPlaySong(Song);
         currentSongDisplayer.SetSong(Song);
-
-        Console.WriteLine("looped");
     }
 
     private void Shuffle()
@@ -112,9 +151,20 @@ public class SongPlayer : AudioPlayer
         } 
         while (randomSong == Song && Playlist.Songs.Count > 1);
 
-        Load(randomSong.FilePath);
+        LoadAndPlaySong(randomSong);
+        currentSongDisplayer.SetSong(randomSong);
+    }
+
+    public void LoadAndPlaySong(Song song)
+    {
+        Load(song.FilePath);
         Play();
 
-        currentSongDisplayer.SetSong(randomSong);
+        pauseOrResumeButton.Text = "||";
+
+        Song = song;
+        
+        mainScene.Settings.Song = Song;
+        mainScene.SaveSettings();
     }
 }
