@@ -39,7 +39,10 @@ public partial class BottomSection : Node2D
         GetChild<HorizontalSlider>("VolumeSlider").InitialPercentage = settings.Volume;
 
         songPlayer.Volume = settings.Volume;
-        songPlayer.Pitch = settings.Pitch;
+
+        float exponent = 1f;
+        float factor = (float)Math.Pow(2, (settings.Pitch - 0.5f) * exponent);
+        songPlayer.Pitch = factor;
     }
 
     private void OnPauseOrResumeButtonLeftClicked(object? sender, EventArgs e)

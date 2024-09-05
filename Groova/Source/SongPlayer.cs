@@ -1,4 +1,6 @@
-﻿namespace Groova;
+﻿using System.Drawing.Design;
+
+namespace Groova;
 
 public class SongPlayer : AudioPlayer
 {
@@ -92,7 +94,7 @@ public class SongPlayer : AudioPlayer
 
         Pitch = factor;
 
-        mainScene.Settings.Pitch = Pitch;
+        mainScene.Settings.Pitch = e;
         mainScene.SaveSettings();
     }
 
@@ -118,7 +120,7 @@ public class SongPlayer : AudioPlayer
     {
         Volume = e;
 
-        mainScene.Settings.Volume = Volume;
+        mainScene.Settings.Volume = e;
         mainScene.SaveSettings();
     }
 

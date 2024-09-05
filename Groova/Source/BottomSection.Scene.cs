@@ -73,7 +73,7 @@ public partial class BottomSection : Node2D
         {
             Position = new(50, 0),
             HasButtons = false,
-            InitialPercentage = 1f,
+            DefaultPercentage = 1f,
             OnUpdate = (slider) =>
             {
                 float screenWidth = Raylib.GetScreenWidth();
@@ -96,7 +96,7 @@ public partial class BottomSection : Node2D
         {
             Position = new(50, 0),
             HasButtons = false,
-            InitialPercentage = 0.5f,
+            DefaultPercentage = 0.5f,
             OnUpdate = (slider) =>
             {
                 float screenWidth = Raylib.GetScreenWidth();

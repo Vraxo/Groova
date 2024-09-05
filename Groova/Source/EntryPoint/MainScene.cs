@@ -93,17 +93,20 @@ public partial class MainScene : Node
 
         string jsonString = JsonSerializer.Serialize(Settings, options);
 
-        File.WriteAllText("Settings.json", jsonString);
+        File.WriteAllText("Resources/Settings.json", jsonString);
     }
 
     private void LoadSettings()
     {
-        if (File.Exists("Settings.json"))
+        if (File.Exists("Resources/Settings.json"))
         {
-            string jsonString = File.ReadAllText("Settings.json");
+            string jsonString = File.ReadAllText("Resources/Settings.json");
 
             Settings = JsonSerializer.Deserialize<Settings>(jsonString) ??
                        new();
+
+            var bottomSection = GetChild<BottomSection>();
+            bottomSection.LoadSettings(Settings);
 
             if (Settings.Playlist is null)
             {
@@ -118,9 +121,6 @@ public partial class MainScene : Node
             }
 
             SongPlayer.Load(Settings.Song.FilePath);
-
-            var bottomSection = GetChild<BottomSection>();
-            bottomSection.LoadSettings(Settings);
 
             SongPlayer.Play();
             SongPlayer.Seek(Settings.Timestamp * SongPlayer.AudioLength);

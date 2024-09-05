@@ -39,12 +39,13 @@ public class AudioPlayer : Node
 
         set
         {
+            _pitch = value;
+
             if (!HasAudio)
             {
                 return;
             }
 
-            _pitch = value;
             Raylib.SetMusicPitch(Audio, _pitch);
         }
     }
@@ -106,6 +107,8 @@ public class AudioPlayer : Node
         Volume = Volume;
         Pitch = Pitch;
         Pan = Pan;
+
+        Console.WriteLine("set pitch to: " + Pitch);
     }
 
     public void Play(float timestamp = 0.1f)

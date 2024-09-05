@@ -80,7 +80,7 @@ public partial class HorizontalSlider : BaseSlider
 
             if (Raylib.IsMouseButtonPressed(MouseButton.Right) && OnTopRight)
             {
-                SetInitialPercentage();
+                RevertToDefaultPercentage();
                 OnPercentageChanged();
                 OnReleased();
             }
