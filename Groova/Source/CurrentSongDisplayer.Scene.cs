@@ -20,11 +20,11 @@ public partial class CurrentSongDisplayer : Node2D
 
         AddChild(new Button
         {
-            Position = new(10, 30),
+            Position = new(10, 25),
             Text = "Stop",
             OnUpdate = (button) =>
             {
-                float x = Window.Width - 60;
+                float x = Window.Width - 85;
                 float y = button.Position.Y;
                 button.Position = new(x, y);
             }

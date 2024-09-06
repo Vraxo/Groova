@@ -11,13 +11,10 @@ public partial class MainScene : Node
     public Settings Settings = new();
 
     private readonly string settingsFilePath = "Resources/Settings.json";
-    private PlaylistContainer playlistContainer;
 
     public override void Ready()
     {
         SongPlayer = GetNode<SongPlayer>("SongPlayer");
-
-        playlistContainer = GetNode<PlaylistContainer>("PlaylistContainer");
 
         LoadPlaylists();
         LoadSettings();
@@ -115,15 +112,15 @@ public partial class MainScene : Node
 
         bool setAudioSlider = false;
 
-        if (Settings.Playlist != null && playlistContainer.PlaylistExists(Settings.Playlist))
+        if (Settings.Playlist != null && PlaylistContainer.Instance.PlaylistExists(Settings.Playlist))
         {
-            Playlist playlist = playlistContainer.GetPlaylist(Settings.Playlist);
+            Playlist playlist = PlaylistContainer.Instance.GetPlaylist(Settings.Playlist);
 
             LoadSongs(playlist);
 
-            if (Settings.Song != null && playlistContainer.SongExists(Settings.Playlist, Settings.Song))
+            if (Settings.Song != null && PlaylistContainer.Instance.SongExists(Settings.Playlist, Settings.Song))
             {
-                Song song = playlistContainer.GetSong(playlist.Name, Settings.Song);
+                Song song = PlaylistContainer.Instance.GetSong(playlist.Name, Settings.Song);
 
                 GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer").SetSong(song);
 

@@ -14,7 +14,7 @@ public class BaseItemItemList : ItemList
         Position = new(x, y);
 
         float width = Window.Width;
-        float height = Window.Height - Position.Y - 100; // - 80
+        float height = Window.Height - Position.Y - 110; // - 80
         Size = new(width, height);
 
         base.Update();

@@ -10,13 +10,15 @@ public abstract class Clickable : Node2D
 
     public override void Start()
     {
+        clickManager = GetNode<ClickManager>("/root/ClickManager");
+
         if (clickManager == null)
         {
             //Program.RootNode.AddChild(new ClickManager());
             RootNode.Children.Insert(0, new ClickManager { Name = "ClickManager" });
+            clickManager = GetNode<ClickManager>("/root/ClickManager");
         }
 
-        clickManager = GetNode<ClickManager>("/root/ClickManager");
         clickManager.Add(this);
     }
 

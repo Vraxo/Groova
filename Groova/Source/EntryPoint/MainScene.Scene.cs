@@ -6,8 +6,6 @@ public partial class MainScene : Node
     {
         //AddChild(new ClickManager());
 
-        AddChild(new PlaylistContainer());
-
         AddChild(new SongPlayer());
 
         AddChild(new TopSection());

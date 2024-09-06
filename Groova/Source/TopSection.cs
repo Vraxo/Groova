@@ -3,13 +3,10 @@
 public partial class TopSection : Node2D
 {
     private MainScene mainScene;
-    private PlaylistContainer playlistsContainer;
 
     public override void Start()
     {
         mainScene = GetParent<MainScene>();
-
-        playlistsContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
 
         GetNode<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetNode<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
@@ -73,7 +70,7 @@ public partial class TopSection : Node2D
         {
             if (IsFileValid(name))
             {
-                playlistsContainer.AddSong(mainScene.CurrentPlaylist, name);
+                PlaylistContainer.Instance.AddSong(mainScene.CurrentPlaylist, name);
             }
         }
 

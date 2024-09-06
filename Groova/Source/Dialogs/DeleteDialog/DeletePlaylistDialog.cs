@@ -8,8 +8,7 @@ public class DeletePlaylistDialog : BaseDeleteDialog
 
     protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
-        playlistsContainer.RemovePlaylist(Playlist);
+        PlaylistContainer.Instance.RemovePlaylist(Playlist);
         GetNode<MainScene>("/root").LoadPlaylists();
 
         Close();

@@ -3,16 +3,27 @@ using System.Text.RegularExpressions;
 
 namespace Groova;
 
-public class PlaylistContainer : Node
+public class PlaylistContainer
 {
     public List<Playlist> Playlists { get; set; } = [];
 
-    private readonly string path = "Resources/Playlists.json";
+    private static PlaylistContainer? instance;
 
-    public override void Start()
+    public static PlaylistContainer Instance
+    {
+        get
+        {
+            instance ??= new();
+            return instance;
+        }
+    }
+
+    private PlaylistContainer()
     {
         Load();
     }
+
+    private readonly string path = "Resources/Playlists.json";
 
     public void AddPlaylist(string name)
     {

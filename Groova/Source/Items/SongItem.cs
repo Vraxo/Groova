@@ -35,6 +35,6 @@ public partial class SongItem : BaseItem
 
     protected override void SetImage(string imagePath)
     {
-        playlistsContainer.SetSongImage(Song, imagePath);
+        PlaylistContainer.Instance.SetSongImage(Song, imagePath);
     }
 }

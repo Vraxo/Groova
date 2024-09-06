@@ -4,7 +4,6 @@ public abstract partial class BaseItem : Node2D
 {
     protected string Text;
     protected TexturedRectangle image;
-    protected PlaylistContainer playlistsContainer;
 
     public override void Start()
     {
@@ -18,7 +17,6 @@ public abstract partial class BaseItem : Node2D
         imageButton.RightClicked += OnImageButtonRightClicked;
 
         image = GetNode<TexturedRectangle>("Image");
-        playlistsContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
     }
 
     protected abstract void OnButtonLeftClicked(object? sender, EventArgs e);

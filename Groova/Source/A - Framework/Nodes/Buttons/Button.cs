@@ -312,25 +312,56 @@ public class Button : ClickableRectangle
             Style.Current.FillColor);
     }
 
+    //private void DrawOutline()
+    //{
+    //    if (Style.Current.OutlineThickness < 0)
+    //    {
+    //        return;
+    //    }
+    //
+    //    for (int i = 0; i < Style.Current.OutlineThickness; i++)
+    //    {
+    //        Rectangle rectangle = new()
+    //        {
+    //            Position = GlobalPosition - Origin - new Vector2(i, i),
+    //            Size = new(Size.X + i + 0, Size.Y + i + 0)
+    //        };
+    //
+    //        Raylib.DrawRectangleRounded(
+    //            rectangle,
+    //            Style.Current.Roundness,
+    //            (int)Size.Y,
+    //            Style.Current.OutlineColor);
+    //    }
+    //}
+
     private void DrawOutline()
     {
-        if (Style.Current.OutlineThickness < 0)
+        if (Style.Current.OutlineThickness <= 0)
         {
             return;
         }
 
-        for (int i = 0; i < Style.Current.OutlineThickness; i++)
+        Vector2 position = GlobalPosition - Origin;
+
+        Rectangle rectangle = new()
         {
-            Rectangle rectangle = new()
+            Position = position,
+            Size = Size
+        };
+
+        for (int i = 0; i <= Style.Current.OutlineThickness; i++)
+        {
+            Rectangle outlineRectangle = new()
             {
-                Position = GlobalPosition - Origin - new Vector2(i, i),
-                Size = new(Size.X + i + 1, Size.Y + i + 1)
+                Position = rectangle.Position - new Vector2(i, i),
+                Size = new(rectangle.Size.X + i + 1, rectangle.Size.Y + i + 1)
             };
 
             Raylib.DrawRectangleRounded(
-                rectangle,
+                outlineRectangle,
                 Style.Current.Roundness,
-                (int)Size.Y,
+                (int)rectangle.Size.X,
                 Style.Current.OutlineColor);
         }
     }

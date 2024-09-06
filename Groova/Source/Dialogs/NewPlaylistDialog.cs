@@ -11,9 +11,7 @@ public partial class NewPlaylistDialog : Dialog
     
     private void OnTextBoxConfirmed(object? sender, string e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
-
-        foreach (Playlist playlist in playlistsContainer.Playlists)
+        foreach (Playlist playlist in PlaylistContainer.Instance.Playlists)
         {
             if (playlist.Name == e)
             {
@@ -22,7 +20,7 @@ public partial class NewPlaylistDialog : Dialog
             }
         }
 
-        playlistsContainer.AddPlaylist(e);
+        PlaylistContainer.Instance.AddPlaylist(e);
         GetNode<MainScene>("/root").LoadPlaylists();
         Close();
     }

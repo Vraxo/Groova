@@ -2,13 +2,9 @@
 
 public class SearchItemList : BaseItemItemList
 {
-    private PlaylistContainer playlistContainer;
-
     public override void Start()
     {
         base.Start();
-
-        playlistContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
 
         var textBox = GetNode<TextBox>("/root/TopSection/SearchBar");
         textBox.TextChanged += OnSearchBarTextChanged;
@@ -24,7 +20,7 @@ public class SearchItemList : BaseItemItemList
     {
         Clear();
 
-        foreach (Playlist playlist in playlistContainer.Playlists)
+        foreach (Playlist playlist in PlaylistContainer.Instance.Playlists)
         {
             if (playlist.Name.ToLower().Contains(text))
             {
