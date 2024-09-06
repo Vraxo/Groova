@@ -17,7 +17,7 @@ public partial class CurrentSongDisplayer : Node2D
             {
                 label.AvailableWidth = Window.Width - 210;
             }
-        });
+        }, "SongName");
 
         AddChild(new Button
         {
@@ -29,6 +29,6 @@ public partial class CurrentSongDisplayer : Node2D
                 float y = button.Position.Y;
                 button.Position = new(x, y);
             }
-        });
+        }, "ReplayModeButton");
     }
 }

@@ -54,7 +54,7 @@ public partial class BottomSection : Node2D
     {
         if (pauseOrResumeButton.Text == ">")
         {
-            if (songPlayer.TimePlayed > -1)
+            if (songPlayer.TimePlayed > 0)
             {
                 songPlayer.Resume();
             }

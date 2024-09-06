@@ -107,8 +107,6 @@ public class AudioPlayer : Node
         Volume = Volume;
         Pitch = Pitch;
         Pan = Pan;
-
-        Console.WriteLine("set pitch to: " + Pitch);
     }
 
     public void Play(float timestamp = 0.1f)
@@ -123,7 +121,6 @@ public class AudioPlayer : Node
         if (timestamp >= AudioLength - 0.1f)
         {
             Stop();
-            Console.WriteLine("stopping");
         }
         else
         {

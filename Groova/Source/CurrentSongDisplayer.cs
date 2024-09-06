@@ -10,11 +10,10 @@ public partial class CurrentSongDisplayer : Node2D
 
     public override void Start()
     {
-        //image = GetChild<TexturedRectangle>();
         image = GetNode2<TexturedRectangle>("Image");
-        label = GetChild<Label>();
+        label = GetNode2<Label>("SongName");
 
-        Button = GetChild<Button>();
+        Button = GetNode2<Button>("ReplayModeButton");
         Button.LeftClicked += OnButtonLeftClicked;
 
         mainScene = GetNode2<MainScene>("/root");
