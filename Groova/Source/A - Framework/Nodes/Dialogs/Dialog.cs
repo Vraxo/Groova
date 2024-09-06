@@ -29,8 +29,8 @@ public partial class Dialog : Node2D
 
     private void UpdatePosition()
     {
-        float x = Raylib.GetScreenWidth() / 2;
-        float y = Raylib.GetScreenHeight() / 2;
+        float x = Window.Width/ 2;
+        float y = Window.Height / 2;
 
         Position = new(x, y);
     }

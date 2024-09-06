@@ -246,4 +246,37 @@ public class Node
         node.Name = node.GetType().Name;
         node.Program = Program;
     }
+
+    public T? GetNode2<T>(string path) where T : Node
+    {
+        Node startNode = this;
+
+        // Check if path starts with "/root"
+        if (path.StartsWith("/root"))
+        {
+            startNode = RootNode;
+            path = path.Substring(6); // Remove "/root/" from the beginning of the path
+        }
+
+        // Split the path into node names
+        string[] nodeNames = path.Split('/');
+
+        Node currentNode = startNode;
+
+        // Traverse the hierarchy based on the path
+        for (int i = 0; i < nodeNames.Length; i++)
+        {
+            currentNode = currentNode.GetChild(nodeNames[i]);
+
+            // If a node is not found, return null
+            if (currentNode == null)
+            {
+                return null;
+            }
+        }
+
+        // Return the final node as the desired type
+        return currentNode as T;
+    }
+
 }

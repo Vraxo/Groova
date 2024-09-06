@@ -66,7 +66,7 @@ public partial class CurrentSongDisplayer : Node2D
 
     private void UpdateLabel()
     {
-        float availableWidth = Raylib.GetScreenWidth() - 210;
+        float availableWidth = Window.Width - 210;
         float characterWidth = GetCharacterWidth();
         int numFittingCharacters = (int)(availableWidth / characterWidth);
 

@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class BottomSection : Node2D
 {
@@ -11,7 +9,7 @@ public partial class BottomSection : Node2D
             OnUpdate = (rectangle) =>
             {
                 float x = rectangle.Position.X;
-                float y = Raylib.GetScreenHeight() - 110;
+                float y = Window.Height - 110;
                 rectangle.Position = new(x, y);
             }
         });
@@ -24,7 +22,7 @@ public partial class BottomSection : Node2D
             OnUpdate = (button) =>
             {
                 float x = button.Position.X;
-                float y = Raylib.GetScreenHeight() - 40;
+                float y = Window.Height - 40;
 
                 button.Position = new(x, y);
             }
@@ -36,10 +34,10 @@ public partial class BottomSection : Node2D
             HasButtons = false,
             OnUpdate = (slider) =>
             {
-                float y = Raylib.GetScreenHeight() - slider.Size.Y * 4;
+                float y = Window.Height - slider.Size.Y * 4;
                 slider.Position = new(slider.Position.X, y);
 
-                float width = Raylib.GetScreenWidth() - 160;
+                float width = Window.Width - 160;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
@@ -52,7 +50,7 @@ public partial class BottomSection : Node2D
             OnUpdate = (label) =>
             {
                 float x = label.Position.X;
-                float y = Raylib.GetScreenHeight() - 40;
+                float y = Window.Height - 40;
                 label.Position = new(x, y);
             }
         }, "TimePlayedLabel");
@@ -63,8 +61,8 @@ public partial class BottomSection : Node2D
             Text = "01:06",
             OnUpdate = (label) =>
             {
-                float x = Raylib.GetScreenWidth() - label.Size.X * 1.2f;
-                float y = Raylib.GetScreenHeight() - 40;
+                float x = Window.Width - label.Size.X * 1.2f;
+                float y = Window.Height - 40;
                 label.Position = new(x, y);
             }
         }, "TotalTimeLabel");
@@ -77,17 +75,15 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 1f,
             OnUpdate = (slider) =>
             {
-                float screenWidth = Raylib.GetScreenWidth();
-
                 var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
 
-                float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
+                float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 
-                float x = screenWidth - slider.Size.X - spaceBetweenAudioSliderAndBorder;
-                float y = Raylib.GetScreenHeight() - 15;
+                float x = Window.Width - slider.Size.X - spaceBetweenAudioSliderAndBorder;
+                float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = screenWidth / 5;
+                float width = Window.Width / 5;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
@@ -101,17 +97,15 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 0.5f,
             OnUpdate = (slider) =>
             {
-                float screenWidth = Raylib.GetScreenWidth();
-
                 var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
 
-                float spaceBetweenAudioSliderAndBorder = screenWidth - audioSlider.Size.X - audioSlider.GlobalPosition.X;
+                float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 
                 float x = slider.Position.X;
-                float y = Raylib.GetScreenHeight() - 15;
+                float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = screenWidth / 3;
+                float width = Window.Width / 3;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }

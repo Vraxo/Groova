@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public class BaseItemItemList : ItemList
 {
@@ -15,8 +13,8 @@ public class BaseItemItemList : ItemList
         float y = 50;
         Position = new(x, y);
 
-        float width = Raylib.GetScreenWidth();
-        float height = Raylib.GetScreenHeight() - Position.Y - 100; // - 80
+        float width = Window.Width;
+        float height = Window.Height - Position.Y - 100; // - 80
         Size = new(width, height);
 
         base.Update();

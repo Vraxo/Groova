@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public abstract partial class BaseItem : Node2D
 {
@@ -18,7 +16,7 @@ public abstract partial class BaseItem : Node2D
             },
             OnUpdate = (button) =>
             {
-                float width = Raylib.GetScreenWidth() - 35;
+                float width = Window.Width - 35;
                 float height = button.Size.Y;
                 button.Size = new(width, height);
             }

@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class TopSection : Node2D
 {
@@ -16,11 +14,11 @@ public partial class TopSection : Node2D
             },
             OnUpdate = (textBox) =>
             {
-                float x = Raylib.GetScreenWidth() / 2;
+                float x = Window.Width / 2;
                 float y = textBox.Position.Y;
                 textBox.Position = new(x, y);
 
-                float width = Raylib.GetScreenWidth() * 0.75f;
+                float width = Window.Width * 0.75f;
                 float height = textBox.Size.Y;
                 textBox.Size = new(width, height);
             }
@@ -40,7 +38,7 @@ public partial class TopSection : Node2D
             Text = "<-",
             OnUpdate = (button) =>
             {
-                float x = Raylib.GetScreenWidth() - 20;
+                float x = Window.Width - 20;
                 float y = button.Position.Y;
 
                 button.Position = new(x, y);

@@ -1,6 +1,4 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class CurrentSongDisplayer : Node2D
 {
@@ -22,7 +20,7 @@ public partial class CurrentSongDisplayer : Node2D
             Text = "Stop",
             OnUpdate = (button) =>
             {
-                float x = Raylib.GetScreenWidth() - 60;
+                float x = Window.Width - 60;
                 float y = button.Position.Y;
                 button.Position = new(x, y);
             }
