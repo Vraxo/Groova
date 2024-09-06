@@ -3,7 +3,6 @@
 public class SongPlayer : AudioPlayer
 {
     public Song Song;
-
     public string ReplayMode = "Stop";
 
     private HorizontalSlider slider;
@@ -29,7 +28,7 @@ public class SongPlayer : AudioPlayer
     {
         AudioFinished += OnAudioFinished;
 
-        mainScene = GetNode<MainScene>("");
+        mainScene = GetNode2<MainScene>("/root");
 
         base.Start();
     }
@@ -38,16 +37,16 @@ public class SongPlayer : AudioPlayer
     {
         pauseOrResumeButton = GetNode<Button>("BottomSection/PauseOrResumeButton");
 
-        slider = GetNode<HorizontalSlider>("BottomSection/AudioSlider");
+        slider = GetNode2<HorizontalSlider>("/root/BottomSection/AudioSlider");
         slider.Released += OnAudioSliderReleased;
 
-        var volumeSlider = GetNode<HorizontalSlider>("BottomSection/VolumeSlider");
+        var volumeSlider = GetNode2<HorizontalSlider>("/root/BottomSection/VolumeSlider");
         volumeSlider.PercentageChanged += OnVolumeSliderPercentageChanged;
 
-        var pitchSlider = GetNode<HorizontalSlider>("BottomSection/PitchSlider");
+        var pitchSlider = GetNode2<HorizontalSlider>("/root/BottomSection/PitchSlider");
         pitchSlider.PercentageChanged += OnPitchSliderPercentageChanged;
 
-        currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+        currentSongDisplayer = GetNode2<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
 
         base.Ready();
     }
