@@ -22,12 +22,13 @@ public class AudioPlayer : Node
 
         set
         {
+            _volume = value;
+
             if (!HasAudio)
             {
                 return;
             }
 
-            _volume = value;
             Raylib.SetMusicVolume(Audio, _volume);
         }
     }

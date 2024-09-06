@@ -41,6 +41,7 @@ public partial class MainScene : Node
     {
         InPlaylists = false;
         CurrentPlaylist = playlist;
+        SongPlayer.Playlist = playlist;
 
         GetChild<ItemList>("SongItemList")?.Destroy();
         GetChild<ItemList>("PlaylistItemList")?.Destroy();
@@ -100,7 +101,9 @@ public partial class MainScene : Node
         const string settingsFilePath = "Resources/Settings.json";
 
         if (!File.Exists(settingsFilePath))
+        {
             return;
+        }
 
         string jsonString = File.ReadAllText(settingsFilePath);
         Settings = JsonSerializer.Deserialize<Settings>(jsonString) ?? new();
