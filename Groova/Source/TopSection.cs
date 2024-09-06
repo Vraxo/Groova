@@ -9,12 +9,12 @@ public partial class TopSection : Node2D
     {
         mainScene = GetParent<MainScene>();
 
-        playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
+        playlistsContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
 
-        GetNode2<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
-        GetNode2<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
-        GetNode2<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
-        GetNode2<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
+        GetNode<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
+        GetNode<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
+        GetNode<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
+        GetNode<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)

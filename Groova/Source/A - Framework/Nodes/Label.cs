@@ -7,8 +7,8 @@ public class Label : Node2D
     public Color Color { get; set; } = Color.White;
     public uint FontSize { get; set; } = 16;
     public Font Font { get; set; } = FontLoader.Instance.Fonts["RobotoMono 32"];
-    public bool LimitText { get; set; } = false;
-    public float AvailableWidth { get; set; } = 0;
+    public int MaxCharacters = -1;
+    public float AvailableWidth { get; set; } = -1;
     public Action<Label> OnUpdate = (label) => { };
 
     private string _text = "";
@@ -66,8 +66,13 @@ public class Label : Node2D
 
     private void LimitDisplayedText()
     {
-        if (!LimitText)
+        if (AvailableWidth < 1)
         {
+            if (Name == "Message")
+            {
+                Console.WriteLine("returning");
+            }
+
             return;
         }
 

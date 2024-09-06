@@ -14,11 +14,11 @@ public partial class SongItem : BaseItem
 
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
-        var songPlayer = GetNode2<SongPlayer>("/root/SongPlayer");
+        var songPlayer = GetNode<SongPlayer>("/root/SongPlayer");
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 
-        var currentSongDisplayer = GetNode2<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
+        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);
     }
 

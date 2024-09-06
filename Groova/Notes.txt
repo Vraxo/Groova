@@ -9,7 +9,7 @@ Song player doesn't know playlist by default after loading
 
 Replay mode should be saved
 
-
+* implement label limiting in dialogs
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 

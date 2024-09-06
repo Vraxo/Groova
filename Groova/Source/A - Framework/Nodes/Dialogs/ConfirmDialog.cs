@@ -4,7 +4,7 @@ public partial class ConfirmDialog : Dialog
 {
     public override void Start()
     {
-        GetNode2<Button>("ConfirmButton").LeftClicked += OnConfirmButtonLeftClicked;
+        GetNode<Button>("ConfirmButton").LeftClicked += OnConfirmButtonLeftClicked;
         base.Start();
     }
 

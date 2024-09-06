@@ -14,7 +14,7 @@ public partial class MainScene : Node
 
     public override void Ready()
     {
-        SongPlayer = GetNode2<SongPlayer>("SongPlayer");
+        SongPlayer = GetNode<SongPlayer>("SongPlayer");
 
         LoadPlaylists();
         LoadSettings();
@@ -24,12 +24,12 @@ public partial class MainScene : Node
     {
         InPlaylists = true;
 
-        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
+        GetNode<TextBox>("/root/TopSection/SearchBar").Text = "";
 
-        GetNode2<ItemList>("SongItemList")?.Destroy();
-        GetNode2<SearchItemList>("SearchItemList")?.Destroy();
+        GetNode<ItemList>("SongItemList")?.Destroy();
+        GetNode<SearchItemList>("SearchItemList")?.Destroy();
 
-        var playlistsItemList = GetNode2<PlaylistItemList>("PlaylistItemList");
+        var playlistsItemList = GetNode<PlaylistItemList>("PlaylistItemList");
         playlistsItemList?.Destroy();
 
         PlaylistItemList playlistItemList = new();
@@ -42,11 +42,11 @@ public partial class MainScene : Node
         CurrentPlaylist = playlist;
         SongPlayer.Playlist = playlist;
 
-        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
+        GetNode<TextBox>("/root/TopSection/SearchBar").Text = "";
 
-        GetNode2<ItemList>("SongItemList")?.Destroy();
-        GetNode2<ItemList>("PlaylistItemList")?.Destroy();
-        GetNode2<SearchItemList>("SearchItemList")?.Destroy();
+        GetNode<ItemList>("SongItemList")?.Destroy();
+        GetNode<ItemList>("PlaylistItemList")?.Destroy();
+        GetNode<SearchItemList>("SearchItemList")?.Destroy();
 
         SongItemList songItemList = new()
         {
@@ -60,8 +60,8 @@ public partial class MainScene : Node
     {
         Searching = true;
 
-        GetNode2<ItemList>("SongItemList")?.Destroy();
-        GetNode2<ItemList>("PlaylistItemList")?.Destroy();
+        GetNode<ItemList>("SongItemList")?.Destroy();
+        GetNode<ItemList>("PlaylistItemList")?.Destroy();
 
         SearchItemList searchItemList = new();
         AddChild(searchItemList);
@@ -71,8 +71,8 @@ public partial class MainScene : Node
     {
         Searching = false;
 
-        GetChild<SearchItemList>()?.Destroy();
-        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
+        GetNode<SearchItemList>("SearchItemList")?.Destroy();
+        GetNode<TextBox>("/root/TopSection/SearchBar").Text = "";
 
         if (InPlaylists)
         {
@@ -106,11 +106,11 @@ public partial class MainScene : Node
         string jsonString = File.ReadAllText(settingsFilePath);
         Settings = JsonSerializer.Deserialize<Settings>(jsonString) ?? new();
 
-        var currentSongDisplayer = GetNode2<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.Button.Text = Settings.ReplayMode;
         SongPlayer.ReplayMode = Settings.ReplayMode;
 
-        var bottomSection = GetChild<BottomSection>();
+        var bottomSection = GetNode<BottomSection>();
         bottomSection.LoadSettings(Settings);
 
         if (Settings.Playlist != null)
@@ -119,7 +119,7 @@ public partial class MainScene : Node
 
             if (Settings.Song != null)
             {
-                bottomSection.GetChild<CurrentSongDisplayer>().SetSong(Settings.Song);
+                GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer").SetSong(Settings.Song);
                 SongPlayer.Load(Settings.Song.FilePath);
                 SongPlayer.Play();
                 SongPlayer.Seek(Settings.Timestamp * SongPlayer.AudioLength);

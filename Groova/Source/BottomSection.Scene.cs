@@ -67,7 +67,7 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 1f,
             OnUpdate = (slider) =>
             {
-                var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
+                var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
 
                 float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 
@@ -89,7 +89,7 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 0.5f,
             OnUpdate = (slider) =>
             {
-                var audioSlider = GetChild<HorizontalSlider>("AudioSlider");
+                var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
 
                 float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 

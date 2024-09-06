@@ -28,25 +28,25 @@ public class SongPlayer : AudioPlayer
     {
         AudioFinished += OnAudioFinished;
 
-        mainScene = GetNode2<MainScene>("/root");
+        mainScene = GetNode<MainScene>("/root");
 
         base.Start();
     }
 
     public override void Ready()
     {
-        pauseOrResumeButton = GetNode<Button>("BottomSection/PauseOrResumeButton");
+        pauseOrResumeButton = GetNode1000<Button>("BottomSection/PauseOrResumeButton");
 
-        slider = GetNode2<HorizontalSlider>("/root/BottomSection/AudioSlider");
+        slider = GetNode<HorizontalSlider>("/root/BottomSection/AudioSlider");
         slider.Released += OnAudioSliderReleased;
 
-        var volumeSlider = GetNode2<HorizontalSlider>("/root/BottomSection/VolumeSlider");
+        var volumeSlider = GetNode<HorizontalSlider>("/root/BottomSection/VolumeSlider");
         volumeSlider.PercentageChanged += OnVolumeSliderPercentageChanged;
 
-        var pitchSlider = GetNode2<HorizontalSlider>("/root/BottomSection/PitchSlider");
+        var pitchSlider = GetNode<HorizontalSlider>("/root/BottomSection/PitchSlider");
         pitchSlider.PercentageChanged += OnPitchSliderPercentageChanged;
 
-        currentSongDisplayer = GetNode2<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
+        currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
 
         base.Ready();
     }

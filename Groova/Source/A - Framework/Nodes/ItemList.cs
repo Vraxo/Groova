@@ -65,16 +65,16 @@ public class ItemList : ClickableRectangle
 
                 slider.ExternalValue = StartingIndex;
             }
-        });
+        }, "Slider");
     }
 
     public override void Start()
     {
-        Slider = GetChild<VerticalSlider>();
+        Slider = GetNode<VerticalSlider>("Slider");
         Slider.PercentageChanged += OnSliderValueChanged;
         Slider.Layer = Layer + 1;
-        Slider.GetChild<Button>("DecrementButton").Layer = Layer + 1;
-        Slider.GetChild<Button>("IncrementButton").Layer = Layer + 1;
+        Slider.GetNode<Button>("DecrementButton").Layer = Layer + 1;
+        Slider.GetNode<Button>("IncrementButton").Layer = Layer + 1;
 
         UpdateList(StartingIndex);
 

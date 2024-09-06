@@ -8,9 +8,9 @@ public class SearchItemList : BaseItemItemList
     {
         base.Start();
 
-        playlistContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
+        playlistContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer");
 
-        var textBox = GetNode2<TextBox>("/root/TopSection/SearchBar");
+        var textBox = GetNode<TextBox>("/root/TopSection/SearchBar");
         textBox.TextChanged += OnSearchBarTextChanged;
         Search(textBox.Text);
     }

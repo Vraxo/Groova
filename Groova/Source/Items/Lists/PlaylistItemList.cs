@@ -6,7 +6,7 @@ public class PlaylistItemList : BaseItemItemList
     {
         base.Start();
 
-        var playlistContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer"); 
+        var playlistContainer = GetNode<PlaylistContainer>("/root/PlaylistContainer"); 
 
         foreach (Playlist playlist in playlistContainer.Playlists)
         {

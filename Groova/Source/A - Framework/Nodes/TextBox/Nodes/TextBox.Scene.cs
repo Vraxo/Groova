@@ -10,6 +10,6 @@ public partial class TextBox : ClickableRectangle
 
         AddChild(new TextBoxPlaceholderText());
 
-        AddChild(new TextBoxCaret());
+        AddChild(new TextBoxCaret(), "Caret");
     }
 }

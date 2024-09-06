@@ -10,13 +10,13 @@ public partial class CurrentSongDisplayer : Node2D
 
     public override void Start()
     {
-        image = GetNode2<TexturedRectangle>("Image");
-        label = GetNode2<Label>("SongName");
+        image = GetNode<TexturedRectangle>("Image");
+        label = GetNode<Label>("SongName");
 
-        Button = GetNode2<Button>("ReplayModeButton");
+        Button = GetNode<Button>("ReplayModeButton");
         Button.LeftClicked += OnButtonLeftClicked;
 
-        mainScene = GetNode2<MainScene>("/root");
+        mainScene = GetNode<MainScene>("/root");
 
         base.Start();
     }
@@ -47,7 +47,7 @@ public partial class CurrentSongDisplayer : Node2D
 
     private void SwitchReplayMode()
     {
-        var songPlayer = GetNode<SongPlayer>("SongPlayer");
+        var songPlayer = GetNode1000<SongPlayer>("SongPlayer");
 
         string replayMode = "Stop";
 

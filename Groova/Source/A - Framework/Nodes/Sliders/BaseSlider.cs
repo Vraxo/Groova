@@ -62,11 +62,11 @@ public abstract class BaseSlider : ClickableRectangle
 
     public override void Start()
     {
-        Grabber = GetChild<BaseGrabber>("Grabber");
+        Grabber = GetNode<BaseGrabber>("Grabber");
         Grabber.Layer = Layer;
 
-        var decrementButton = GetChild<Button>("DecrementButton");
-        var incrementButton = GetChild<Button>("IncrementButton");
+        var decrementButton = GetNode<Button>("DecrementButton");
+        var incrementButton = GetNode<Button>("IncrementButton");
 
         if (!HasButtons)
         {

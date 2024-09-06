@@ -9,13 +9,13 @@ public partial class BottomSection : Node2D
 
     public override void Start()
     {
-        pauseOrResumeButton = GetNode2<Button>("PauseOrResumeButton");
+        pauseOrResumeButton = GetNode<Button>("PauseOrResumeButton");
         pauseOrResumeButton.LeftClicked += OnPauseOrResumeButtonLeftClicked;
 
-        songPlayer = GetNode2<SongPlayer>("/root/SongPlayer");
+        songPlayer = GetNode<SongPlayer>("/root/SongPlayer");
 
-        timePlayedLabel = GetNode2<Label>("TimePlayedLabel");
-        totalTimeLabel = GetNode2<Label>("TotalTimeLabel");
+        timePlayedLabel = GetNode<Label>("TimePlayedLabel");
+        totalTimeLabel = GetNode<Label>("TotalTimeLabel");
     }
 
     public override void Update()
@@ -29,15 +29,15 @@ public partial class BottomSection : Node2D
     {
         pauseOrResumeButton.Text = ">";
 
-        var audioSlider = GetNode2<HorizontalSlider>("AudioSlider");
+        var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
         audioSlider.Percentage = settings.Timestamp;
         audioSlider.InitialPercentage = settings.Timestamp;
 
-        var pitchSlider = GetNode2<HorizontalSlider>("PitchSlider");
+        var pitchSlider = GetNode<HorizontalSlider>("PitchSlider");
         pitchSlider.Percentage = settings.Pitch;
         pitchSlider.InitialPercentage = settings.Pitch;
 
-        var volumeSlider = GetNode2<HorizontalSlider>("VolumeSlider");
+        var volumeSlider = GetNode<HorizontalSlider>("VolumeSlider");
         volumeSlider.Percentage = settings.Volume;
         volumeSlider.InitialPercentage = settings.Volume;
 
