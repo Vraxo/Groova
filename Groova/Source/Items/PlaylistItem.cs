@@ -13,7 +13,7 @@ public partial class PlaylistItem : BaseItem
 
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
-        GetNode<MainScene>("/root").LoadSongs(Playlist);
+        GetNode2<MainScene>("/root").LoadSongs(Playlist);
     }
 
     protected override void OnButtonRightClicked(object? sender, EventArgs e)

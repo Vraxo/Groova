@@ -40,6 +40,6 @@ public abstract partial class BaseItem : Node2D
         AddChild(new TexturedRectangle
         {
             Position = new(24, 20),
-        });
+        }, "Image");
     }
 }

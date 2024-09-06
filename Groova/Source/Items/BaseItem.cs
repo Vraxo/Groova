@@ -8,18 +8,17 @@ public abstract partial class BaseItem : Node2D
 
     public override void Start()
     {
-        var button = GetChild<Button>();
-        //Button.OriginalText = Text;
+        var button = GetNode2<Button>("Button");
         button.Text = Text;
         button.LeftClicked += OnButtonLeftClicked;
         button.RightClicked += OnButtonRightClicked;
 
-        var imageButton = GetChild<Button>("ImageButton");
+        var imageButton = GetNode2<Button>("ImageButton");
         imageButton.LeftClicked += OnImageButtonLeftClicked;
         imageButton.RightClicked += OnImageButtonRightClicked;
 
-        image = GetChild<TexturedRectangle>();
-        playlistsContainer = GetNode<PlaylistContainer>("PlaylistContainer");
+        image = GetNode2<TexturedRectangle>("Image");
+        playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
     }
 
     protected abstract void OnButtonLeftClicked(object? sender, EventArgs e);
