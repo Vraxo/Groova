@@ -73,6 +73,7 @@ public partial class MainScene : Node
         Searching = false;
 
         GetChild<SearchItemList>()?.Destroy();
+        GetNode2<TextBox>("TopSection/SearchBar").Text = "";
 
         if (InPlaylists)
         {
