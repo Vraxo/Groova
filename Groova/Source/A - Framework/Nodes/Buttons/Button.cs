@@ -380,7 +380,7 @@ public class Button : ClickableRectangle
             1
         );
 
-        // Calculate the center of the button
+        // Calculate the center of the Button
         Vector2 center = Size / 2;
 
         // Determine the alignment adjustment based on the TextOrigin

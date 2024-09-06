@@ -9,7 +9,7 @@ public abstract partial class BaseItem : Node2D
     public override void Start()
     {
         var button = GetChild<Button>();
-        //button.OriginalText = Text;
+        //Button.OriginalText = Text;
         button.Text = Text;
         button.LeftClicked += OnButtonLeftClicked;
         button.RightClicked += OnButtonRightClicked;

@@ -21,7 +21,7 @@ public class SongPlayer : AudioPlayer
         }
     }
 
-    public string State = "Stop";
+    public string ReplayMode = "Stop";
 
     private HorizontalSlider slider;
     private CurrentSongDisplayer currentSongDisplayer;
@@ -72,7 +72,7 @@ public class SongPlayer : AudioPlayer
     {
         slider.Percentage = 0;
 
-        switch (State)
+        switch (ReplayMode)
         {
             case "Stop":
                 pauseOrResumeButton.Text = ">";

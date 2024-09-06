@@ -2,17 +2,21 @@
 
 public partial class CurrentSongDisplayer : Node2D
 {
+    public Button Button;
+
     private Label label;
     private TexturedRectangle image;
-    private Button button;
+    private MainScene mainScene;
 
     public override void Start()
     {
         image = GetChild<TexturedRectangle>();
         label = GetChild<Label>();
 
-        button = GetChild<Button>();
-        button.LeftClicked += OnButtonLeftClicked;
+        Button = GetChild<Button>();
+        Button.LeftClicked += OnButtonLeftClicked;
+
+        mainScene = GetNode<MainScene>("");
 
         base.Start();
     }
@@ -45,28 +49,31 @@ public partial class CurrentSongDisplayer : Node2D
     {
         var songPlayer = GetNode<SongPlayer>("SongPlayer");
 
-        string state = "Stop";
+        string replayMode = "Stop";
 
-        switch (button.Text)
+        switch (Button.Text)
         {
             case "Stop":
-                state = "Repeat";
+                replayMode = "Repeat";
                 break;
 
             case "Repeat":
-                state = "Loop";
+                replayMode = "Loop";
                 break;
 
             case "Loop":
-                state = "Shuffle";
+                replayMode = "Shuffle";
                 break;
 
             case "Shuffle":
-                state = "Stop";
+                replayMode = "Stop";
                 break;
         }
 
-        button.Text = state;
-        songPlayer.State = state;
+        Button.Text = replayMode;
+        songPlayer.ReplayMode = replayMode;
+
+        mainScene.Settings.ReplayMode = replayMode;
+        mainScene.SaveSettings();
     }
 }

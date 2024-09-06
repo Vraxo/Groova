@@ -7,4 +7,5 @@ public class Settings
     public float Timestamp { get; set; } = 0;
     public float Pitch { get; set; } = 0.5f;
     public float Volume { get; set; } = 1f;
+    public string ReplayMode { get; set; } = "Stop";
 }

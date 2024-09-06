@@ -98,23 +98,23 @@
 //            Size = new(Size.X, Size.X),
 //            Origin = new(Size.X / 2, 0),
 //            OriginPreset = OriginPreset.TopCenter,
-//            OnUpdate = (button) =>
+//            OnUpdate = (Button) =>
 //            {
-//                if (button.PressedLeft)
+//                if (Button.PressedLeft)
 //                {
-//                    button.Position.Y = Raylib.GetMousePosition().Y - button.Size.Y;
+//                    Button.Position.Y = Raylib.GetMousePosition().Y - Button.Size.Y;
 //                }
 //
-//                float maxY = Size.Y - button.Size.Y;
+//                float maxY = Size.Y - Button.Size.Y;
 //
-//                if (button.Position.Y > maxY)
+//                if (Button.Position.Y > maxY)
 //                {
-//                    button.Position.Y = maxY;
+//                    Button.Position.Y = maxY;
 //                }
 //
-//                if (button.Position.Y < 0)
+//                if (Button.Position.Y < 0)
 //                {
-//                    button.Position.Y = 0;
+//                    Button.Position.Y = 0;
 //                }
 //            }
 //        };

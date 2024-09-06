@@ -105,6 +105,11 @@ public partial class MainScene : Node
             Settings = JsonSerializer.Deserialize<Settings>(jsonString) ??
                        new();
 
+            var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+            currentSongDisplayer.Button.Text = Settings.ReplayMode;
+
+            SongPlayer.ReplayMode = Settings.ReplayMode;
+
             var bottomSection = GetChild<BottomSection>();
             bottomSection.LoadSettings(Settings);
 
