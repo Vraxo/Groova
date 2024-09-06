@@ -4,13 +4,14 @@ namespace Groova;
 
 public class Button : ClickableRectangle
 {
-    public string Text { get; set; } = "";
     public Vector2 TextPadding { get; set; } = Vector2.Zero;
     public Vector2 TextOrigin { get; set; } = Vector2.Zero;
     public OriginPreset TextOriginPreset { get; set; } = OriginPreset.Center;
     public ButtonStyle Style { get; set; } = new();
     public bool PressedLeft { get; set; } = false;
     public bool PressedRight { get; set; } = false;
+    public bool LimitText { get; set; } = false;
+    public float AvailableWidth { get; set; } = 0;
     public ButtonClickMode LeftClickMode { get; set; } = ButtonClickMode.Limitless;
     public ButtonClickMode RightClickMode { get; set; } = ButtonClickMode.Limitless;
     public Action<Button> OnUpdate = (button) => { };
@@ -19,6 +20,19 @@ public class Button : ClickableRectangle
     public event EventHandler? RightClicked;
 
     private bool alreadyClicked = false;
+    private string displayedText = "";
+
+    private string _text = "";
+    public string Text
+    {
+        get => _text;
+
+        set
+        {
+            _text = value;
+            displayedText = value;
+        }
+    }
 
     public Button()
     {
@@ -28,9 +42,10 @@ public class Button : ClickableRectangle
     public override void Update()
     {
         OnUpdate(this);
+        LimitDisplayedText();
         UpdateTextOrigin();
-        Draw();
         HandleInput();
+        Draw();
         base.Update();
     }
 
@@ -324,7 +339,7 @@ public class Button : ClickableRectangle
     {
         Raylib.DrawTextEx(
             Style.Current.Font, 
-            Text, 
+            displayedText, 
             GetTextPosition(), 
             Style.Current.FontSize, 
             1, 
@@ -376,5 +391,56 @@ public class Button : ClickableRectangle
 
         // Calculate the Text position based on the alignment and origin
         return GlobalPosition + TextOrigin + alignmentAdjustment - Origin + TextPadding;
+    }
+
+    // Text limitation
+
+    private void LimitDisplayedText()
+    {
+        if (!LimitText)
+        {
+            return;
+        }
+
+        float characterWidth = GetCharacterWidth();
+        int numFittingCharacters = (int)(AvailableWidth / characterWidth);
+
+        if (numFittingCharacters <= 0)
+        {
+            displayedText = "";
+        }
+        else if (numFittingCharacters < Text.Length)
+        {
+            string trimmedText = Text[..numFittingCharacters];
+            displayedText = ReplaceLastThreeWithDots(trimmedText);
+        }
+        else
+        {
+            displayedText = Text;
+        }
+    }
+
+    private float GetCharacterWidth()
+    {
+        float width = Raylib.MeasureTextEx(
+            Style.Current.Font,
+            " ",
+            Style.Current.FontSize,
+            1).X;
+
+        return width;
+    }
+
+    private static string ReplaceLastThreeWithDots(string input)
+    {
+        if (input.Length > 3)
+        {
+            string trimmedText = input[..^3];
+            return trimmedText + "...";
+        }
+        else
+        {
+            return input;
+        }
     }
 }

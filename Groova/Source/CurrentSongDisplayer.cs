@@ -17,7 +17,31 @@ public partial class CurrentSongDisplayer : Node2D
         base.Start();
     }
 
+    public override void Update()
+    {
+        UpdatePosition();
+        base.Update();
+    }
+
+    public void SetSong(Song song)
+    {
+        label.Text = song.GetName();
+        image.Load(song.ImagePath);
+    }
+
     private void OnButtonLeftClicked(object? sender, EventArgs e)
+    {
+        SwitchReplayMode();
+    }
+
+    private void UpdatePosition()
+    {
+        float x = Position.X;
+        float y = Window.Height - 110;
+        Position = new(x, y);
+    }
+
+    private void SwitchReplayMode()
     {
         var songPlayer = GetNode<SongPlayer>("SongPlayer");
 
@@ -44,18 +68,5 @@ public partial class CurrentSongDisplayer : Node2D
 
         button.Text = state;
         songPlayer.State = state;
-    }
-
-    public override void Update()
-    {
-        float x = Position.X;
-        float y = Window.Height - 110;
-        Position = new(x, y);
-    }
-
-    public void SetSong(Song song)
-    {
-        label.Text = song.GetName();
-        image.Load(song.ImagePath);
     }
 }

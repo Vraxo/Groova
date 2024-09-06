@@ -6,12 +6,16 @@ namespace Groova;
 public class SongPlayer : AudioPlayer
 {
     public Song Song;
+
+    private Playlist _playlist;
     public Playlist Playlist
     {
-        get => Playlist;
+        get => _playlist;
 
         set
         {
+            _playlist = value;
+
             mainScene.Settings.Playlist = value;
             mainScene.SaveSettings();
         }

@@ -5,15 +5,9 @@ because deactivated unshown items in ItemLists never
 run their Ready method and therefore don't get their
 click manager.
 
-Make padding in button style 
-to text origin for textbox
+Song player doesn't know playlist by default after loading
 
-Add a way to access window resolution 
-and delta time without raylib
-
-Screenshots are still being loaded
-
-
+Replay mode should be saved
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 

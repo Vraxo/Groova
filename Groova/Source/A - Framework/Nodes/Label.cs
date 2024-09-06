@@ -34,7 +34,7 @@ public class Label : Node2D
     {
         OnUpdate(this);
         UpdateSize();
-        UpdateLabel();
+        LimitDisplayedText();
         Draw();
         base.Update();
     }
@@ -64,7 +64,7 @@ public class Label : Node2D
             Color);
     }
 
-    private void UpdateLabel()
+    private void LimitDisplayedText()
     {
         if (!LimitText)
         {

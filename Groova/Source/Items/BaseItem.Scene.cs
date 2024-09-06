@@ -4,11 +4,12 @@ public abstract partial class BaseItem : Node2D
 {
     public override void Build()
     {
-        AddChild(new ItemButton
+        AddChild(new Button
         {
             Size = new(100, 40),
             OriginPreset = OriginPreset.TopLeft,
             TextOriginPreset = OriginPreset.CenterLeft,
+            LimitText = true,
             TextPadding = new(50, 0),
             Style = new()
             {
@@ -19,6 +20,8 @@ public abstract partial class BaseItem : Node2D
                 float width = Window.Width - 35;
                 float height = button.Size.Y;
                 button.Size = new(width, height);
+
+                button.AvailableWidth = button.Size.X - 100;
             }
         });
 
