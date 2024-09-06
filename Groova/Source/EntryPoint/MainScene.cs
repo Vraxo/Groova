@@ -11,10 +11,13 @@ public partial class MainScene : Node
     public Settings Settings = new();
 
     private readonly string settingsFilePath = "Resources/Settings.json";
+    private PlaylistContainer playlistContainer;
 
     public override void Ready()
     {
         SongPlayer = GetNode<SongPlayer>("SongPlayer");
+
+        playlistContainer = GetNode<PlaylistContainer>("PlaylistContainer");
 
         LoadPlaylists();
         LoadSettings();
@@ -110,21 +113,30 @@ public partial class MainScene : Node
         currentSongDisplayer.Button.Text = Settings.ReplayMode;
         SongPlayer.ReplayMode = Settings.ReplayMode;
 
-        var bottomSection = GetNode<BottomSection>();
-        bottomSection.LoadSettings(Settings);
+        bool setAudioSlider = false;
 
-        if (Settings.Playlist != null)
+        if (Settings.Playlist != null && playlistContainer.PlaylistExists(Settings.Playlist))
         {
-            LoadSongs(Settings.Playlist);
+            Playlist playlist = playlistContainer.GetPlaylist(Settings.Playlist);
 
-            if (Settings.Song != null)
+            LoadSongs(playlist);
+
+            if (Settings.Song != null && playlistContainer.SongExists(Settings.Playlist, Settings.Song))
             {
-                GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer").SetSong(Settings.Song);
-                SongPlayer.Load(Settings.Song.FilePath);
+                Song song = playlistContainer.GetSong(playlist.Name, Settings.Song);
+
+                GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer").SetSong(song);
+
+                SongPlayer.Load(song.FilePath);
                 SongPlayer.Play();
                 SongPlayer.Seek(Settings.Timestamp * SongPlayer.AudioLength);
                 SongPlayer.Pause();
+
+                setAudioSlider = true;
             }
         }
+
+        var bottomSection = GetNode<BottomSection>();
+        bottomSection.LoadSettings(Settings, setAudioSlider);
     }
 }

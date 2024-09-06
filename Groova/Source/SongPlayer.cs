@@ -19,7 +19,7 @@ public class SongPlayer : AudioPlayer
         {
             _playlist = value;
 
-            mainScene.Settings.Playlist = value;
+            mainScene.Settings.Playlist = value.Name;
             mainScene.SaveSettings();
         }
     }
@@ -167,7 +167,7 @@ public class SongPlayer : AudioPlayer
 
         Song = song;
 
-        mainScene.Settings.Song = Song;
+        mainScene.Settings.Song = Song.FilePath;
         mainScene.SaveSettings();
     }
 }

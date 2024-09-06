@@ -25,13 +25,16 @@ public partial class BottomSection : Node2D
         base.Update();
     }
 
-    public void LoadSettings(Settings settings)
+    public void LoadSettings(Settings settings, bool setAudioSlider)
     {
         pauseOrResumeButton.Text = ">";
 
-        var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
-        audioSlider.Percentage = settings.Timestamp;
-        audioSlider.InitialPercentage = settings.Timestamp;
+        if (setAudioSlider)
+        {
+            var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
+            audioSlider.Percentage = settings.Timestamp;
+            audioSlider.InitialPercentage = settings.Timestamp;
+        }
 
         var pitchSlider = GetNode<HorizontalSlider>("PitchSlider");
         pitchSlider.Percentage = settings.Pitch;

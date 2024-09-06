@@ -102,6 +102,44 @@ public class PlaylistContainer : Node
         }
     }
 
+    public bool PlaylistExists(string name)
+    {
+        return Playlists.Any(p => p.Name == name);
+    }
+
+    public bool SongExists(string playlistName, string songFilePath)
+    {
+        // Find the playlist by name
+        var playlist = Playlists.FirstOrDefault(p => p.Name == playlistName);
+
+        // If the playlist exists, check if the song exists within it
+        if (playlist != null)
+        {
+            return playlist.Songs.Any(s => s.FilePath == songFilePath);
+        }
+
+        // Return false if the playlist doesn't exist
+        return false;
+    }
+
+    public Playlist GetPlaylist(string name)
+    {
+        // Return the first matching playlist, or null if not found
+        return Playlists.FirstOrDefault(p => p.Name == name);
+    }
+
+    public Song GetSong(string playlistName, string songFilePath)
+    {
+        Playlist playlist = GetPlaylist(playlistName);
+
+        if (playlist != null)
+        {
+            return playlist.Songs.FirstOrDefault(s => s.FilePath == songFilePath);
+        }
+
+        return null;
+    }
+
     private static string PadNumbers(string input)
     {
         return Regex.Replace(input, "[0-9]+", match => match.Value.PadLeft(10, '0'));
