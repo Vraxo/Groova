@@ -4,15 +4,7 @@ public partial class BottomSection : Node2D
 {
     public override void Build()
     {
-        AddChild(new CurrentSongDisplayer()
-        {
-            OnUpdate = (rectangle) =>
-            {
-                float x = rectangle.Position.X;
-                float y = Window.Height - 110;
-                rectangle.Position = new(x, y);
-            }
-        });
+        AddChild(new CurrentSongDisplayer());
 
         AddChild(new Button
         {

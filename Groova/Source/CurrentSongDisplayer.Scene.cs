@@ -12,6 +12,11 @@ public partial class CurrentSongDisplayer : Node2D
         AddChild(new Label
         {
             Position = new(8+32+10, 25),
+            LimitText = true,
+            OnUpdate = (label) =>
+            {
+                label.AvailableWidth = Window.Width - 210;
+            }
         });
 
         AddChild(new Button
