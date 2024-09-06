@@ -18,7 +18,6 @@ public class SearchItemList : BaseItemItemList
     private void OnSearchBarTextChanged(object? sender, string e)
     {
         Search(e.ToLower());
-        Console.WriteLine("searching for " + e);
     }
 
     private void Search(string text)

@@ -7,13 +7,14 @@ public partial class TopSection : Node2D
 
     public override void Start()
     {
-        mainScene = Parent as MainScene;
-        playlistsContainer = GetNode<PlaylistContainer>();
+        mainScene = GetParent<MainScene>();
 
-        GetChild<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
-        GetChild<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
-        GetChild<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
-        GetChild<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
+        playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
+
+        GetNode2<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
+        GetNode2<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
+        GetNode2<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
+        GetNode2<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)

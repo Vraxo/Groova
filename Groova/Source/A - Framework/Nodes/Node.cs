@@ -305,5 +305,4 @@ public class Node
             return currentNode as T;
         }
     }
-
 }

@@ -1,11 +1,15 @@
-﻿using Raylib_cs;
-using System.Drawing.Design;
-
-namespace Groova;
+﻿namespace Groova;
 
 public class SongPlayer : AudioPlayer
 {
     public Song Song;
+
+    public string ReplayMode = "Stop";
+
+    private HorizontalSlider slider;
+    private CurrentSongDisplayer currentSongDisplayer;
+    private MainScene mainScene;
+    private Button pauseOrResumeButton;
 
     private Playlist _playlist;
     public Playlist Playlist
@@ -20,13 +24,6 @@ public class SongPlayer : AudioPlayer
             mainScene.SaveSettings();
         }
     }
-
-    public string ReplayMode = "Stop";
-
-    private HorizontalSlider slider;
-    private CurrentSongDisplayer currentSongDisplayer;
-    private MainScene mainScene;
-    private Button pauseOrResumeButton;
 
     public override void Start()
     {
