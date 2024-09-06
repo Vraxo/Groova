@@ -4,7 +4,7 @@ public class ButtonStyle
 {
     public ButtonStyle()
     {
-        Roundness = 0.5F;
+        Roundness = 1F;
         OutlineThickness = 1;
         Current = Default;
     }

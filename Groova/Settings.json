@@ -1,0 +1,20 @@
+{
+  "Playlist": {
+    "Name": "ok",
+    "ImagePath": null,
+    "Songs": [
+      {
+        "FilePath": "D:\\Parsa Stuff\\Music\\Push It To The Limit - Instrumental.mp3",
+        "ImagePath": null
+      }
+    ]
+  },
+  "Song": {
+    "FilePath": "D:\\Parsa Stuff\\Music\\Push It To The Limit - Instrumental.mp3",
+    "ImagePath": null
+  },
+  "Timestamp": 0.69188994,
+  "Pitch": 0.84166664,
+  "Volume": 1,
+  "ReplayMode": "Loop"
+}

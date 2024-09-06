@@ -7,7 +7,7 @@ public partial class CurrentSongDisplayer : Node2D
         AddChild(new TexturedRectangle
         {
             Position = new(24, 24),
-        });
+        }, "Image");
 
         AddChild(new Label
         {

@@ -16,8 +16,8 @@ public partial class MainScene : Node
     public override void Ready()
     {
         SongPlayer = GetChild<SongPlayer>();
-        topSection = GetChild<TopSection>();
-        playlistsContainer = GetChild<PlaylistContainer>();
+        //topSection = GetChild<TopSection>();
+        //playlistsContainer = GetChild<PlaylistContainer>();
 
         LoadPlaylists();
         LoadSettings();

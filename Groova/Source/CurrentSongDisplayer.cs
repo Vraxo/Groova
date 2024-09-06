@@ -10,13 +10,14 @@ public partial class CurrentSongDisplayer : Node2D
 
     public override void Start()
     {
-        image = GetChild<TexturedRectangle>();
+        //image = GetChild<TexturedRectangle>();
+        image = GetNode2<TexturedRectangle>("Image");
         label = GetChild<Label>();
 
         Button = GetChild<Button>();
         Button.LeftClicked += OnButtonLeftClicked;
 
-        mainScene = GetNode<MainScene>("");
+        mainScene = GetNode2<MainScene>("/root");
 
         base.Start();
     }

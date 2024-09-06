@@ -249,34 +249,61 @@ public class Node
 
     public T? GetNode2<T>(string path) where T : Node
     {
-        Node startNode = this;
+        if (string.IsNullOrEmpty(path))
+        {
+            return null;
+        }
 
-        // Check if path starts with "/root"
+        // Handle absolute path starting with /root
         if (path.StartsWith("/root"))
         {
-            startNode = RootNode;
-            path = path.Substring(6); // Remove "/root/" from the beginning of the path
-        }
+            path = path.Substring("/root".Length);
+            Node currentNode = Program.RootNode;
 
-        // Split the path into node names
-        string[] nodeNames = path.Split('/');
-
-        Node currentNode = startNode;
-
-        // Traverse the hierarchy based on the path
-        for (int i = 0; i < nodeNames.Length; i++)
-        {
-            currentNode = currentNode.GetChild(nodeNames[i]);
-
-            // If a node is not found, return null
-            if (currentNode == null)
+            // Remove leading slash for absolute paths
+            if (path.StartsWith("/"))
             {
-                return null;
+                path = path.Substring(1);
             }
-        }
 
-        // Return the final node as the desired type
-        return currentNode as T;
+            // Traverse the path
+            if (!string.IsNullOrEmpty(path))
+            {
+                string[] nodeNames = path.Split('/');
+                foreach (var name in nodeNames)
+                {
+                    currentNode = currentNode.GetChild(name);
+                    if (currentNode == null)
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            return currentNode as T;
+        }
+        else
+        {
+            // Handle relative path
+            Node currentNode = this;
+
+            string[] nodeNames = path.Split('/');
+            foreach (var name in nodeNames)
+            {
+                if (name == "")
+                {
+                    return (currentNode as T);
+                }
+
+                currentNode = currentNode.GetChild(name);
+                if (currentNode == null)
+                {
+                    return null;
+                }
+            }
+
+            return currentNode as T;
+        }
     }
 
 }
