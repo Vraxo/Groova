@@ -10,14 +10,11 @@ public partial class MainScene : Node
     public SongPlayer SongPlayer;
     public Settings Settings = new();
 
-    private PlaylistContainer playlistsContainer;
-    private TopSection topSection;
+    private readonly string settingsFilePath = "Resources/Settings.json";
 
     public override void Ready()
     {
-        SongPlayer = GetChild<SongPlayer>();
-        //topSection = GetChild<TopSection>();
-        //playlistsContainer = GetChild<PlaylistContainer>();
+        SongPlayer = GetNode2<SongPlayer>("SongPlayer");
 
         LoadPlaylists();
         LoadSettings();
@@ -27,10 +24,12 @@ public partial class MainScene : Node
     {
         InPlaylists = true;
 
-        GetChild<ItemList>("SongItemList")?.Destroy();
-        GetChild<SearchItemList>()?.Destroy();
+        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
 
-        var playlistsItemList = GetChild<PlaylistItemList>();
+        GetNode2<ItemList>("SongItemList")?.Destroy();
+        GetNode2<SearchItemList>("SearchItemList")?.Destroy();
+
+        var playlistsItemList = GetNode2<PlaylistItemList>("PlaylistItemList");
         playlistsItemList?.Destroy();
 
         PlaylistItemList playlistItemList = new();
@@ -43,11 +42,11 @@ public partial class MainScene : Node
         CurrentPlaylist = playlist;
         SongPlayer.Playlist = playlist;
 
-        GetChild<ItemList>("SongItemList")?.Destroy();
-        GetChild<ItemList>("PlaylistItemList")?.Destroy();
-        GetChild<SearchItemList>()?.Destroy();
+        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
 
-        GetNode<TextBox>("TopSection/SearchBar").Text = "";
+        GetNode2<ItemList>("SongItemList")?.Destroy();
+        GetNode2<ItemList>("PlaylistItemList")?.Destroy();
+        GetNode2<SearchItemList>("SearchItemList")?.Destroy();
 
         SongItemList songItemList = new()
         {
@@ -61,8 +60,8 @@ public partial class MainScene : Node
     {
         Searching = true;
 
-        GetChild<ItemList>("SongItemList")?.Destroy();
-        GetChild<ItemList>("PlaylistItemList")?.Destroy();
+        GetNode2<ItemList>("SongItemList")?.Destroy();
+        GetNode2<ItemList>("PlaylistItemList")?.Destroy();
 
         SearchItemList searchItemList = new();
         AddChild(searchItemList);
@@ -73,7 +72,7 @@ public partial class MainScene : Node
         Searching = false;
 
         GetChild<SearchItemList>()?.Destroy();
-        GetNode2<TextBox>("TopSection/SearchBar").Text = "";
+        GetNode2<TextBox>("/root/TopSection/SearchBar").Text = "";
 
         if (InPlaylists)
         {
@@ -94,13 +93,11 @@ public partial class MainScene : Node
 
         string jsonString = JsonSerializer.Serialize(Settings, options);
 
-        File.WriteAllText("Resources/Settings.json", jsonString);
+        File.WriteAllText(settingsFilePath, jsonString);
     }
 
     private void LoadSettings()
     {
-        const string settingsFilePath = "Resources/Settings.json";
-
         if (!File.Exists(settingsFilePath))
         {
             return;
@@ -109,7 +106,7 @@ public partial class MainScene : Node
         string jsonString = File.ReadAllText(settingsFilePath);
         Settings = JsonSerializer.Deserialize<Settings>(jsonString) ?? new();
 
-        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+        var currentSongDisplayer = GetNode2<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.Button.Text = Settings.ReplayMode;
         SongPlayer.ReplayMode = Settings.ReplayMode;
 
