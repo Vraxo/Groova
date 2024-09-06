@@ -12,9 +12,9 @@ public class DeletePlaylistDialog : ConfirmDialog
 
     protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>();
+        var playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
         playlistsContainer.RemovePlaylist(Playlist);
-        GetNode<MainScene>("").LoadPlaylists(); ;
+        GetNode2<MainScene>("/root").LoadPlaylists();
 
         Close();
     }
@@ -24,7 +24,7 @@ public class DeletePlaylistDialog : ConfirmDialog
         string songName = Path.GetFileNameWithoutExtension(Playlist.Name);
         string truncatedSongName = TruncateSongName(songName);
 
-        GetChild<Label>().Text = $"Delete '{truncatedSongName}'?";
+        GetNode2<Label>("Label").Text = $"Delete '{truncatedSongName}'?";
     }
 
     private static string TruncateSongName(string songName)

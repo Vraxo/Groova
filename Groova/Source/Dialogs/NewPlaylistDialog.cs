@@ -4,20 +4,20 @@ public partial class NewPlaylistDialog : Dialog
 {
     public override void Start()
     {
-        GetChild<Label>().Text = "Enter playlist name:";
-        GetChild<TextBox>().Confirmed += OnTextBoxConfirmed;
+        GetNode2<Label>().Text = "Enter playlist name:";
+        GetNode2<TextBox>().Confirmed += OnTextBoxConfirmed;
         base.Start();
     }
     
     private void OnTextBoxConfirmed(object? sender, string e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>("PlaylistContainer");
+        var playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
 
         foreach (Playlist playlist in playlistsContainer.Playlists)
         {
             if (playlist.Name == e)
             {
-                GetChild<Label>("ErrorLabel").Visible = true;
+                GetNode<Label>("ErrorLabel").Visible = true;
                 return;
             }
         }

@@ -13,9 +13,9 @@ public class DeleteSongDialog : ConfirmDialog
 
     protected override void OnConfirmButtonLeftClicked(object? sender, EventArgs e)
     {
-        var playlistsContainer = GetNode<PlaylistContainer>();
+        var playlistsContainer = GetNode2<PlaylistContainer>("/root/PlaylistContainer");
         playlistsContainer.RemoveSong(Playlist, Song);
-        GetNode<MainScene>("").LoadSongs(Playlist);
+        GetNode2<MainScene>("/root").LoadSongs(Playlist);
 
         Close();
     }
