@@ -4,8 +4,8 @@ public partial class NewPlaylistDialog : Dialog
 {
     public override void Start()
     {
-        GetNode2<Label>().Text = "Enter playlist name:";
-        GetNode2<TextBox>().Confirmed += OnTextBoxConfirmed;
+        GetNode2<Label>("Message").Text = "Enter playlist name:";
+        GetNode2<TextBox>("TextBox").Confirmed += OnTextBoxConfirmed;
         base.Start();
     }
     
@@ -17,13 +17,13 @@ public partial class NewPlaylistDialog : Dialog
         {
             if (playlist.Name == e)
             {
-                GetNode<Label>("ErrorLabel").Visible = true;
+                GetNode2<Label>("ErrorLabel").Visible = true;
                 return;
             }
         }
 
         playlistsContainer.AddPlaylist(e);
-        GetNode<MainScene>("").LoadPlaylists();
+        GetNode2<MainScene>("/root").LoadPlaylists();
         Close();
     }
 }

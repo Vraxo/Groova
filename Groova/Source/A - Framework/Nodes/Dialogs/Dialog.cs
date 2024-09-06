@@ -1,14 +1,12 @@
-﻿using Raylib_cs;
-
-namespace Groova;
+﻿namespace Groova;
 
 public partial class Dialog : Node2D
 {
     public override void Start()
     {
-        Origin = GetChild<ColoredRectangle>().Size / 2;
-        GetNode<ClickManager>().MinLayer = ClickableLayer.DialogButtons;
-        GetChild<Button>("CloseButton").LeftClicked += OnCloseButtonLeftClicked;
+        Origin = GetNode2<ColoredRectangle>("Background").Size / 2;
+        GetNode2<ClickManager>("/root/ClickManager").MinLayer = ClickableLayer.DialogButtons;
+        GetNode2<Button>("CloseButton").LeftClicked += OnCloseButtonLeftClicked;
     }
 
     public override void Update()

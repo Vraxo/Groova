@@ -8,7 +8,7 @@ public partial class Dialog : Node2D
         {
             Size = new(300, 150),
             InheritsOrigin = true
-        });
+        }, "Background");
 
         AddChild(new Button
         {
@@ -33,6 +33,6 @@ public partial class Dialog : Node2D
         {
             Position = new(10, 50),
             InheritsOrigin = true,
-        });
+        }, "Message");
     }
 }
