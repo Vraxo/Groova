@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Text.Json;
+﻿using System.Text.Json;
 
 namespace Groova;
 
@@ -21,7 +20,7 @@ public partial class MainScene : Node
         playlistsContainer = GetChild<PlaylistContainer>();
 
         LoadPlaylists();
-        LoadSettings(); // Load settings when the scene starts
+        LoadSettings();
     }
 
     public void LoadPlaylists()
@@ -98,40 +97,33 @@ public partial class MainScene : Node
 
     private void LoadSettings()
     {
-        if (File.Exists("Resources/Settings.json"))
+        const string settingsFilePath = "Resources/Settings.json";
+
+        if (!File.Exists(settingsFilePath))
+            return;
+
+        string jsonString = File.ReadAllText(settingsFilePath);
+        Settings = JsonSerializer.Deserialize<Settings>(jsonString) ?? new();
+
+        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
+        currentSongDisplayer.Button.Text = Settings.ReplayMode;
+        SongPlayer.ReplayMode = Settings.ReplayMode;
+
+        var bottomSection = GetChild<BottomSection>();
+        bottomSection.LoadSettings(Settings);
+
+        if (Settings.Playlist != null)
         {
-            string jsonString = File.ReadAllText("Resources/Settings.json");
-
-            Settings = JsonSerializer.Deserialize<Settings>(jsonString) ??
-                       new();
-
-            var currentSongDisplayer = GetNode<CurrentSongDisplayer>("BottomSection/CurrentSongDisplayer");
-            currentSongDisplayer.Button.Text = Settings.ReplayMode;
-
-            SongPlayer.ReplayMode = Settings.ReplayMode;
-
-            var bottomSection = GetChild<BottomSection>();
-            bottomSection.LoadSettings(Settings);
-
-            if (Settings.Playlist is null)
-            {
-                return;
-            }
-
             LoadSongs(Settings.Playlist);
-        
-            if (Settings.Song is null)
+
+            if (Settings.Song != null)
             {
-                return;
+                bottomSection.GetChild<CurrentSongDisplayer>().SetSong(Settings.Song);
+                SongPlayer.Load(Settings.Song.FilePath);
+                SongPlayer.Play();
+                SongPlayer.Seek(Settings.Timestamp * SongPlayer.AudioLength);
+                SongPlayer.Pause();
             }
-
-            bottomSection.GetChild<CurrentSongDisplayer>().SetSong(Settings.Song);
-
-            SongPlayer.Load(Settings.Song.FilePath);
-
-            SongPlayer.Play();
-            SongPlayer.Seek(Settings.Timestamp * SongPlayer.AudioLength);
-            SongPlayer.Pause();
         }
     }
 }
