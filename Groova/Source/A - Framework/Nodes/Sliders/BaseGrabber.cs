@@ -13,7 +13,7 @@ public abstract class BaseGrabber : ClickableRectangle
 
     public BaseGrabber()
     {
-        Size = new(14, 14);
+        Size = new(18, 18);
         InheritPosition = false;
     }
 

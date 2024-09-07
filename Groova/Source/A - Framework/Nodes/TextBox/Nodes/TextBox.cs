@@ -35,8 +35,9 @@ public partial class TextBox : ClickableRectangle
 
     public override void Start()
     {
-        Style.Pressed.FillColor = new(34, 34, 34, 255);
-        Style.Pressed.OutlineColor = new(71, 114, 179, 255);
+        Style.Pressed.FillColor = new(68, 68, 68, 255);
+        Style.Pressed.OutlineThickness = 10;
+        Style.Pressed.OutlineColor = Theme.Instance.Accent;
 
         caret = GetNode<TextBoxCaret>("Caret");
 

@@ -4,9 +4,9 @@ public class ButtonStyle
 {
     public ButtonStyle()
     {
-        Roundness = 1F;
-        OutlineThickness = 0;
         Current = Default;
+        Roundness = 1F;
+        //OutlineThickness = 0;
     }
 
     public ButtonStateStyle Current { get; set; } = new();

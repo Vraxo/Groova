@@ -312,29 +312,6 @@ public class Button : ClickableRectangle
             Style.Current.FillColor);
     }
 
-    //private void DrawOutline()
-    //{
-    //    if (Style.Current.OutlineThickness < 0)
-    //    {
-    //        return;
-    //    }
-    //
-    //    for (int i = 0; i < Style.Current.OutlineThickness; i++)
-    //    {
-    //        Rectangle rectangle = new()
-    //        {
-    //            Position = GlobalPosition - Origin - new Vector2(i, i),
-    //            Size = new(Size.X + i + 0, Size.Y + i + 0)
-    //        };
-    //
-    //        Raylib.DrawRectangleRounded(
-    //            rectangle,
-    //            Style.Current.Roundness,
-    //            (int)Size.Y,
-    //            Style.Current.OutlineColor);
-    //    }
-    //}
-
     private void DrawOutline()
     {
         if (Style.Current.OutlineThickness <= 0)
@@ -376,6 +353,29 @@ public class Button : ClickableRectangle
             1, 
             Style.Current.TextColor);
     }
+
+    //private void DrawOutline()
+    //{
+    //    if (Style.Current.OutlineThickness < 0)
+    //    {
+    //        return;
+    //    }
+    //
+    //    for (int i = 0; i < Style.Current.OutlineThickness; i++)
+    //    {
+    //        Rectangle rectangle = new()
+    //        {
+    //            Position = GlobalPosition - Origin - new Vector2(i, i),
+    //            Size = new(Size.X + i + 0, Size.Y + i + 0)
+    //        };
+    //
+    //        Raylib.DrawRectangleRounded(
+    //            rectangle,
+    //            Style.Current.Roundness,
+    //            (int)Size.Y,
+    //            Style.Current.OutlineColor);
+    //    }
+    //}
 
     //private Vector2 GetTextPosition()
     //{

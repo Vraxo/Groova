@@ -8,7 +8,7 @@ public partial class BottomSection : Node2D
 
         AddChild(new Button
         {
-            Position = new(20, 20),
+            Position = new(25, 20),
             Size = new(32, 32),
             Text = ">",
             OnUpdate = (button) =>
