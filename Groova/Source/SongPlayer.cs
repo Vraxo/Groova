@@ -79,7 +79,7 @@ public class SongPlayer : AudioPlayer
                 break;
 
             case "Loop":
-                Loop();
+                DoLoop();
                 break;
 
             case "Shuffle":
@@ -125,7 +125,7 @@ public class SongPlayer : AudioPlayer
         mainScene.SaveSettings();
     }
 
-    private void Loop()
+    private void DoLoop()
     {
         int index = Playlist.Songs.IndexOf(Song) + 1;
 
