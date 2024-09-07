@@ -5,32 +5,17 @@ because deactivated unshown items in ItemLists never
 run their Ready method and therefore don't get their
 click manager.
 
-Song player doesn't know playlist by default after loading
 
-Replay mode should be saved
-
-* implement label limiting in dialogs
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 
-
-
-* when left & right click are both enabled on a button,
-  the button only changes color on pressed on right clicks.
-
+* add rapid deletion to textbox
 
 * horizontal slider button is one pixel high
 
 * make on update a universal thing
 
 * make horizontal slider work with origins
-
-* sync slider button with actual value
-
-* add rapid deletion to textbox
-
-* currently I think visiblity is not working properly
-  because it always goes back to true
 
 * clickable start needs to be called before adding children,
   otherwise the node itself will the last node and therefore

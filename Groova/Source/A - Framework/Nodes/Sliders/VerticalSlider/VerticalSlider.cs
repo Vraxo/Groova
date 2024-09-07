@@ -59,7 +59,7 @@ public partial class VerticalSlider : BaseSlider
 
     protected override void Draw()
     {
-        if (!Visible)
+        if (!(Visible && readyForVisibility))
         {
             return;
         }

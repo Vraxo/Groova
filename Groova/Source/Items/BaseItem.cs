@@ -11,6 +11,7 @@ public abstract partial class BaseItem : Node2D
         button.Text = Text;
         button.LeftClicked += OnButtonLeftClicked;
         button.RightClicked += OnButtonRightClicked;
+        button.Style.OutlineThickness = 0;
 
         var imageButton = GetNode<Button>("ImageButton");
         imageButton.LeftClicked += OnImageButtonLeftClicked;

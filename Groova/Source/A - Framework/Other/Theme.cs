@@ -2,11 +2,9 @@
 
 public class Theme
 {
-    public Color DefaultFill = new(84, 84, 84, 255);
-    //public FillColor DefaultFill = new(0, 0, 0, 255);
+    public Color DefaultFill = new(42, 42, 42, 255);
     public Color DefaultOutline = new(61, 61, 61, 255);
-    //public FillColor DefaultOutline = new(255, 255, 255, 255);
-    public Color HoverFill = new(101, 101, 101, 255);
+    public Color HoverFill = new(50, 50, 50, 255);
     public Color HoverOutline = new(71, 71, 71, 255);
     public Color Accent = new(71, 114, 179, 255);
     public Color PressedOutline = new(61, 61, 61, 255);

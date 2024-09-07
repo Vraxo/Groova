@@ -24,10 +24,10 @@ public abstract class Clickable : Node2D
 
     public override void Destroy()
     {
-        if (Active)
-        {
+        //if (Active)
+        //{
             clickManager.Remove(this);
-        }
+        //}
 
         base.Destroy();
     }

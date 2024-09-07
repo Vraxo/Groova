@@ -98,9 +98,7 @@ public abstract class BaseSlider : ClickableRectangle
         UpdatePercentage();
         HandleClicks();
         Draw();
-
         SetInitialPercentage();
-
         base.Update();
     }
 

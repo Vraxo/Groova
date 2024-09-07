@@ -4,8 +4,6 @@ namespace Groova;
 
 public abstract class BaseGrabber : ClickableRectangle
 {
-    public Vector2 TextOrigin = Vector2.Zero;
-    public string Text = "";
     public ButtonStyle Style = new();
     public bool Pressed = false;
     public Action<BaseGrabber> OnUpdate = (button) => { };
@@ -87,20 +85,20 @@ public abstract class BaseGrabber : ClickableRectangle
             return;
         }
 
-        float x = (float)Math.Round(GlobalPosition.X);
-        float y = (float)Math.Round(GlobalPosition.Y);
-
-        Vector2 temporaryPosition = new(x, y);
-
-        DrawOutline(temporaryPosition);
-        DrawInside(temporaryPosition);
+        DrawShape();
     }
 
-    private void DrawInside(Vector2 position)
+    private void DrawShape()
+    {
+        DrawOutline();
+        DrawInside();
+    }
+
+    private void DrawInside()
     {
         Rectangle rectangle = new()
         {
-            Position = position - Origin,
+            Position = GlobalPosition - Origin,
             Size = Size
         };
 
@@ -111,26 +109,88 @@ public abstract class BaseGrabber : ClickableRectangle
             Style.Current.FillColor);
     }
 
-    private void DrawOutline(Vector2 position)
+    private void DrawOutline()
     {
-        if (Style.Current.OutlineThickness < 0)
+        if (Style.Current.OutlineThickness <= 0)
         {
             return;
         }
 
+        Vector2 position = GlobalPosition - Origin;
+
+        Rectangle rectangle = new()
+        {
+            Position = position,
+            Size = Size
+        };
+
         for (int i = 0; i <= Style.Current.OutlineThickness; i++)
         {
-            Rectangle rectangle = new()
+            Rectangle outlineRectangle = new()
             {
-                Position = position - Origin - new Vector2(i, i),
-                Size = new(Size.X + i + 1, Size.Y + i + 1)
+                Position = rectangle.Position - new Vector2(i, i),
+                Size = new(rectangle.Size.X + i + 1, rectangle.Size.Y + i + 1)
             };
 
             Raylib.DrawRectangleRounded(
-                rectangle,
+                outlineRectangle,
                 Style.Current.Roundness,
-                (int)Size.Y,
+                (int)rectangle.Size.X,
                 Style.Current.OutlineColor);
         }
     }
+
+    //private void Draw()
+    //{
+    //    if (!(Visible && readyForVisibility))
+    //    {
+    //        return;
+    //    }
+    //
+    //    float x = (float)Math.Round(GlobalPosition.X);
+    //    float y = (float)Math.Round(GlobalPosition.Y);
+    //
+    //    Vector2 temporaryPosition = new(x, y);
+    //
+    //    DrawOutline(temporaryPosition);
+    //    DrawInside(temporaryPosition);
+    //}
+    //
+    //private void DrawInside(Vector2 position)
+    //{
+    //    Rectangle rectangle = new()
+    //    {
+    //        Position = position - Origin,
+    //        Size = Size
+    //    };
+    //
+    //    Raylib.DrawRectangleRounded(
+    //        rectangle,
+    //        Style.Current.Roundness,
+    //        (int)Size.Y,
+    //        Style.Current.FillColor);
+    //}
+    //
+    //private void DrawOutline(Vector2 position)
+    //{
+    //    if (Style.Current.OutlineThickness < 0)
+    //    {
+    //        return;
+    //    }
+    //
+    //    for (int i = 0; i <= Style.Current.OutlineThickness; i++)
+    //    {
+    //        Rectangle rectangle = new()
+    //        {
+    //            Position = position - Origin - new Vector2(i, i),
+    //            Size = new(Size.X + i + 1, Size.Y + i + 1)
+    //        };
+    //
+    //        Raylib.DrawRectangleRounded(
+    //            rectangle,
+    //            Style.Current.Roundness,
+    //            (int)Size.Y,
+    //            Style.Current.OutlineColor);
+    //    }
+    //}
 }
