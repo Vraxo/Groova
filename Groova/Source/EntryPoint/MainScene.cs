@@ -80,7 +80,7 @@ public partial class MainScene : Node
         }
         else
         {
-            LoadSongs(CurrentPlaylist);
+            //LoadSongs(CurrentPlaylist);
         }
     }
 
@@ -112,13 +112,17 @@ public partial class MainScene : Node
 
         bool setAudioSlider = false;
 
-        if (Settings.Playlist != null && PlaylistContainer.Instance.PlaylistExists(Settings.Playlist))
+        bool playlistExists = PlaylistContainer.Instance.PlaylistExists(Settings.Playlist);
+
+        if (Settings.Playlist != null && playlistExists)
         {
             Playlist playlist = PlaylistContainer.Instance.GetPlaylist(Settings.Playlist);
 
             LoadSongs(playlist);
 
-            if (Settings.Song != null && PlaylistContainer.Instance.SongExists(Settings.Playlist, Settings.Song))
+            bool songExists = PlaylistContainer.Instance.SongExists(Settings.Playlist, Settings.Song);
+
+            if (Settings.Song != null && songExists)
             {
                 Song song = PlaylistContainer.Instance.GetSong(playlist.Name, Settings.Song);
 
@@ -133,7 +137,7 @@ public partial class MainScene : Node
             }
         }
 
-        var bottomSection = GetNode<BottomSection>();
+        var bottomSection = GetNode<BottomSection>("BottomSection");
         bottomSection.LoadSettings(Settings, setAudioSlider);
     }
 }

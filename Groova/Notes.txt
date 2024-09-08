@@ -5,7 +5,7 @@ because deactivated unshown items in ItemLists never
 run their Ready method and therefore don't get their
 click manager.
 
-
+item list base.start causes problems
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 

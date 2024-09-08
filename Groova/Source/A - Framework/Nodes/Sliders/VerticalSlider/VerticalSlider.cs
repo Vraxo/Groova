@@ -22,7 +22,7 @@ public partial class VerticalSlider : BaseSlider
 
     public override void MoveGrabber(int direction)
     {
-        if (MaxExternalValue == 0)
+        if (direction == 0 || MaxExternalValue == 0)
         {
             return;
         }

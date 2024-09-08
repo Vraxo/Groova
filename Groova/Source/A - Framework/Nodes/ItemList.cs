@@ -14,6 +14,7 @@ public class ItemList : ClickableRectangle
     public event EventHandler<int>? StartingIndexChanged;
 
     private int maxItemsShownAtOnce = 0;
+    private int count = 0;
 
     private int _startingIndex = 0;
     public int StartingIndex
@@ -86,6 +87,7 @@ public class ItemList : ClickableRectangle
         OnUpdate(this);
         HandleScrolling();
         UpdateList(StartingIndex);
+        //base.Update();
     }
 
     public void Add(Node2D item)
@@ -93,7 +95,7 @@ public class ItemList : ClickableRectangle
         item.InheritsOrigin = true;
         Items.Add(item);
         AddChild(item);
-        item.Layer = Layer + 10;
+        item.Layer = Layer;
         OnItemCountChanged(this);
     }
 
@@ -147,6 +149,12 @@ public class ItemList : ClickableRectangle
 
     private void UpdateChildrenActivationAndPosition()
     {
+        if (count != 2)
+        {
+            count++;
+            return;
+        }
+
         int j = 0;
 
         for (int i = 0; i < Items.Count; i++)
@@ -161,6 +169,7 @@ public class ItemList : ClickableRectangle
             else
             {
                 Items[i].Position = new(Items[i].Position.X, -1000);
+                //Items[i].Position = new(Items[i].Position.X, ItemSize.Y * j);
                 Items[i].Deactivate();
             }
         }
