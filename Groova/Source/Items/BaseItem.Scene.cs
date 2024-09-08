@@ -33,7 +33,7 @@ public abstract partial class BaseItem : Node2D
             {
                 OutlineThickness = 0,
                 Roundness = 0,
-                FillColor = Theme.Instance.Accent
+                FillColor = Theme.Instance.Colors["Accent"]
             }
         }, "ImageButton");
 

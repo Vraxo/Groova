@@ -5,7 +5,6 @@ public class Node
     public string Name { get; set; } = "";
     public Node? Parent { get; set; } = null;
     public List<Node> Children { get; set; } = [];
-    //public Program? Program { get; set; } = null;
     public bool Active { get; private set; } = true;
 
     public Node RootNode => Program.RootNode;
@@ -284,7 +283,6 @@ public class Node
         node.Parent = this;
         
         node.Build();
-
 
         if (start)
         {

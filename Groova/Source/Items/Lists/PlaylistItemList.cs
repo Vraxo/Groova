@@ -4,8 +4,6 @@ public class PlaylistItemList : BaseItemItemList
 {
     public override void Start()
     {
-        base.Start();
-
         foreach (Playlist playlist in PlaylistContainer.Instance.Playlists)
         {
             PlaylistItem playlistItem = new()
@@ -15,5 +13,7 @@ public class PlaylistItemList : BaseItemItemList
 
             Add(playlistItem);
         }
+
+        base.Start();
     }
 }

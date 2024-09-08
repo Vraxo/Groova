@@ -9,6 +9,6 @@ public class ButtonStateStyle
     public float FontSize { get; set; } = 16;
     public Font Font { get; set; } = FontLoader.Instance.Fonts["RobotoMono 32"];
     public Color TextColor { get; set; } = Color.White;
-    public Color FillColor { get; set; } = Theme.Instance.DefaultFill;
-    public Color OutlineColor { get; set; } = Theme.Instance.DefaultOutline;
+    public Color FillColor { get; set; } = Theme.Instance.Colors["DefaultFill"];
+    public Color OutlineColor { get; set; } = Theme.Instance.Colors["DefaultOutline"];
 }

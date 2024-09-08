@@ -53,11 +53,33 @@ public partial class BottomSection : Node2D
             Text = "01:06",
             OnUpdate = (label) =>
             {
-                float x = Window.Width - label.Size.X * 1.2f;
+                float x = Window.Width - label.Size.X * 1.3f;
                 float y = Window.Height - 40;
                 label.Position = new(x, y);
             }
         }, "TotalTimeLabel");
+
+        //AddChild(new HorizontalSlider
+        //{
+        //    Position = new(50, 0),
+        //    HasButtons = false,
+        //    InitialPercentage = 1f,
+        //    DefaultPercentage = 1f,
+        //    OnUpdate = (slider) =>
+        //    {
+        //        var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
+        //
+        //        float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
+        //
+        //        float x = Window.Width - slider.Size.X - spaceBetweenAudioSliderAndBorder;
+        //        float y = Window.Height - 15;
+        //        slider.Position = new(x, y);
+        //
+        //        float width = Window.Width / 5;
+        //        float height = slider.Size.Y;
+        //        slider.Size = new(width, height);
+        //    }
+        //}, "VolumeSlider");
 
         AddChild(new HorizontalSlider
         {
@@ -67,15 +89,15 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 1f,
             OnUpdate = (slider) =>
             {
-                var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
+                var label = GetNode<Label>("TotalTimeLabel");
 
-                float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
+                float spaceBetweenAudioSliderAndBorder = Window.Width - label.Size.X - label.GlobalPosition.X;
 
                 float x = Window.Width - slider.Size.X - spaceBetweenAudioSliderAndBorder;
                 float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = Window.Width / 5;
+                float width = Window.Width - slider.Position.X - spaceBetweenAudioSliderAndBorder;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
@@ -97,7 +119,7 @@ public partial class BottomSection : Node2D
                 float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = Window.Width / 3;
+                float width = Window.Width / 2;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }

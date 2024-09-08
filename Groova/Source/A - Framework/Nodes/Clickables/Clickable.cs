@@ -4,7 +4,7 @@ public abstract class Clickable : Node2D
 {
     public bool OnTopLeft = false;
     public bool OnTopRight = false;
-    public int Layer = 0;
+    //public int Layer = 0;
 
     protected ClickManager? clickManager;
 

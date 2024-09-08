@@ -6,8 +6,6 @@ public class SongItemList : BaseItemItemList
 
     public override void Start()
     {
-        base.Start();
-
         foreach (Song song in Playlist.Songs)
         {
             SongItem musicItem = new()
@@ -18,5 +16,7 @@ public class SongItemList : BaseItemItemList
 
             Add(musicItem);
         }
+
+        base.Start();
     }
 }

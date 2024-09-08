@@ -18,6 +18,8 @@ public partial class SongItem : BaseItem
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 
+        GetNode<MainScene>("/root").StopSearch();
+
         var currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);
     }

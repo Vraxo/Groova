@@ -83,8 +83,8 @@ public class ItemList : ClickableRectangle
 
     public override void Update()
     {
-        HandleScrolling();
         OnUpdate(this);
+        HandleScrolling();
         UpdateList(StartingIndex);
     }
 
@@ -93,6 +93,7 @@ public class ItemList : ClickableRectangle
         item.InheritsOrigin = true;
         Items.Add(item);
         AddChild(item);
+        item.Layer = Layer + 10;
         OnItemCountChanged(this);
     }
 

@@ -7,10 +7,10 @@ public class Node2D : Node
     public bool InheritPosition { get; set; } = true;
     public bool InheritsOrigin { get; set; } = false;
     public bool Visible { get; set; } = true;
+    
+    public event EventHandler? SizeChanged;
 
     protected bool readyForVisibility = false;
-
-    public event EventHandler? SizeChanged;
 
     private Vector2 _size = Vector2.Zero;
     public Vector2 Size
@@ -21,6 +21,22 @@ public class Node2D : Node
         {
             _size = value;
             SizeChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    private int _layer = 0;
+    public int Layer
+    {
+        get => _layer;
+
+        set
+        {
+            _layer = value;
+
+            foreach (Node2D child in Children.Cast<Node2D>())
+            {
+                child.Layer = Layer + 1;
+            }
         }
     }
 

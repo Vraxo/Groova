@@ -11,9 +11,13 @@ click manager.
 
 * add rapid deletion to textbox
 
-* horizontal slider button is one pixel high
-
 * make on update a universal thing
+
+* remove flicker from first time seeing item list items
+
+
+
+* horizontal slider button is one pixel high
 
 * make horizontal slider work with origins
 

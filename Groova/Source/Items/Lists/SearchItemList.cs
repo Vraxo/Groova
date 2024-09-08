@@ -40,7 +40,8 @@ public class SearchItemList : BaseItemItemList
                 {
                     SongItem songItem = new()
                     {
-                        Song = song
+                        Song = song,
+                        Playlist = playlist
                     };
 
                     Add(songItem);
