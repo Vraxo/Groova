@@ -41,6 +41,7 @@ public class ItemList : ClickableRectangle
     public ItemList()
     {
         Size = new(250, 150);
+        OriginPreset = OriginPreset.TopLeft;
     }
 
     public override void Build()
@@ -87,7 +88,7 @@ public class ItemList : ClickableRectangle
         OnUpdate(this);
         HandleScrolling();
         UpdateList(StartingIndex);
-        //base.Update();
+        base.Update();
     }
 
     public void Add(Node2D item)

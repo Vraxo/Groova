@@ -1,26 +1,17 @@
-﻿This is preventing me from switching click manager
-from Ready to Start, which would remove the need for
-checking if the clickable is active, which is there
-because deactivated unshown items in ItemLists never
-run their Ready method and therefore don't get their
-click manager.
+﻿item list base.start causes problems
 
-item list base.start causes problems
+
 
 - - - - - - - - - - Long Term - - - - - - - - - -
 
+
+
 * add rapid deletion to textbox
 
-* make on update a universal thing
-
-* remove flicker from first time seeing item list items
+* fix pitch and volume sliders
 
 
 
 * horizontal slider button is one pixel high
 
 * make horizontal slider work with origins
-
-* clickable start needs to be called before adding children,
-  otherwise the node itself will the last node and therefore
-  absorb the clicks.
