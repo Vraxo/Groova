@@ -25,12 +25,16 @@ public partial class TextBox : ClickableRectangle
 
     private const int minAscii = 32;
     private const int maxAscii = 125;
+    private const float backspaceDelay = 0.5f; 
+    private const float backspaceSpeed = 0.05f;
+
     private TextBoxCaret caret;
+    private float backspaceTimer = 0f;
+    private bool backspaceHeld = false;
 
     public TextBox()
     {
         Size = new(300, 25);
-        Visible = false;
     }
 
     public override void Start()
@@ -50,7 +54,6 @@ public partial class TextBox : ClickableRectangle
         HandleInput();
         PasteText();
         base.Update();
-        Visible = true;
     }
 
     private void HandleInput()
@@ -68,7 +71,7 @@ public partial class TextBox : ClickableRectangle
         }
 
         GetTypedCharacters();
-        DeleteLastCharacter();
+        HandleBackspace();
         Confirm();
     }
 
@@ -76,8 +79,6 @@ public partial class TextBox : ClickableRectangle
     {
         if (IsMouseOver())
         {
-            //BackgroundStyle.Current = BackgroundStyle.HoverFill;
-
             if (Raylib.IsMouseButtonDown(MouseButton.Left) && OnTopLeft)
             {
                 Selected = true;
@@ -131,7 +132,7 @@ public partial class TextBox : ClickableRectangle
             }
 
             Text = Text.Insert(caret.X, ((char)key).ToString());
-            caret.X ++;
+            caret.X++;
             TextChanged?.Invoke(this, Text);
 
             if (Text.Length == 1)
@@ -141,24 +142,48 @@ public partial class TextBox : ClickableRectangle
         }
     }
 
-    private void DeleteLastCharacter()
+    private void HandleBackspace()
     {
         if (Raylib.IsKeyPressed(KeyboardKey.Backspace))
         {
-            if (Text.Length > 0 && caret.X > 0)
+            backspaceHeld = true;
+            backspaceTimer = 0f;
+            DeleteLastCharacter();
+        }
+        else if (Raylib.IsKeyDown(KeyboardKey.Backspace) && backspaceHeld)
+        {
+            backspaceTimer += Raylib.GetFrameTime();
+
+            if (backspaceTimer >= backspaceDelay)
             {
-                Text = Text.Remove(caret.X - 1, 1);
-                caret.X --;
+                if (backspaceTimer % backspaceSpeed < Raylib.GetFrameTime())
+                {
+                    DeleteLastCharacter();
+                }
             }
+        }
 
-            RevertTextToDefaultIfEmpty();
+        if (Raylib.IsKeyReleased(KeyboardKey.Backspace))
+        {
+            backspaceHeld = false;
+        }
+    }
 
-            TextChanged?.Invoke(this, Text);
+    private void DeleteLastCharacter()
+    {
+        if (Text.Length > 0 && caret.X > 0)
+        {
+            Text = Text.Remove(caret.X - 1, 1);
+            caret.X--;
+        }
 
-            if (Text.Length == 0)
-            {
-                Cleared?.Invoke(this, EventArgs.Empty);
-            }
+        RevertTextToDefaultIfEmpty();
+
+        TextChanged?.Invoke(this, Text);
+
+        if (Text.Length == 0)
+        {
+            Cleared?.Invoke(this, EventArgs.Empty);
         }
     }
 

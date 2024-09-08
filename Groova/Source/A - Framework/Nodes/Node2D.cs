@@ -7,10 +7,9 @@ public class Node2D : Node
     public bool InheritPosition { get; set; } = true;
     public bool InheritsOrigin { get; set; } = false;
     public bool Visible { get; set; } = true;
-    
-    public event EventHandler? SizeChanged;
+    public bool ReadyForVisibility = false;
 
-    protected bool readyForVisibility = false;
+    public event EventHandler? SizeChanged;
 
     private Vector2 _size = Vector2.Zero;
     public Vector2 Size
@@ -91,7 +90,7 @@ public class Node2D : Node
     public override void Update()
     {
         UpdateOrigin();
-        readyForVisibility = true;
+        ReadyForVisibility = true;
     }
 
     private void UpdateOrigin()

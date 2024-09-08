@@ -50,7 +50,7 @@ public class Label : Node2D
 
     private void Draw()
     {
-        if (!(Visible && readyForVisibility))
+        if (!(Visible && ReadyForVisibility))
         {
             return;
         }

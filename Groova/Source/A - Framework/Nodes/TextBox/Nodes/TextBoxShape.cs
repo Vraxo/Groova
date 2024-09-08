@@ -19,11 +19,11 @@ public class TextBoxShape : Node2D
 
     private void Draw()
     {
-        if (!parent.Visible)
+        if (!(parent.Visible && parent.ReadyForVisibility))
         {
             return;
         }
-    
+
         DrawOutline();
         DrawInside();
     }

@@ -282,7 +282,7 @@ public class Button : ClickableRectangle
 
     private void Draw()
     {
-        if (!(Visible && readyForVisibility))
+        if (!(Visible && ReadyForVisibility))
         {
             return;
         }
