@@ -59,28 +59,6 @@ public partial class BottomSection : Node2D
             }
         }, "TotalTimeLabel");
 
-        //AddChild(new HorizontalSlider
-        //{
-        //    Position = new(50, 0),
-        //    HasButtons = false,
-        //    InitialPercentage = 1f,
-        //    DefaultPercentage = 1f,
-        //    OnUpdate = (slider) =>
-        //    {
-        //        var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
-        //
-        //        float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
-        //
-        //        float x = Window.Width - slider.Size.X - spaceBetweenAudioSliderAndBorder;
-        //        float y = Window.Height - 15;
-        //        slider.Position = new(x, y);
-        //
-        //        float width = Window.Width / 5;
-        //        float height = slider.Size.Y;
-        //        slider.Size = new(width, height);
-        //    }
-        //}, "VolumeSlider");
-
         AddChild(new HorizontalSlider
         {
             Position = new(50, 0),
@@ -89,15 +67,29 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 1f,
             OnUpdate = (slider) =>
             {
+                //var label = GetNode<Label>("TotalTimeLabel");
+                //
+                //float spaceBetweenLabelAndBorder = Window.Width - label.Size.X - label.GlobalPosition.X;
+                //
+                //float x = Window.Width - slider.Size.X - spaceBetweenLabelAndBorder;
+                //float y = Window.Height - 15;
+                //slider.Position = new(x, y);
+                //
+                //float width = Window.Width - slider.Position.X - spaceBetweenLabelAndBorder;
+                //float height = slider.Size.Y;
+                //slider.Size = new(width, height);
+
                 var label = GetNode<Label>("TotalTimeLabel");
+                var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
 
-                float spaceBetweenAudioSliderAndBorder = Window.Width - label.Size.X - label.GlobalPosition.X;
+                float spaceBetweenLabelAndBorder = Window.Width - label.Size.X - label.GlobalPosition.X;
 
-                float x = Window.Width - slider.Size.X - spaceBetweenAudioSliderAndBorder;
+                float x = audioSlider.Position.X + audioSlider.Size.X / 2 + 10;
+                
                 float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = Window.Width - slider.Position.X - spaceBetweenAudioSliderAndBorder;
+                float width = Window.Width - slider.Position.X - spaceBetweenLabelAndBorder;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }
@@ -111,15 +103,14 @@ public partial class BottomSection : Node2D
             DefaultPercentage = 0.5f,
             OnUpdate = (slider) =>
             {
+                var label = GetNode<Label>("TimePlayedLabel");
                 var audioSlider = GetNode<HorizontalSlider>("AudioSlider");
-
-                float spaceBetweenAudioSliderAndBorder = Window.Width - audioSlider.Size.X - audioSlider.GlobalPosition.X;
 
                 float x = slider.Position.X;
                 float y = Window.Height - 15;
                 slider.Position = new(x, y);
 
-                float width = Window.Width / 2;
+                float width = label.Size.X + audioSlider.Size.X / 2;
                 float height = slider.Size.Y;
                 slider.Size = new(width, height);
             }

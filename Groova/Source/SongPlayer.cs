@@ -55,7 +55,10 @@ public class SongPlayer : AudioPlayer
     {
         if (Playing)
         {
-            slider.Percentage = TimePlayed / AudioLength;
+            if (!slider.Grabber.Pressed)
+            {
+                slider.Percentage = TimePlayed / AudioLength;
+            }
 
             mainScene.Settings.Timestamp = slider.Percentage;
             mainScene.SaveSettings();
