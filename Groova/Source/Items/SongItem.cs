@@ -18,7 +18,7 @@ public partial class SongItem : BaseItem
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 
-        GetNode<MainScene>("/root").StopSearch();
+        GetNode<MainScene>("/root").StopSearch(true);
 
         var currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);

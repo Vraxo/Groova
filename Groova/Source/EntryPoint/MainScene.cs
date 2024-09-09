@@ -56,7 +56,7 @@ public partial class MainScene : Node
         AddChild(songItemList);
     }
 
-    public void Search()
+    public void StartSearch()
     {
         Searching = true;
 

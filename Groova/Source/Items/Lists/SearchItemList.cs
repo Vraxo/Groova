@@ -4,22 +4,27 @@ public class SearchItemList : BaseItemItemList
 {
     public override void Start()
     {
-        base.Start();
-
         var textBox = GetNode<TextBox>("/root/TopSection/SearchBar");
         textBox.TextChanged += OnSearchBarTextChanged;
-        textBox.Cleared += OnSearchBarCleared;
+        //textBox.Cleared += OnSearchBarCleared;
+        textBox.Cleared += TextBox_Cleared;
+
         Search(textBox.Text);
+
+        base.Start();
     }
 
-    private void OnSearchBarCleared(object? sender, EventArgs e)
+    private void TextBox_Cleared(object? sender, EventArgs e)
     {
         GetNode<MainScene>("/root").StopSearch(true);
     }
 
     private void OnSearchBarTextChanged(object? sender, string e)
     {
-        Search(e.ToLower());
+        if (e.Length > 0)
+        {
+            Search(e.ToLower());
+        }
     }
 
     private void Search(string text)

@@ -26,12 +26,12 @@ public partial class TopSection : Node2D
 
     private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
     {
-        mainScene.Search();
+        mainScene.StartSearch();
     }
 
     private void OnSearchBarCleared(object? sender, EventArgs e)
     {
-        mainScene.StopSearch();
+        //mainScene.StopSearch(true);
     }
 
     private void AddPlaylistOrMusic()

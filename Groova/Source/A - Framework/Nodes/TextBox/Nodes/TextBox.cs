@@ -171,6 +171,8 @@ public partial class TextBox : ClickableRectangle
 
     private void DeleteLastCharacter()
     {
+        int textLengthBeforeDeletion = Text.Length;
+
         if (Text.Length > 0 && caret.X > 0)
         {
             Text = Text.Remove(caret.X - 1, 1);
@@ -181,7 +183,7 @@ public partial class TextBox : ClickableRectangle
 
         TextChanged?.Invoke(this, Text);
 
-        if (Text.Length == 0)
+        if (Text.Length == 0 && textLengthBeforeDeletion != 0)
         {
             Cleared?.Invoke(this, EventArgs.Empty);
         }
