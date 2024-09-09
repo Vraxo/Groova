@@ -22,6 +22,7 @@ public partial class SongItem : BaseItem
 
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
+        mainScene.CurrentPlaylist = Playlist;
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 

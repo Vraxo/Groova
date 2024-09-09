@@ -67,7 +67,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
                 RootNode.Process();
             Raylib.EndDrawing();
 
-            //PrintTree();
+            PrintTree();
         }
     }
 
@@ -75,8 +75,11 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
     {
         if (Raylib.IsKeyPressed(KeyboardKey.Enter))
         {
-            Console.Clear();
-            RootNode.PrintChildren();
+            //Console.Clear();
+
+            Raylib.TakeScreenshot($"Screenshot{Raylib.GetFrameTime() * 10}.png");
+
+            //RootNode.PrintChildren();
         }
     }
 }

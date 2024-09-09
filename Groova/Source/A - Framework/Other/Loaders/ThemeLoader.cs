@@ -33,7 +33,6 @@ public class ThemeLoader
     private ThemeLoader()
     {
         Save();
-        LoadThemeFromFile("Nord");
     }
 
     private void Save()
@@ -54,7 +53,7 @@ public class ThemeLoader
         File.WriteAllText("Resources/Themes/Dark.json", json);
     }
 
-    public void LoadThemeFromFile(string fileName)
+    public void Load(string fileName)
     {
         string json = File.ReadAllText($"Resources/Themes/{fileName}.json");
         var deserializedColors = JsonSerializer.Deserialize<Dictionary<string, JsonColor>>(json);
