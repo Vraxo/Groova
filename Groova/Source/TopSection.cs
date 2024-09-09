@@ -92,10 +92,12 @@ public partial class TopSection : Node2D
     {
         if (mainScene.Searching)
         {
+            Console.WriteLine("first option");
             mainScene.StopSearch();
         }
         else if (!mainScene.InPlaylists)
         {
+            Console.WriteLine("second option");
             mainScene.LoadPlaylists();
         }
     }

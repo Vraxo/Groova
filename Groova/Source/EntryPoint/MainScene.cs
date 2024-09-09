@@ -67,20 +67,28 @@ public partial class MainScene : Node
         AddChild(searchItemList);
     }
 
-    public void StopSearch(bool cancelled = false)
+    public void StopSearch(bool clickedOnSong = false)
     {
+        if (!Searching)
+        {
+            Console.WriteLine("not searching, returning");
+            return;
+        }
+
         Searching = false;
 
         GetNode<SearchItemList>("SearchItemList")?.Destroy();
         GetNode<TextBox>("/root/TopSection/SearchBar").Text = "";
 
-        if (InPlaylists)
+        if (InPlaylists && !clickedOnSong)
         {
             LoadPlaylists();
+            Console.WriteLine("loaded playlists");
         }
-        else if (cancelled)
+        else
         {
             LoadSongs(CurrentPlaylist);
+            Console.WriteLine("loaded songs");
         }
     }
 

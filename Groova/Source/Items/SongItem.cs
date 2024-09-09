@@ -25,7 +25,7 @@ public partial class SongItem : BaseItem
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 
-        mainScene.StopSearch(mainScene.Searching);
+        mainScene.StopSearch(true);
 
         currentSongDisplayer.SetSong(Song);
     }

@@ -15,7 +15,7 @@ public class SearchItemList : BaseItemItemList
 
     private void OnSearchBarCleared(object? sender, EventArgs e)
     {
-        GetNode<MainScene>("/root").StopSearch(true);
+        GetNode<MainScene>("/root").StopSearch();
     }
 
     private void OnSearchBarTextChanged(object? sender, string e)
