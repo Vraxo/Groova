@@ -4,7 +4,7 @@ namespace Groova;
 
 public class ThemeLoader
 {
-    public Dictionary<string, Color> Colors { get; } = new()
+    public Dictionary<string, Color> Colors = new()
     {
         { "Background", new(16, 16, 16, 255) },
         { "DefaultFill", new(42, 42, 42, 255) },
@@ -32,7 +32,9 @@ public class ThemeLoader
 
     private ThemeLoader()
     {
-        Save();
+        //Save();
+        string name = File.ReadAllText("Resources/Themes/Theme.txt");
+        Load(name);
     }
 
     private void Save()

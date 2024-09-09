@@ -11,6 +11,26 @@ public partial class TopSection : Node2D
         GetNode<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetNode<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
         GetNode<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
+        GetNode<Button>("LoadThemeButton").LeftClicked += OnLoadThemeButtonLeftClicked;
+    }
+
+    private void OnLoadThemeButtonLeftClicked(object? sender, EventArgs e)
+    {
+        OpenFileDialog dialog = new();
+        dialog.ShowDialog();
+
+        if (dialog.FileNames.Length == 0)
+        {
+            Console.WriteLine("returned");
+            return;
+        }
+
+        string theme = Path.GetFileNameWithoutExtension(dialog.FileName);
+
+        Console.WriteLine(theme);
+
+        //ThemeLoader.Instance.Load(theme);
+        ThemeLoader.Instance.Colors["DefaultFill"] = Color.White;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)

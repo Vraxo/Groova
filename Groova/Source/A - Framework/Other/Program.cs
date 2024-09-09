@@ -77,7 +77,10 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
         {
             //Console.Clear();
 
-            Raylib.TakeScreenshot($"Screenshot{Raylib.GetFrameTime() * 10}.png");
+            Random random = new();
+            int r = random.Next(1000);
+
+            Raylib.TakeScreenshot($"Screenshot{r}.png");
 
             //RootNode.PrintChildren();
         }

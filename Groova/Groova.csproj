@@ -30,6 +30,12 @@
     <None Update="Resources\Icon\Icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Themes\Monokai.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Themes\Theme.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Themes\Beige.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
