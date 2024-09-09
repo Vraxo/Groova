@@ -31,7 +31,7 @@ public class Program(WindowData windowData, Node rootNode, string[] args)
 
         Raylib.SetTargetFPS(60);
 
-        Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon.png"));
+        Raylib.SetWindowIcon(Raylib.LoadImage("Resources/Icon/Icon.png"));
         
         //Scene scene = new(rootNode);
         //var mainScene = scene.Instantiate<MainScene>();

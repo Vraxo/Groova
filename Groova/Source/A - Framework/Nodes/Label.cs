@@ -4,7 +4,7 @@ namespace Groova;
 
 public class Label : Node2D
 {
-    public Color Color { get; set; } = Color.White;
+    public Color Color { get; set; } = ThemeLoader.Instance.Colors["Text"];
     public uint FontSize { get; set; } = 16;
     public Font Font { get; set; } = FontLoader.Instance.Fonts["RobotoMono 32"];
     public int MaxCharacters = -1;

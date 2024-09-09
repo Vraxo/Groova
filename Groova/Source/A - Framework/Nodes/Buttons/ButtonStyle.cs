@@ -15,14 +15,14 @@ public class ButtonStyle
 
     public ButtonStateStyle Hover { get; set; } = new()
     {
-        FillColor = Theme.Instance.Colors["HoverFill"],
-        OutlineColor = Theme.Instance.Colors["HoverOutline"]
+        FillColor = ThemeLoader.Instance.Colors["HoverFill"],
+        OutlineColor = ThemeLoader.Instance.Colors["HoverOutline"]
     };
 
     public ButtonStateStyle Pressed { get; set; } = new()
     {
-        FillColor = Theme.Instance.Colors["Accent"],
-        OutlineColor = Theme.Instance.Colors["PressedOutline"],
+        FillColor = ThemeLoader.Instance.Colors["Accent"],
+        OutlineColor = ThemeLoader.Instance.Colors["PressedOutline"],
     };
 
     public float Roundness

@@ -11,7 +11,7 @@ public class EntryPoint
             Resolution = new(360, 640),
             //ClearColor = new(57, 57, 57, 255)
             //ClearColor = new(16, 16, 16, 255)
-            ClearColor = Theme.Instance.Colors["Background"]
+            ClearColor = ThemeLoader.Instance.Colors["Background"]
         };
 
         MainScene rootNode = new()

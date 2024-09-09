@@ -10,7 +10,6 @@ public partial class BottomSection : Node2D
         {
             Position = new(25, 20),
             Size = new(32, 32),
-            Text = ">",
             OnUpdate = (button) =>
             {
                 float x = button.Position.X;

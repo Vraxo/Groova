@@ -74,7 +74,7 @@ public partial class BottomSection : Node2D
         else
         {
             songPlayer.Pause();
-            pauseOrResumeButton.Text = ">";
+            pauseOrResumeButton.Text = "▶";
         }
     }
 

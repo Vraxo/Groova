@@ -4,15 +4,15 @@ namespace Groova;
 
 public class ColoredRectangle : ClickableRectangle
 {
-    public Color FillColor = new(24, 24, 24, 255);
-    public Color OutlineColor = new(128, 128, 128, 255);
+    public Color FillColor = ThemeLoader.Instance.Colors["Background"];
+    public Color OutlineColor = ThemeLoader.Instance.Colors["DefaultOutline"];
+
     public Action<ColoredRectangle> OnUpdate = (rectangle) => { };
 
     public ColoredRectangle()
     {
         Size = new(32, 32);
         OriginPreset = OriginPreset.TopLeft;
-        Layer = ClickableLayer.Panels;
     }
 
     public override void Update()

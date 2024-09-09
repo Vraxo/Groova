@@ -67,7 +67,7 @@ public partial class MainScene : Node
         AddChild(searchItemList);
     }
 
-    public void StopSearch()
+    public void StopSearch(bool cancelled = false)
     {
         Searching = false;
 
@@ -78,9 +78,9 @@ public partial class MainScene : Node
         {
             LoadPlaylists();
         }
-        else
+        else if (cancelled)
         {
-            //LoadSongs(CurrentPlaylist);
+            LoadSongs(CurrentPlaylist);
         }
     }
 
