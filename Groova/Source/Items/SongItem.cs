@@ -5,22 +5,28 @@ public partial class SongItem : BaseItem
     public Playlist Playlist;
     public Song Song;
 
+    private MainScene mainScene;
+    private SongPlayer songPlayer;
+    private CurrentSongDisplayer currentSongDisplayer;
+
     public override void Start()
     {
         Text = Path.GetFileNameWithoutExtension(Song.FilePath);
         base.Start();
         image.Load(Song.ImagePath);
+
+        mainScene = GetNode<MainScene>("/root");
+        songPlayer = GetNode<SongPlayer>("/root/SongPlayer");
+        currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
     }
 
     protected override void OnButtonLeftClicked(object? sender, EventArgs e)
     {
-        var songPlayer = GetNode<SongPlayer>("/root/SongPlayer");
         songPlayer.Playlist = Playlist;
         songPlayer.LoadAndPlaySong(Song);
 
-        GetNode<MainScene>("/root").StopSearch(true);
+        mainScene.StopSearch(mainScene.Searching);
 
-        var currentSongDisplayer = GetNode<CurrentSongDisplayer>("/root/BottomSection/CurrentSongDisplayer");
         currentSongDisplayer.SetSong(Song);
     }
 

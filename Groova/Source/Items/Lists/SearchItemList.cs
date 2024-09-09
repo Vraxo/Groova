@@ -6,15 +6,14 @@ public class SearchItemList : BaseItemItemList
     {
         var textBox = GetNode<TextBox>("/root/TopSection/SearchBar");
         textBox.TextChanged += OnSearchBarTextChanged;
-        //textBox.Cleared += OnSearchBarCleared;
-        textBox.Cleared += TextBox_Cleared;
+        textBox.Cleared += OnSearchBarCleared;
 
         Search(textBox.Text);
 
         base.Start();
     }
 
-    private void TextBox_Cleared(object? sender, EventArgs e)
+    private void OnSearchBarCleared(object? sender, EventArgs e)
     {
         GetNode<MainScene>("/root").StopSearch(true);
     }

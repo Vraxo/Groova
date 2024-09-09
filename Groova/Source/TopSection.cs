@@ -11,7 +11,6 @@ public partial class TopSection : Node2D
         GetNode<Button>("AddButton").LeftClicked += OnAddButtonLeftClicked;
         GetNode<Button>("ReturnButton").LeftClicked += OnReturnButtonLeftClicked;
         GetNode<TextBox>("SearchBar").FirstCharacterEntered += OnSearchBarFirstCharacterEntered;
-        GetNode<TextBox>("SearchBar").Cleared += OnSearchBarCleared;
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)
@@ -27,11 +26,6 @@ public partial class TopSection : Node2D
     private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
     {
         mainScene.StartSearch();
-    }
-
-    private void OnSearchBarCleared(object? sender, EventArgs e)
-    {
-        //mainScene.StopSearch(true);
     }
 
     private void AddPlaylistOrMusic()
