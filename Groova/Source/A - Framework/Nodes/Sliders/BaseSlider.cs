@@ -106,22 +106,18 @@ public abstract class BaseSlider : ClickableRectangle
     {
         float previousValue = Percentage;
 
-        // Update the percentage based on the grabber's position
         UpdatePercentage();
 
-        // If the percentage has changed, invoke the PercentageChanged event
         if (Percentage != previousValue)
         {
             OnPercentageChanged();
         }
 
-        // Handle the Released event if the grabber was pressed and is now released
         if (wasPressed && !Grabber.Pressed)
         {
             OnReleased();
         }
 
-        // Update the pressed state
         wasPressed = Grabber.Pressed;
     }
 

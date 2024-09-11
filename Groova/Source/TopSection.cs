@@ -17,20 +17,21 @@ public partial class TopSection : Node2D
     private void OnLoadThemeButtonLeftClicked(object? sender, EventArgs e)
     {
         OpenFileDialog dialog = new();
-        dialog.ShowDialog();
+        DialogResult result = dialog.ShowDialog();
 
-        if (dialog.FileNames.Length == 0)
+        if (result != DialogResult.OK)
         {
-            Console.WriteLine("returned");
             return;
         }
 
         string theme = Path.GetFileNameWithoutExtension(dialog.FileName);
 
-        Console.WriteLine(theme);
+        if (!File.Exists($"Resources/Themes/{theme}.json"))
+        {
+            return;
+        }
 
-        //ThemeLoader.Instance.Load(theme);
-        ThemeLoader.Instance.Colors["DefaultFill"] = Color.White;
+        File.WriteAllText("Resources/Themes/Theme.txt", theme);
     }
 
     private void OnAddButtonLeftClicked(object? sender, EventArgs e)

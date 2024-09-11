@@ -1,13 +1,6 @@
-﻿search doesn't end when reaching 0 character
-
+﻿
 
 - - - - - - - - - - Long Term - - - - - - - - - -
-
-
-
-* add rapid deletion to textbox
-
-* fix pitch and volume sliders
 
 
 
