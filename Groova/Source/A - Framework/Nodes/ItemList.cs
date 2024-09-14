@@ -93,7 +93,7 @@ public class ItemList : ClickableRectangle
 
     public void Add(Node2D item)
     {
-        item.InheritsOrigin = true;
+        item.InheritOrigin = true;
         Items.Add(item);
         AddChild(item);
         item.Layer = Layer;

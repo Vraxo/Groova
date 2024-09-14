@@ -7,14 +7,14 @@ public partial class Dialog : Node2D
         AddChild(new ColoredRectangle
         {
             Size = new(300, 150),
-            InheritsOrigin = true
+            InheritOrigin = true
         }, "Background");
 
         AddChild(new Button
         {
             Text = "X",
             Size = new(25, 25),
-            InheritsOrigin = true,
+            InheritOrigin = true,
             Layer = ClickableLayer.DialogButtons,
             Style = new()
             {
@@ -32,7 +32,7 @@ public partial class Dialog : Node2D
         AddChild(new Label
         {
             Position = new(10, 50),
-            InheritsOrigin = true,
+            InheritOrigin = true,
         }, "Message");
     }
 }

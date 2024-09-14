@@ -1,4 +1,6 @@
-﻿namespace Groova;
+﻿using System.Diagnostics;
+
+namespace Groova;
 
 public partial class TopSection : Node2D
 {
@@ -16,6 +18,26 @@ public partial class TopSection : Node2D
 
     private void OnLoadThemeButtonLeftClicked(object? sender, EventArgs e)
     {
+        CreateThemeDialog();
+    }
+
+    private void OnAddButtonLeftClicked(object? sender, EventArgs e)
+    {
+        AddPlaylistOrMusic();
+    }
+
+    private void OnReturnButtonLeftClicked(object? sender, EventArgs e)
+    {
+        Return();
+    }
+
+    private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
+    {
+        mainScene.StartSearch();
+    }
+
+    private void CreateThemeDialog()
+    {
         OpenFileDialog dialog = new();
         DialogResult result = dialog.ShowDialog();
 
@@ -32,21 +54,10 @@ public partial class TopSection : Node2D
         }
 
         File.WriteAllText("Resources/Themes/Theme.txt", theme);
-    }
 
-    private void OnAddButtonLeftClicked(object? sender, EventArgs e)
-    {
-        AddPlaylistOrMusic();
-    }
-
-    private void OnReturnButtonLeftClicked(object? sender, EventArgs e)
-    {
-        Return();
-    }
-
-    private void OnSearchBarFirstCharacterEntered(object? sender, EventArgs e)
-    {
-        mainScene.StartSearch();
+        Process currentProcess = System.Diagnostics.Process.GetCurrentProcess();
+        System.Diagnostics.Process.Start(currentProcess.MainModule.FileName);
+        Environment.Exit(0);
     }
 
     private void AddPlaylistOrMusic()

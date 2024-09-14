@@ -21,7 +21,7 @@ public partial class NewPlaylistDialog : Dialog
         AddChild(new Label
         {
             Position = new(10, 125),
-            InheritsOrigin = true,
+            InheritOrigin = true,
             Visible = false,
             Color = new(255, 0, 0, 255),
             Text = "Playlist already exists."

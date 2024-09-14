@@ -5,7 +5,7 @@ public class Node2D : Node
     public Vector2 Position { get; set; }  = Vector2.Zero;
     public OriginPreset OriginPreset { get; set; } = OriginPreset.Center;
     public bool InheritPosition { get; set; } = true;
-    public bool InheritsOrigin { get; set; } = false;
+    public bool InheritOrigin { get; set; } = false;
     public bool Visible { get; set; } = true;
     public bool ReadyForVisibility = false;
 
@@ -70,7 +70,7 @@ public class Node2D : Node
     {
         get
         {
-            if (InheritsOrigin)
+            if (InheritOrigin)
             {
                 if (Parent is Node2D parentNode)
                 {
